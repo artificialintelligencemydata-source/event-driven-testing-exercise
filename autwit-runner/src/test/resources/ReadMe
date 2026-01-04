@@ -1,0 +1,50 @@
+RunnerApp
+   |
+   |-- SpringApplication.run(RunnerApp.class)
+   |       |
+   |       |--> AutwitApplication (Spring Boot starter)
+   |       |--> EngineAutoConfiguration (DB adapters, Kafka, ResumeEngine)
+   |       |--> TestKit internal beans
+   |
+   |-- TestNG
+   |       |
+   |       |--> CucumberTestRunner
+   |               |
+   |               |--> CucumberSpringConfig (@CucumberContextConfiguration)
+   |               |--> Glue + Steps + Hooks
+   |               |--> resume logic
+   |
+   |-- RetrySkippedTestsExecutor
+
+
+┌────────────────────────┐
+│      RunnerApp         │  <-- YOU RUN THIS
+│   (SpringBoot main)    │
+└──────────┬─────────────┘
+           │
+      Spring Boot
+           │
+           ▼
+┌────────────────────────┐
+│  EngineAutoConfiguration│
+│  Kafka, DB, ResumeEngine│
+└──────────┬─────────────┘
+           │
+       TestNG start
+           │
+           ▼
+┌────────────────────────┐
+│     testng.xml         │
+└──────────┬─────────────┘
+           │
+           ▼
+┌────────────────────────┐
+│ CucumberTestRunner     │
+│ (Test class executed)  │
+└──────────┬─────────────┘
+           │
+           ▼
+    Feature Execution
+           │
+           ▼
+  RetrySkippedTestsExecutor

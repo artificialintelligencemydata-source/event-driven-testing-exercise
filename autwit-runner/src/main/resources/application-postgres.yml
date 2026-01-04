@@ -1,0 +1,21 @@
+autwit:
+  database: postgres
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/autwit
+    driver-class-name: org.postgresql.Driver
+    username: autwit
+    password: autwit
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema-postgres.sql

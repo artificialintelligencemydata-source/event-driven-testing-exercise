@@ -1,0 +1,15 @@
+Kafka Topic
+   ↓
+KafkaEventConsumer
+   ↓
+EventRecordMapper (parses JSON → EventRecord)
+   ↓
+EventNotifierPort (InMemoryEventBus)
+   ↓
+ResumeEngine.accept(EventRecord)
+   ↓
+EventStoragePort.saveEvent/saveTestContext
+   ↓
+test_context.resumeReady = true
+   ↓
+CucumberTestRunner retries ONLY that scenario
