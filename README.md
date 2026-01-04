@@ -1,64 +1,46 @@
-autwit-project/
-│   pom.xml  <-- ROOT AGGREGATOR POM
-│
-├── autwit-parent/
-│       pom.xml
-├── autwit-core/
-│       pom.xml
-├── autwit-engine/
-│       pom.xml
-├── autwit-adapter-kafka/
-│       pom.xml
-├── autwit-adapter-mongo/
-│       pom.xml
-├── autwit-adapter-h2/
-│       pom.xml
-├── autwit-adapter-postgres/
-│       pom.xml
-├── autwit-client-sdk/
-│       pom.xml
-├── autwit-internal-testkit/
-│       pom.xml
-├── autwit-runner/
-│       pom.xml
-└── autwit-shared/
-        pom.xml
+# Autwit – Event-Driven Testing Framework
 
- ---------------------------------------------
+## 1. Purpose
+This framework provides a pure event-driven testing model where test execution
+never relies on sleeps, waits, or timeouts.
 
- autwit-core
-      ↑
- autwit-engine
-      ↑
- autwit-adapters (mongo/h2/postgres/kafka)
-      ↑
- autwit-testkit
-      ↑
- autwit-client-sdk
-      ↑
- autwit-runner
------------------------------------------------
+Tests pause and resume based on real system events.
 
-autwit-runner
-    ↓ depends on
-autwit-client-sdk
-    ↓ depends on
-autwit-testkit
-    ↓ depends on
-autwit-adapters (mongo / h2 / postgres / kafka)
-    ↓ depends on
-autwit-engine
-    ↓ depends on
-autwit-core
+## 2. Core Principles (NON-NEGOTIABLE)
+- No Thread.sleep(), waits, or polling inside test steps
+- Kafka → Database → Scheduler → ResumeEngine is the only flow
+- Tests pause, never block
+- Database is the single source of truth
+- Framework must support parallel execution safely
 
-----------------------------------------------
+## 3. High-Level Architecture
+- Core framework is isolated from client runners
+- Clients only depend on public APIs / annotations
+- Internal logic is fully encapsulated
 
-| Module       | Can Depend On                   | Cannot Depend On         |
-| ------------ | ------------------------------- | ------------------------ |
-| **core**     | Nobody                          | ANYBODY                  |
-| **engine**   | core                            | testkit, sdk, runner     |
-| **adapters** | engine, core                    | testkit, sdk, runner     |
-| **testkit**  | adapters, engine, core          | sdk, runner              |
-| **sdk**      | testkit, adapters, engine, core | runner                   |
-| **runner**   | everything                      | Nobody depends on runner |
+## 4. Module Structure
+- autwit-core: core event-driven engine
+- autwit-runner: client-facing execution layer
+- adapters: database-specific implementations (Mongo, Postgres, H2)
 
+## 5. Authoritative Event Flow
+Kafka → Listener → Persistence → Scheduler → ResumeEngine → Test Step
+
+## 6. Client Responsibilities
+- Write scenarios and step definitions only
+- Never access Kafka, DB, or schedulers directly
+- Never introduce waits or retries
+
+## 7. Configuration Rules
+- No secrets committed to Git
+- Local configuration via ignored files or env variables only
+
+## 8. AI Collaboration Rules
+- README.md is the contract
+- No architectural changes without updating README
+- No refactors that violate core principles
+
+## 9. Future Scope
+- Annotation-based abstraction (`@Autwit`)
+- ResumeEngine enhancements
+- Client SDK simplification
