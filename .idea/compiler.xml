@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="autwit-client-sdk" />
+      </profile>
+      <profile name="Annotation profile for autwit-root" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
+        </processorPath>
+        <module name="autwit-adapter-kafka" />
+        <module name="autwit-shared" />
+        <module name="client-tests" />
+        <module name="autwit-runner" />
+        <module name="autwit-adapter-mongo" />
+        <module name="autwit-internal-testkit" />
+        <module name="autwit-engine" />
+        <module name="autwit-adapter-postgres" />
+        <module name="autwit-adapter-h2" />
+        <module name="autwit-domain" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

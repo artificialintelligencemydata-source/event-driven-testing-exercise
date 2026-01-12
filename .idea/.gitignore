@@ -1,9 +1,0 @@
-# Default ignored files
-/shelf/
-/workspace.xml
-*local.properties
-*.env
-application-local.yml
-.idea/
-target/
-build/

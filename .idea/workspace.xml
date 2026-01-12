@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a4bc6adf-0206-40e7-9eb3-669ef6b24efe" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/autwit-client-sdk/autwit-client-sdk.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/ApiClientImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/Autwit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/AutwitImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/ContextAccessorImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/EventExpectationImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/ScenarioStepStatusImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/SoftAssertionsImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/scenario/MapStringStringConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/scenario/NestedMapConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/bootstrap/CucumberGlueBootstrap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/exceptions/InternalStepSkipException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/reporting/AllureLifecycleManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/autwit-runner/src/main/java/com/acuver/autwit/AutwitProfileInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/autwit-runner/src/main/java/com/acuver/autwit/config/AutwitClientAutoConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/autwit-runner/src/main/java/com/acuver/autwit/runner/BaseAutwitCucumberRunner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-tests/src/test/java/com/bjs/tests/config/ClientTestApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-tests/src/test/java/com/bjs/tests/config/CucumberSpringConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-tests/src/test/java/com/bjs/tests/runner/ClientCucumberRunner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-tests/src/test/java/com/bjs/tests/stepDefinitions/EventDrivenOrderLifecycleStepDefsFacedBased.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/application-test.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/.cursor/rules.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/Readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/features/event-dispatcher/Digital-OES-DelayedQueue-Service (DQS).feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/features/event-dispatcher/Digital-OES-Idempotency-Service (IDS).feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/features/event-dispatcher/Digital-OES-OrderAudit-Service (OAS).feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/features/notes/Digital-OES-OrderNotes-Service (ONS).feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/features/order-domain/Digital-OES-OrderInvoice-Service (OIS).feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/features/order-domain/Digital-OES-OrderProcess-Service (OPS).feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/features/order-router/Digital-OES-OrderUniversalAPI-Service (OUS).feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/features/payment-service/Digital-OES-OrderPayment-Service (OPAYS).feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/features/Notes Services/notes-create.feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/testng.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/event-driven-testing-exercise.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/H2JpaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/H2JpaConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-mongo/src/main/java/com/acuver/autwit/adapter/mongo/MongoSchemaInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-mongo/src/main/java/com/acuver/autwit/adapter/mongo/MongoSchemaInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-mongo/src/main/java/com/acuver/autwit/adapter/mongo/scenario/MongoScenarioContextAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-mongo/src/main/java/com/acuver/autwit/adapter/mongo/scenario/MongoScenarioContextAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-mongo/src/main/java/com/acuver/autwit/adapter/mongo/scenario/MongoScenarioContextEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-mongo/src/main/java/com/acuver/autwit/adapter/mongo/scenario/MongoScenarioContextEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/PostgresJpaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/PostgresJpaConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/scenario/PostgresScenarioContextAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/scenario/PostgresScenarioContextAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/scenario/PostgresScenarioContextEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/scenario/PostgresScenarioContextEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-client-sdk/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/BaseStep.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/testData/TestData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/domain/ScenarioContext.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/ports/EventContextPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/ports/EventContextPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/ports/ScenarioContextPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/ports/ScenarioContextPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/ports/ScenarioStatePort.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/ports/ScenarioStatePort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-engine/src/main/java/com/acuver/autwit/engine/resume/ResumeEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-engine/src/main/java/com/acuver/autwit/engine/resume/ResumeEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-engine/src/main/java/com/acuver/autwit/engine/state/ScenarioStateTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-engine/src/main/java/com/acuver/autwit/engine/scenarioStateTracker/ScenarioStateTracker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/Hooks.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/Hooks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/context/ScenarioContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/context/ScenarioContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/reporting/AllureAttachmentUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/reporting/AllureAttachmentUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/stepDef/ReusableStepDefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/stepDef/ReusableStepDefs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/src/main/java/com/acuver/autwit/runner/RunnerApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/src/main/java/com/acuver/autwit/runner/RunnerApp.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/src/main/resources/application-h2.yml" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/src/main/resources/application-h2.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/src/main/resources/schema-h2.sql" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/src/main/resources/schema-h2.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/src/main/resources/schema-postgres.sql" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/src/main/resources/schema-postgres.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/src/test/java/com/acuver/autwit/config/CucumberSpringConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/src/test/java/com/acuver/autwit/runner/CucumberTestRunner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/src/test/java/com/acuver/autwit/stepdef/EventDrivenOrderLifecycleStepDefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/client-tests/src/test/java/com/bjs/tests/stepDefinitions/EventDrivenOrderLifecycleStepDefs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/src/test/resources/ReadMe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/src/test/resources/application-test.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/src/test/resources/configuration.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/src/test/resources/features/sample_order_event.feature" beforeDir="false" afterPath="$PROJECT_DIR$/client-tests/src/test/resources/features/sample_order_event.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/src/test/resources/testng.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="21 (2)" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="37pXKZj1sSoXcTp3Y0MZAm5fYkH" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven.autwit-client-sdk [clean].executor": "Run",
+    "Maven.autwit-root [clean].executor": "Run",
+    "Maven.autwit-root [compile].executor": "Run",
+    "Maven.autwit-root [install].executor": "Run",
+    "Maven.autwit-root [test].executor": "Run",
+    "Maven.autwit-runner [clean].executor": "Run",
+    "Maven.autwit-runner [install].executor": "Run",
+    "Maven.autwit-runner [test].executor": "Run",
+    "Maven.client-tests [clean].executor": "Run",
+    "Maven.client-tests [install].executor": "Run",
+    "Maven.client-tests [test].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.codeium.enabled": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/mohan.kumar_acuverco/Autwit/client-tests/src/test/resources/br1-tests/docs/lucid",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.40574712",
+    "settings.editor.selected.configurable": "MavenSettings"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mohan.kumar_acuverco\Autwit\client-tests\src\test\resources\br1-tests\docs\lucid" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mohan.kumar_acuverco\Autwit\client-tests\src\test\resources\br1-tests\features\features" />
+      <recent name="C:\Users\mohan.kumar_acuverco\Autwit\autwit-runner\src\test\resources" />
+      <recent name="C:\Users\mohan.kumar_acuverco\Autwit\client-tests\src\test\resources\features" />
+      <recent name="C:\Users\mohan.kumar_acuverco\Autwit\autwit-runner\src\test\resources\features" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.acuver.autwit.runner" />
+      <recent name="com.bjs.tests.stepDefinitions" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="autwit-shared" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="autwit-shared" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="Autwit" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="RobotRunConfiguration" factoryName="RobotRunConfiguration">
+      <module name="autwit-shared" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="true" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <module name="autwit-shared" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a4bc6adf-0206-40e7-9eb3-669ef6b24efe" name="Changes" comment="" />
+      <created>1767600924323</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1767600924323</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/autwit-core/autwit-engine/src/main/java/com/acuver/autwit/engine/scenarioStateTracker/ScenarioStateTracker.java</url>
+          <line>19</line>
+          <properties class="com.acuver.autwit.engine.scenarioStateTracker.ScenarioStateTracker" method="markStep">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

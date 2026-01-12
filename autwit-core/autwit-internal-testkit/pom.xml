@@ -191,6 +191,15 @@
       <artifactId>json</artifactId>
       <version>${json.version}</version>
     </dependency>
+
+    <!-- ===================== -->
+    <!-- jakarta -->
+    <!-- ===================== -->
+    <dependency>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
+    </dependency>
+
   </dependencies>
 
 </project>

@@ -3,6 +3,12 @@ package com.acuver.autwit.internal.context;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Runtime (ThreadLocal) scenario context.
+ * 
+ * This is execution-time, thread-scoped scenarioStateTracker.
+ * It is NOT persisted scenarioStateTracker (see ScenarioStateContext in core.domain).
+ */
 public final class ScenarioContext {
 
     private static final ThreadLocal<Map<String, Object>> store =
@@ -36,3 +42,4 @@ public final class ScenarioContext {
         return get("api");
     }
 }
+

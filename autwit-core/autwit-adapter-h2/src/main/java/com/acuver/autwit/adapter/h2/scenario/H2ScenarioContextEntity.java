@@ -9,41 +9,59 @@ import lombok.NoArgsConstructor;
 import java.util.HashMap;
 import java.util.Map;
 
+@Entity
+@Table(name = "scenario_context", indexes = {
+        @Index(name = "idx_scenario_name", columnList = "scenario_name"),
+        @Index(name = "idx_example_id", columnList = "example_id"),
+        @Index(name = "idx_scenario_status", columnList = "scenario_status")
+})
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "scenario_context")
+@Builder
 public class H2ScenarioContextEntity {
 
+    /**
+     * Primary key - Auto-generated UUID
+     *
+     * FIX: Added @GeneratedValue(strategy = GenerationType.UUID)
+     * This tells JPA to auto-generate the ID if it's null when persisting.
+     */
     @Id
-    @Column(name = "scenario_name")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", length = 255)
+    private String id;
+
+    @Column(name = "example_id", length = 255)
+    private String exampleId;
+
+    @Column(name = "test_case_id", length = 255)
+    private String testCaseId;
+
+    @Column(name = "scenario_name", nullable = false, length = 255)
     private String scenarioName;
 
     /**
-     * Map: stepName -> status
-     * Stored as CLOB JSON by Hibernate.
+     * Map<String, String> - stores step status (step name -> status)
+     * Converted to JSON string in database
      */
-    @Lob
-    @Column(name = "step_status", columnDefinition = "CLOB")
+    @Convert(converter = MapStringStringConverter.class)
+    @Column(name = "step_status", columnDefinition = "TEXT")
     @Builder.Default
     private Map<String, String> stepStatus = new HashMap<>();
 
     /**
-     * Map: stepName -> key/value map
-     * Also stored as JSON inside CLOB.
+     * Map<String, Map<String, String>> - stores step data (step name -> data map)
+     * Converted to JSON string in database
      */
-    @Lob
-    @Column(name = "step_data", columnDefinition = "CLOB")
+    @Convert(converter = NestedMapConverter.class)
+    @Column(name = "step_data", columnDefinition = "TEXT")
     @Builder.Default
     private Map<String, Map<String, String>> stepData = new HashMap<>();
 
     @Column(name = "last_updated")
-    private long lastUpdated;
+    private Long lastUpdated;
 
-//    ⚠️ Note: JPA does not support nested maps easily.
-//            But this structure works because H2 can serialize nested values as JSON (via Hibernate Map mapping).
-//
-//    If needed later, we can switch stepData to @Lob String json.
+    @Column(name = "scenario_status", length = 100)
+    private String scenarioStatus;
 }

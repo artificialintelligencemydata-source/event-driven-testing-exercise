@@ -2,5 +2,33 @@ package com.acuver.autwit.adapter.h2.scenario;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface H2ScenarioContextRepository  extends JpaRepository<H2ScenarioContextEntity, String> {
+import java.util.List;
+import java.util.Optional;
+
+public interface H2ScenarioContextRepository extends JpaRepository<H2ScenarioContextEntity, String> {
+
+    /**
+     * Find by scenario name (for non-parameterized scenarios)
+     */
+    Optional<H2ScenarioContextEntity> findByScenarioName(String scenarioName);
+
+    /**
+     * Find by scenario name and example ID (business key for parameterized scenarios)
+     */
+    Optional<H2ScenarioContextEntity> findByScenarioNameAndExampleId(String scenarioName, String exampleId);
+
+    /**
+     * Find all by scenario status
+     */
+    List<H2ScenarioContextEntity> findByScenarioStatus(String scenarioStatus);
+
+    /**
+     * Check if exists by business key
+     */
+    boolean existsByScenarioNameAndExampleId(String scenarioName, String exampleId);
+
+    /**
+     * Delete by scenario name
+     */
+    void deleteByScenarioName(String scenarioName);
 }

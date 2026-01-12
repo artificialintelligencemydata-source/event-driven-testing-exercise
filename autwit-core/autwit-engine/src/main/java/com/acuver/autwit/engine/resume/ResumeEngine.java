@@ -2,24 +2,35 @@ package com.acuver.autwit.engine.resume;
 
 import com.acuver.autwit.core.domain.EventContext;
 import com.acuver.autwit.core.ports.EventContextPort;
-import com.acuver.autwit.engine.config.EngineAutoConfiguration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
 /**
- * ResumeEngine listens to EventContext events emitted by EventReceiverPort (EventBus).
+ * ResumeEngine - SOLE AUTHORITY for marking scenarios resumeReady.
  *
- * Responsibilities:
- *  1. Persist event into storage (event_records / test_context table)
- *  2. Lookup existing paused context using canonicalKey
- *  3. If match found → mark resumeReady=true
- *  4. Test runner (TestNG/Cucumber) will automatically rerun resumeReady tests
+ * ARCHITECTURAL RESPONSIBILITY:
+ * This is the ONLY component in AUTWIT that may transition scenarios
+ * from PAUSED to RESUME_READY scenarioStateTracker.
+ *
+ * AUTHORITY ENFORCEMENT:
+ * - Pollers MUST notify ResumeEngine via accept()
+ * - Adapters MUST NOT call storage.markResumeReady() directly
+ * - Only ResumeEngine may invoke storage.markResumeReady()
+ *
+ * RESPONSIBILITIES:
+ *  1. Receive event notifications from pollers or Kafka adapters
+ *  2. Persist incoming events to storage
+ *  3. Lookup paused scenarios matching the event's canonicalKey
+ *  4. Evaluate resume conditions (matching, validation)
+ *  5. Mark scenarios resumeReady=true if conditions satisfied
+ *  6. Delegate to runner for actual scenario re-execution
  */
-
 public class ResumeEngine implements Consumer<EventContext> {
+
     private static final Logger log = LogManager.getLogger(ResumeEngine.class);
     private final EventContextPort storagePort;
 
@@ -28,67 +39,153 @@ public class ResumeEngine implements Consumer<EventContext> {
     }
 
     /**
-     * Entry point called by EventBus.publish(eventContext)
+     * Entry point for event notifications.
+     *
+     * Called by:
+     * - Kafka adapters when events arrive from external systems
+     * - DB pollers when they detect matching events in periodic scans
+     * - Any component that detects an event arrival
+     *
+     * @param event The event that arrived
      */
     @Override
     public void accept(EventContext event) {
-        if (event == null) return;
+        if (event == null) {
+            log.warn("ResumeEngine: Received null event, ignoring");
+            return;
+        }
         onEvent(event);
     }
 
     /**
      * Core resume-engine logic.
+     *
+     * FLOW:
+     * 1. Persist the incoming event
+     * 2. Look up paused scenarios with matching canonicalKey
+     * 3. Evaluate if resume conditions are satisfied
+     * 4. Mark resumeReady=true (ONLY DONE HERE)
+     * 5. Runner detects resumeReady and re-executes scenario
      */
     private void onEvent(EventContext event) {
 
         final String canonicalKey = event.getCanonicalKey();
 
-        log.debug("ResumeEngine: Received event → {}", canonicalKey);
+        log.debug("ResumeEngine: Processing event → {}", canonicalKey);
 
-        // 1️⃣ Persist incoming event (Kafka/Mongo/H2/Postgres)
-        storagePort.save(event);
+        // 1️⃣ Persist incoming event to DB
+        // This ensures the event is available for immediate DB lookup
+        // when the scenario resumes and calls matchOrPause()
+        try {
+            storagePort.save(event);
+            log.debug("ResumeEngine: Event persisted → {}", canonicalKey);
+        } catch (Exception e) {
+            log.error("ResumeEngine: Failed to persist event {}: {}", canonicalKey, e.getMessage());
+            // Continue anyway - maybe it's already persisted
+        }
 
-        // 2️⃣ Check if a paused test exists for this canonicalKey
-        Optional<EventContext> existing = storagePort.findByCanonicalKey(canonicalKey);
+        // 2️⃣ Look up paused scenarios with matching canonicalKey
+        // The storage should return the PAUSED SCENARIO CONTEXT,
+        // not the event itself (though they share the same canonicalKey)
+        List<EventContext> pausedScenarios = findPausedScenarios(canonicalKey);
 
-        if (existing.isEmpty()) {
-            log.debug("ResumeEngine: No paused test for key {}", canonicalKey);
+        if (pausedScenarios.isEmpty()) {
+            log.debug("ResumeEngine: No paused scenarios for key {}", canonicalKey);
             return;
         }
 
-        EventContext paused = existing.get();
+        log.info("ResumeEngine: Found {} paused scenario(s) for key {}", pausedScenarios.size(), canonicalKey);
 
-        // 3️⃣ Determine resume condition
+        // 3️⃣ Process each paused scenario
+        for (EventContext paused : pausedScenarios) {
+            try {
+                processResume(paused, event);
+            } catch (Exception e) {
+                log.error("ResumeEngine: Error processing paused scenario {}: {}",
+                        paused.getCanonicalKey(), e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Find paused scenarios matching the canonical key.
+     *
+     * Note: findByCanonicalKey() may return either:
+     * - The paused scenario context (if it exists)
+     * - The event record (if scenario hasn't paused yet)
+     *
+     * We need to filter for actually paused scenarios.
+     */
+    private List<EventContext> findPausedScenarios(String canonicalKey) {
+        try {
+            Optional<EventContext> found = storagePort.findByCanonicalKey(canonicalKey);
+
+            if (found.isPresent() && found.get().isPaused()) {
+                return List.of(found.get());
+            }
+
+            return List.of();
+
+        } catch (Exception e) {
+            log.error("ResumeEngine: DB lookup failed for {}: {}", canonicalKey, e.getMessage());
+            return List.of();
+        }
+    }
+
+    /**
+     * Evaluate and execute resume for a single paused scenario.
+     */
+    private void processResume(EventContext paused, EventContext event) {
+
+        // 3️⃣ Evaluate resume conditions
         if (!shouldResume(paused, event)) {
-            log.debug("ResumeEngine: Resume condition not satisfied for {}", canonicalKey);
+            log.debug("ResumeEngine: Resume condition not satisfied for {}", paused.getCanonicalKey());
             return;
         }
 
         // 4️⃣ Mark resumeReady=true
-        paused.setResumeReady(true);
-        paused.setPaused(false);
+        // ⚠️ THIS IS THE ONLY PLACE IN AUTWIT WHERE THIS HAPPENS ⚠️
+        try {
+            storagePort.markResumeReady(paused.getCanonicalKey());
+            log.info("⚡ ResumeEngine: Marked resumeReady for {}", paused.getCanonicalKey());
 
-        storagePort.save(paused);
-
-        log.info("⚡ ResumeEngine: Marked resumeReady for {}", canonicalKey);
+        } catch (Exception e) {
+            log.error("ResumeEngine: Failed to mark resumeReady for {}: {}",
+                    paused.getCanonicalKey(), e.getMessage());
+        }
     }
 
     /**
-     * Resume rules:
-     *  Expand later to include eventType matching, stage validation, etc.
+     * Determine if a paused scenario should resume given an arrived event.
+     *
+     * CURRENT RULES:
+     * - Canonical key must match (orderId + eventType)
+     * - Event type must match (if specified)
+     *
+     * FUTURE ENHANCEMENTS:
+     * - Stage validation (e.g., don't resume if in wrong workflow stage)
+     * - Payload validation (e.g., ensure event has required fields)
+     * - Business rules (e.g., order must be in certain status)
+     * - Time-based rules (e.g., minimum pause duration)
      */
     private boolean shouldResume(EventContext paused, EventContext event) {
-        // Base rule: canonicalKey match
+
+        // Rule 1: Canonical key must match
         if (!paused.getCanonicalKey().equals(event.getCanonicalKey())) {
+            log.debug("ResumeEngine: Canonical key mismatch - paused: {}, event: {}",
+                    paused.getCanonicalKey(), event.getCanonicalKey());
             return false;
         }
 
-        // Optional: eventType check
+        // Rule 2: Event type must match (if specified in paused context)
         if (paused.getEventType() != null &&
                 !paused.getEventType().equals(event.getEventType())) {
+            log.debug("ResumeEngine: Event type mismatch - paused: {}, event: {}",
+                    paused.getEventType(), event.getEventType());
             return false;
         }
 
+        // All conditions satisfied
         return true;
     }
 }

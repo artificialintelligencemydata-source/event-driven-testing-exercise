@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/event-driven-testing-exercise.iml" filepath="$PROJECT_DIR$/.idea/event-driven-testing-exercise.iml" />
+      <module fileurl="file://$PROJECT_DIR$/autwit-client-sdk/autwit-client-sdk.iml" filepath="$PROJECT_DIR$/autwit-client-sdk/autwit-client-sdk.iml" />
     </modules>
   </component>
 </project>

@@ -15,17 +15,33 @@ import java.util.Map;
 @Table(name = "scenario_context")
 public class PostgresScenarioContextEntity {
 
-
+    /**
+     * Technical primary key.
+     * Example: scenarioName::exampleId
+     */
     @Id
-    @Column(name = "scenario_name")
+    @Column(name = "id", nullable = false)
+    private String id;
+
+    @Column(name = "scenario_name", nullable = false)
     private String scenarioName;
 
-    // stepName -> "success"/"skipped"
+    @Column(name = "example_id", nullable = false)
+    private String exampleId;
+
+    @Column(name = "test_case_id")
+    private String testCaseId;
+
+    /**
+     * stepName -> status (success / skipped / failed)
+     */
     @Lob
     @Column(name = "step_status", columnDefinition = "TEXT")
     private Map<String, String> stepStatus;
 
-    // stepName -> Map<field,value>
+    /**
+     * stepName -> key/value map
+     */
     @Lob
     @Column(name = "step_data", columnDefinition = "TEXT")
     private Map<String, Map<String, String>> stepData;
@@ -33,6 +49,8 @@ public class PostgresScenarioContextEntity {
     @Column(name = "last_updated")
     private long lastUpdated;
 
+    @Column(name = "scenario_status")
+    private String scenarioStatus;
 //    ⚠ Nested map works
 //    Postgres supports JSON serialization via Hibernate map handlers.
 //    If required later, we can convert stepData to a JSON string.

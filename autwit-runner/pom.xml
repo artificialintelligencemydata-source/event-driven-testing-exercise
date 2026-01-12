@@ -40,6 +40,7 @@
         <artifactId>spring-boot-dependencies</artifactId>
         <version>${spring.boot.version}</version>
         <type>pom</type>
+<!--        <scope>provided</scope>-->
         <scope>import</scope>
       </dependency>
 
@@ -114,7 +115,6 @@
       <version>${project.version}</version>
     </dependency>
 
-
     <!-- CUCUMBER + TESTNG -->
     <dependency>
       <groupId>io.cucumber</groupId>
@@ -164,11 +164,18 @@
       <artifactId>log4j-slf4j2-impl</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <scope>provided</scope>  <!-- ✅ ADDED -->
+    </dependency>
+
     <!-- SPRING BOOT TEST (without default logging) -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
+<!--      <scope>test</scope>-->
+      <scope>provided</scope>
       <exclusions>
         <exclusion>
           <groupId>org.springframework.boot</groupId>
@@ -228,11 +235,22 @@
 
 
       <!-- SPRING BOOT -->
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${spring.boot.version}</version>
-      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.springframework.boot</groupId>-->
+<!--        <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--        <version>${spring.boot.version}</version>-->
+<!--        <configuration>-->
+<!--          <mainClass>com.acuver.autwit.runner.RunnerApp</mainClass>-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <goals>-->
+<!--              <goal>repackage</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
+
 
       <!-- FORMATTER -->
       <plugin>
@@ -247,47 +265,98 @@
       </plugin>
 
       <!-- CLEAN ALLURE RESULTS -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.8</version>
-        <executions>
-          <execution>
-            <phase>pre-clean</phase>
-            <goals><goal>run</goal></goals>
-            <configuration>
-              <target>
-                <delete dir="${project.basedir}/allure-results">
-                  <exclude name="history/**"/>
-                  <exclude name="categories.json"/>
-                  <exclude name="environment.properties"/>
-                </delete>
-              </target>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.apache.maven.plugins</groupId>-->
+<!--        <artifactId>maven-antrun-plugin</artifactId>-->
+<!--        <version>1.8</version>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <phase>pre-clean</phase>-->
+<!--            <goals><goal>run</goal></goals>-->
+<!--            <configuration>-->
+<!--              <target>-->
+<!--                <delete dir="${project.basedir}/allure-results">-->
+<!--                  <exclude name="history/**"/>-->
+<!--                  <exclude name="categories.json"/>-->
+<!--                  <exclude name="environment.properties"/>-->
+<!--                </delete>-->
+<!--              </target>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
 
-      <!-- SUREFIRE TESTNG -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${maven.surefire.plugin.version}</version>
-        <configuration>
-          <suiteXmlFiles>
-            <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-          </suiteXmlFiles>
-          <useSystemClassLoader>true</useSystemClassLoader>
-          <testNGArtifactName>org.testng:testng</testNGArtifactName>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>org.apache.maven.surefire</groupId>
-            <artifactId>surefire-testng</artifactId>
-            <version>${maven.surefire.plugin.version}</version>
-          </dependency>
-        </dependencies>
-      </plugin>
+<!--      &lt;!&ndash; SUREFIRE TESTNG &ndash;&gt;-->
+<!--      <plugin>-->
+<!--        <groupId>org.apache.maven.plugins</groupId>-->
+<!--        <artifactId>maven-surefire-plugin</artifactId>-->
+<!--        <version>${maven.surefire.plugin.version}</version>-->
+<!--        <configuration>-->
+<!--          <suiteXmlFiles>-->
+<!--            <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>-->
+<!--          </suiteXmlFiles>-->
+<!--          <useSystemClassLoader>true</useSystemClassLoader>-->
+<!--&lt;!&ndash;          <skipTests>true</skipTests>  &lt;!&ndash; ✅ Runner has no tests, clients do &ndash;&gt;&ndash;&gt;-->
+<!--          <testNGArtifactName>org.testng:testng</testNGArtifactName>-->
+<!--        </configuration>-->
+<!--        <dependencies>-->
+<!--          <dependency>-->
+<!--            <groupId>org.apache.maven.surefire</groupId>-->
+<!--            <artifactId>surefire-testng</artifactId>-->
+<!--            <version>${maven.surefire.plugin.version}</version>-->
+<!--          </dependency>-->
+<!--        </dependencies>-->
+<!--      </plugin>-->
+
+
+<!--      <plugin>-->
+<!--        <groupId>org.apache.maven.plugins</groupId>-->
+<!--        <artifactId>maven-resources-plugin</artifactId>-->
+<!--        <version>3.3.1</version>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <id>copy-client-features</id>-->
+<!--            <phase>process-test-resources</phase>-->
+<!--            <goals>-->
+<!--              <goal>copy-resources</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <outputDirectory>-->
+<!--                ${project.build.testOutputDirectory}/features-->
+<!--              </outputDirectory>-->
+<!--              <resources>-->
+<!--                <resource>-->
+<!--                  <directory>-->
+<!--                    ${project.basedir}/../client-tests/src/test/resources/features-->
+<!--                  </directory>-->
+<!--                  <includes>-->
+<!--                    <include>**/*.features</include>-->
+<!--                  </includes>-->
+<!--                </resource>-->
+<!--              </resources>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+
+<!--          <execution>-->
+<!--            <id>copy-client-cucumber-properties</id>-->
+<!--            <phase>process-test-resources</phase>-->
+<!--            <goals>-->
+<!--              <goal>copy-resources</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>-->
+<!--              <resources>-->
+<!--                <resource>-->
+<!--                  <directory>../client-tests/src/test/resources</directory>-->
+<!--                  <includes>-->
+<!--                    <include>cucumber.properties</include>-->
+<!--                  </includes>-->
+<!--                </resource>-->
+<!--              </resources>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
 
     </plugins>
   </build>

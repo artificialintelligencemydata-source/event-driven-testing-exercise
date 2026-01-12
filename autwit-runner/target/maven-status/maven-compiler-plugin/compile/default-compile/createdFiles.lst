@@ -1,0 +1,3 @@
+com\acuver\autwit\runner\BaseAutwitCucumberRunner.class
+com\acuver\autwit\AutwitProfileInitializer.class
+com\acuver\autwit\config\AutwitClientAutoConfiguration.class

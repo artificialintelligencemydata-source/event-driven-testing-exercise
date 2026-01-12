@@ -1,0 +1,5 @@
+com\acuver\autwit\adapter\kafka\KafkaConfig.class
+com\acuver\autwit\adapter\kafka\EventContextMapper.class
+com\acuver\autwit\adapter\kafka\KafkaEventConsumer.class
+com\acuver\autwit\adapter\kafka\KafkaProperties.class
+com\acuver\autwit\adapter\kafka\KafkaProducer.class

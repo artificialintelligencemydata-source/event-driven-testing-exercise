@@ -1,0 +1,27 @@
+Kafka | Webhook | REST adapters
+         |
+         V
+ EventNotifierPort  ←——— InMemoryEventBus (default)
+         |
+         | publishes EventContext
+         V
+     ResumeEngine (consumes)
+         |
+         | updates .resumeReady in DB
+         V
+ Test Runner picks resumed tests
+
+
+ ---------------------------------------------------------------------
+
+ Kafka → EventContextAdapter.save() → Mongo/H2/Postgres
+                                   → EventNotifier.notifyEvent()
+                                   → InMemoryEventBus.publish()
+                                               ↳ ResumeEngine.accept()
+                                                         ↳ mark resumeReady
+ Test Step → await(orderId, eventType)
+           ↳ stored future
+ Mongo Poller → find paused
+              → notifyEvent()
+ Completes future → resumes step
+

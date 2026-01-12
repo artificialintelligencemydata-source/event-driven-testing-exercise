@@ -13,7 +13,7 @@ public interface ReusableStepDefs {
     EventContext verifyEvent(String eventType);
 
     /**
-     * Validate event payload or DB state AFTER verifyEvent().
+     * Validate event payload or DB scenarioStateTracker AFTER verifyEvent().
      * - Ensures event exists
      * - Performs validation logic
      * - If missing → create placeholder + skip

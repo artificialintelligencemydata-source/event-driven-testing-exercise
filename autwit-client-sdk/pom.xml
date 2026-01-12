@@ -1,0 +1,74 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- TEMP during mono-repo phase -->
+  <parent>
+    <groupId>com.acuver</groupId>
+    <artifactId>autwit-root</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>autwit-client-sdk</artifactId>
+  <packaging>jar</packaging>
+  <description>Client-facing SDK for Autwit Event-Driven Testing Framework</description>
+
+
+  <!-- ========================= -->
+  <!-- DEPENDENCIES              -->
+  <!-- ========================= -->
+  <dependencies>
+
+    <!-- SINGLE FRAMEWORK DEPENDENCY -->
+    <!-- SDK wraps Core, never exposes internals -->
+<!--    <dependency>-->
+<!--      <groupId>com.acuver</groupId>-->
+<!--      <artifactId>autwit-core</artifactId>-->
+<!--      <version>${project.version}</version>-->
+<!--    </dependency>-->
+
+    <!-- Domain ports (temporary internal bridge) -->
+    <dependency>
+      <groupId>com.acuver</groupId>
+      <artifactId>autwit-domain</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+<!--    &lt;!&ndash; Spring annotations only (no boot, no autoconfig) &ndash;&gt;-->
+<!--    <dependency>-->
+<!--      <groupId>org.springframework</groupId>-->
+<!--      <artifactId>spring-context</artifactId>-->
+<!--    </dependency>-->
+
+    <!-- Lombok (compile-time only) -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>${testng.version}</version>
+    </dependency>
+
+    <!-- Jackson for JSON payload parsing (read-only) -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.17.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>5.5.6</version>
+    </dependency>
+
+  </dependencies>
+
+</project>

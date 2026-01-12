@@ -1,0 +1,19 @@
+autwit:
+  adapter:
+    kafka:
+      enabled: true
+
+kafka:
+  bootstrapServers: localhost:9092
+  groupId: autwit-runner
+
+topics:
+  - order-created
+  - order-updated
+  - shipment-created
+  - shipment-delivered
+
+  # Optional enterprise settings
+  securityProtocol:
+  saslMechanism:
+  saslJaasConfig:

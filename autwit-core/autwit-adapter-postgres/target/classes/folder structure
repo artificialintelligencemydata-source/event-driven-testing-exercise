@@ -1,0 +1,11 @@
+autwit-adapter-postgres/
+│
+├── src/main/java/com/acuver/autwit/adapter/postgres/
+│      ├── EventRecordEntity.java
+│      ├── EventRecordRepository.java
+│      ├── TestContextEntity.java
+│      ├── TestContextRepository.java
+│      └── PostgresEventStorageAdapter.java
+│
+└── src/main/resources/
+       application-postgres.properties

@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="ClientSuite" parallel="methods" thread-count="4">
+    <test name="CucumberTests">
+        <classes>
+            <class name="com.bjs.tests.runner.ClientCucumberRunner"/>
+        </classes>
+    </test>
+</suite>

@@ -1,6 +1,0 @@
-autwit:
-  database: mongo
-  suiteFile: src/test/resources/testng.xml
-  environment: qa
-  config:
-    path: config/test-config.properties

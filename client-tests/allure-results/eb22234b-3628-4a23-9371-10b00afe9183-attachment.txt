@@ -1,0 +1,1 @@
+{totalAmount=1000, quantity=1, productId=LAPTOP001, orderId=1768032989519, price=1000, customerId=CUST001}

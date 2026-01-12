@@ -1,0 +1,8 @@
+com\acuver\autwit\adapter\postgres\PostgresEventContextAdapter.class
+com\acuver\autwit\adapter\postgres\scenario\PostgresScenarioContextEntity.class
+com\acuver\autwit\adapter\postgres\scenario\PostgresScenarioContextRepository.class
+com\acuver\autwit\adapter\postgres\PostgresEventContextEntity$PostgresEventContextEntityBuilder.class
+com\acuver\autwit\adapter\postgres\PostgresJpaConfig.class
+com\acuver\autwit\adapter\postgres\PostgresEventContextRepository.class
+com\acuver\autwit\adapter\postgres\scenario\PostgresScenarioContextAdapter.class
+com\acuver\autwit\adapter\postgres\PostgresEventContextEntity.class

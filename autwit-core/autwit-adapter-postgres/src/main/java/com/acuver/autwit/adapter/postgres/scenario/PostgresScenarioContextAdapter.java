@@ -1,6 +1,6 @@
 package com.acuver.autwit.adapter.postgres.scenario;
 
-import com.acuver.autwit.core.domain.ScenarioContext;
+import com.acuver.autwit.core.domain.ScenarioStateContext;
 import com.acuver.autwit.core.ports.ScenarioContextPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -17,12 +17,12 @@ public class PostgresScenarioContextAdapter implements ScenarioContextPort {
     private final PostgresScenarioContextRepository repo;
 
     @Override
-    public Optional<ScenarioContext> findByScenarioName(String name) {
+    public Optional<ScenarioStateContext> findByScenarioName(String name) {
         return repo.findById(name).map(this::toDomain);
     }
 
     @Override
-    public ScenarioContext save(ScenarioContext state) {
+    public ScenarioStateContext save(ScenarioStateContext state) {
         return toDomain(repo.save(toEntity(state)));
     }
 
@@ -37,21 +37,29 @@ public class PostgresScenarioContextAdapter implements ScenarioContextPort {
     }
 
     // ---------- Mapping ----------
-    private PostgresScenarioContextEntity toEntity(ScenarioContext ctx) {
+    private PostgresScenarioContextEntity toEntity(ScenarioStateContext ctx) {
         return new PostgresScenarioContextEntity(
+                ctx.get_id(),
+                ctx.getExampleId(),
+                ctx.getTestCaseId(),
                 ctx.getScenarioName(),
                 ctx.getStepStatus(),
                 ctx.getStepData(),
-                ctx.getLastUpdated()
+                ctx.getLastUpdated(),
+                ctx.getScenarioStatus()
         );
     }
 
-    private ScenarioContext toDomain(PostgresScenarioContextEntity e) {
-        return new ScenarioContext(
+    private ScenarioStateContext toDomain(PostgresScenarioContextEntity e) {
+        return new ScenarioStateContext(
+                e.getId(),
+                e.getExampleId(),
+                e.getTestCaseId(),
                 e.getScenarioName(),
                 e.getStepStatus(),
                 e.getStepData(),
-                e.getLastUpdated()
+                e.getLastUpdated(),
+                e.getScenarioStatus()
         );
     }
 }
