@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Shipment AcceptOutOfSequenceUpdates="Y" BaseDropStatus="1100.70.06.10" SellerOrganizationCode="" ShipNode="STORE_VENDOR02" ShipmentKey="20231211172631109041" ShipmentNo="1117263183" TransactionId="YCD_BACKROOM_PICK">
+    <ShipmentStatusAudit ReasonCode="" ReasonText="" ShipmentKey="" ShipmentStatusAuditKey="" StatusDate=""/>
+</Shipment>

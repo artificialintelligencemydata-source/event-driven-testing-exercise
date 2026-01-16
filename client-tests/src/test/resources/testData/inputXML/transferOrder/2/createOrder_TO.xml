@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Order Action="CREATE" ApplyDefaultTemplate="Y" BuyerOrganizationCode="Matrix" ChainType="" DocumentType="0006"
+       EnterpriseCode="Matrix" Extn_ExtnConsolidateChainedOrder="" OrderNo="Auto_2024022813054989"
+       ReqCancelDate="2500-01-01" ReserveInventoryFlag="" SellerOrganizationCode="Matrix" ShipNode="" ShipToKey="">
+    <OrderLines>
+        <OrderLine Action="CREATE" HoldFlag="N" KitCode="" LineType="" OrderLineKey="" OrderLineScheduleKey=""
+                   OrderedQty="10" ReceivingNode="Mtrx_Store_2" ReqDeliveryDate="2024-02-14T12:38:07+00:00"
+                   ReqShipDate="2024-02-12T12:38:07+00:00" Segment="" SegmentType="" ShipNode="STORE_VENDOR02">
+            <Item ItemID="100013" ProductClass="Good" UnitCost="850.0" UnitOfMeasure="EACH"/>
+            <Instructions NumberOfInstructions="0"/>
+            <KitLines NumberOfKitLines="0"/>
+            <AdditionalAddresses NumberOfAdditionalAddresses="0"/>
+        </OrderLine>
+        <OrderLine Action="CREATE" HoldFlag="N" KitCode="" LineType="" OrderLineKey="" OrderLineScheduleKey=""
+                   OrderedQty="10" ReceivingNode="Mtrx_Store_2" ReqDeliveryDate="2024-02-14T12:38:07+00:00"
+                   ReqShipDate="2024-02-12T12:38:07+00:00" Segment="" SegmentType="" ShipNode="STORE_VENDOR02">
+            <Item ItemID="100015" ProductClass="Good" UnitCost="850.0" UnitOfMeasure="EACH"/>
+            <Instructions NumberOfInstructions="0"/>
+            <KitLines NumberOfKitLines="0"/>
+            <AdditionalAddresses NumberOfAdditionalAddresses="0"/>
+        </OrderLine>
+    </OrderLines>
+</Order>

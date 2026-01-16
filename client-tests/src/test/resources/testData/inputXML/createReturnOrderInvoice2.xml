@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Order DocumentType="0003" EnterpriseCode="Matrix" IgnoreStatusCheck="Y" IgnoreTransactionDependencies="Y" LightInvoice="N" OrderHeaderKey="20240305160032598115" OrderNo="RT20240305160032" TransactionId="CREATE_ORDER_INVOICE.0003">
+    <OrderLines>
+        <OrderLine OrderLineKey="20240305160032598113" PrimeLineNo="1" Quantity="1.00"/>
+        <OrderLine OrderLineKey="20240305160032598114" PrimeLineNo="2" Quantity="2.00"/>
+    </OrderLines>
+</Order>

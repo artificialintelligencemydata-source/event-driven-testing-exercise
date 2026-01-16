@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Shipment EnterpriseCode="Matrix" SellerOrganizationCode="Matrix-R" ShipNode="" ShipmentNo="1413090268">
+    <ShipmentLines>
+        <ShipmentLine DocumentType="0001" ItemID="" OrderNo="Auto_2024021413085739" PrimeLineNo="1" Quantity="3" ShipAdviceNo="Auto_2024021413085739_1" SubLineNo="1" UnitOfMeasure="EACH">
+        </ShipmentLine>
+        <ShipmentLine DocumentType="0001" ItemID="" OrderNo="Auto_2024021413085739" PrimeLineNo="2" Quantity="5" ShipAdviceNo="Auto_2024021413085739_1" SubLineNo="1" UnitOfMeasure="EACH">
+        </ShipmentLine>
+		  <ShipmentLine DocumentType="0001" ItemID="" OrderNo="Auto_2024021413085739" PrimeLineNo="3" Quantity="7" ShipAdviceNo="Auto_2024021413085739_1" SubLineNo="1" UnitOfMeasure="EACH">
+        </ShipmentLine>
+		  <ShipmentLine DocumentType="0001" ItemID="" OrderNo="Auto_2024021413085739" PrimeLineNo="4" Quantity="9" ShipAdviceNo="Auto_2024021413085739_1" SubLineNo="1" UnitOfMeasure="EACH">
+        </ShipmentLine>
+    </ShipmentLines>
+    <OrderRelease OrderReleaseKey="20240214130901702730" ReleaseNo="1" ShipAdviceNo="Auto_2024021413085739_1">
+        <Order DocumentType="0001" EnterpriseCode="Matrix-R" OrderNo="Auto_2024021413085739"/>
+    </OrderRelease>
+    <Containers>
+        <Container ActualWei77ght="" ContainerGrossWeight="15.100000" ContainerGrossWeightUOM="KG" ContainerHeight="300" ContainerHeightUOM="MM" ContainerLength="300" ContainerLengthUOM="MM" ContainerNo="Container_2316455244" ContainerSeqNo="1" ContainerType="PARCEL" ContainerWidth="300" ContainerWidthUOM="MM" TrackingNo="2316455148">
+            <ContainerDetails>
+                <ContainerDetail Quantity="3">
+                    <ShipmentLine DocumentType="0001" ItemID="200472" OrderNo="Auto_2024022316454832" PrimeLineNo="1" Quantity="3" ShipAdviceNo="Auto_2024022316454832_1" SubLineNo="1" UnitOfMeasure="EACH">
+                    </ShipmentLine>
+                </ContainerDetail>
+            </ContainerDetails>
+        </Container>
+        <Container ActualWei77ght="" ContainerGrossWeight="15.100000" ContainerGrossWeightUOM="KG" ContainerHeight="300" ContainerHeightUOM="MM" ContainerLength="300" ContainerLengthUOM="MM" ContainerNo="Container_2316455251" ContainerSeqNo="1" ContainerType="PARCEL" ContainerWidth="300" ContainerWidthUOM="MM" TrackingNo="2316455148">
+            <ContainerDetails>
+                <ContainerDetail Quantity="5">
+                    <ShipmentLine DocumentType="0001" ItemID="200473" OrderNo="Auto_2024022316454832" PrimeLineNo="2" Quantity="5" ShipAdviceNo="Auto_2024022316454832_1" SubLineNo="1" UnitOfMeasure="EACH">
+                    </ShipmentLine>
+                </ContainerDetail>
+            </ContainerDetails>
+        </Container>
+        <Container ActualWei77ght="" ContainerGrossWeight="15.100000" ContainerGrossWeightUOM="KG" ContainerHeight="300" ContainerHeightUOM="MM" ContainerLength="300" ContainerLengthUOM="MM" ContainerNo="Container_2316455242" ContainerSeqNo="1" ContainerType="PARCEL" ContainerWidth="300" ContainerWidthUOM="MM" TrackingNo="2316455148">
+            <ContainerDetails>
+                <ContainerDetail Quantity="7">
+                    <ShipmentLine DocumentType="0001" ItemID="200474" OrderNo="Auto_2024022316454832" PrimeLineNo="3" Quantity="7" ShipAdviceNo="Auto_2024022316454832_1" SubLineNo="1" UnitOfMeasure="EACH">
+                    </ShipmentLine>
+                </ContainerDetail>
+            </ContainerDetails>
+        </Container>
+        <Container ActualWei77ght="" ContainerGrossWeight="15.100000" ContainerGrossWeightUOM="KG" ContainerHeight="300" ContainerHeightUOM="MM" ContainerLength="300" ContainerLengthUOM="MM" ContainerNo="Container_2316455313" ContainerSeqNo="1" ContainerType="PARCEL" ContainerWidth="300" ContainerWidthUOM="MM" TrackingNo="2316455148">
+            <ContainerDetails>
+                <ContainerDetail Quantity="9">
+                    <ShipmentLine DocumentType="0001" ItemID="200475" OrderNo="Auto_2024022316454832" PrimeLineNo="4" Quantity="9" ShipAdviceNo="Auto_2024022316454832_1" SubLineNo="1" UnitOfMeasure="EACH">
+                    </ShipmentLine>
+                </ContainerDetail>
+            </ContainerDetails>
+        </Container>
+    </Containers>
+</Shipment>

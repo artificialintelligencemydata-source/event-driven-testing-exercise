@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Shipment BuyerOrganizationCode="Matrix" DoNotVerifyCaseContent="Y" DoNotVerifyPalletContent="Y" DocumentType="0006" EnterpriseCode="Matrix" ReceivingNode="Mtrx_Store_2" SellerOrganizationCode="Matrix" ShipNode="STORE_VENDOR02" ShipmentNo="2615013111">
+    <ShipmentLines>
+        <ShipmentLine DocumentType="0006" ItemID="100013" OrderNo="Auto_2024022615012927" PrimeLineNo="1" ProductClass="FQ" Quantity="10" ReleaseNo="1" SubLineNo="1" UnitOfMeasure="EACH"/>
+        <ShipmentLine DocumentType="0006" ItemID="100015" OrderNo="Auto_2024022615012927" PrimeLineNo="2" ProductClass="FQ" Quantity="10" ReleaseNo="1" SubLineNo="1" UnitOfMeasure="EACH"/>
+    </ShipmentLines>
+</Shipment>

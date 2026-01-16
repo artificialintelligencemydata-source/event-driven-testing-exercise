@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><MultiApi>
+    <API Name="confirmShipment">
+        <Input>
+            <Shipment SellerOrganizationCode="Matrix-R" ShipNode="Matrix_WH1" ShipmentKey="20240228175357560809" ShipmentNo="2817535652"/>
+        </Input>
+    </API>
+    <API Name="confirmShipment">
+        <Input>
+            <Shipment SellerOrganizationCode="Matrix-R" ShipNode="Matrix_WH1" ShipmentKey="20240228175400560824" ShipmentNo="2817535867"/>
+        </Input>
+    </API>
+    <API Name="confirmShipment">
+        <Input>
+            <Shipment SellerOrganizationCode="Matrix-R" ShipNode="Matrix_WH1" ShipmentKey="20240228175400560824" ShipmentNo="2817535867"/>
+        </Input>
+    </API>
+</MultiApi>

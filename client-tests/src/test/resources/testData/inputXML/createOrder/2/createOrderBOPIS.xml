@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Order CarrierServiceCode="Ground" DocumentType="0001" EnterpriseCode="Matrix-R" OrderDate="2024-03-12T10:33:31" OrderNo="Auto_2024031210333198" PaymentStatus="AUTHORIZED" ReqDeliveryDate="2024-03-15T10:33:31" SCAC="FEDX">
+    <OrderLines>
+        <OrderLine DeliveryMethod="PICK" FulfillmentType="" OrderedQty="2" PrimeLineNo="1" ReqDeliveryDate="2024-03-15T10:33:31" ReservationID="2403121033311460" SCAC="" ShipNode="STORE_VENDOR02">
+            <Item ItemID="100012" ProductClass="Good" UnitCost="248.99" UnitOfMeasure="EACH"/>
+            <LinePriceInfo IsPriceLocked="Y" ListPrice="248.99" UnitPrice="248.99"/>
+        </OrderLine>
+        <OrderLine DeliveryMethod="PICK" FulfillmentType="" OrderedQty="4" PrimeLineNo="2" ReqDeliveryDate="2024-03-15T10:33:31" ReservationID="2403121033311460" SCAC="" ShipNode="STORE_VENDOR02">
+            <Item ItemID="100013" ProductClass="Good" UnitCost="750" UnitOfMeasure="EACH"/>
+            <LinePriceInfo IsPriceLocked="Y" ListPrice="750" UnitPrice="750"/>
+        </OrderLine>
+    </OrderLines>
+    <PersonInfoShipTo AddressLine1="234 Copley Place" City="Boston" Country="US" DayPhone="" EMailID="sheetal.raina@acuverconsulting.com" FirstName="Sheetal" LastName="Raina" MobilePhone="" State="MA" ZipCode="02116"/>
+    <PersonInfoBillTo AddressLine1="234 Copley Place" City="Boston" Country="US" DayPhone="" EMailID="sheetal.raina@acuverconsulting.com" FirstName="Sheetal" LastName="Raina" MobilePhone="" State="MA" ZipCode="02116"/>
+    <PaymentMethods>
+        <PaymentMethod CreditCardExpDate="2028-08-05:00" CreditCardNo="411111vjOiXS1111" CreditCardType="visa" DisplayCreditCardNo="1111" FirstName="test" PaymentReference1="" PaymentReference2="" PaymentReference3="bankAuthCode" PaymentReference4="933857" PaymentReference7="visa-1111" PaymentType="CREDIT_CARD" SvcNo="">
+            <PaymentDetailsList>
+                <PaymentDetails ChargeType="CHARGE" ProcessedAmount="859.95"/>
+            </PaymentDetailsList>
+        </PaymentMethod>
+    </PaymentMethods>
+    <HeaderCharges>
+        <HeaderCharge ChargeAmount="9.95" ChargeCategory="Shipping" ChargeName="ShippingCharge" IsShippingCharge="Y"/>
+    </HeaderCharges>
+</Order>

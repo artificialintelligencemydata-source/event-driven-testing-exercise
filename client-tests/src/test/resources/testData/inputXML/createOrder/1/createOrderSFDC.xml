@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Order CarrierServiceCode="Ground" DocumentType="0001" EnterpriseCode="Matrix" OrderDate="2024-03-05T16:00:45" OrderNo="Auto_2024030516004567" PaymentStatus="AUTHORIZED" ReqDeliveryDate="2024-03-08T16:00:45" SCAC="FEDX" SellerOrganizationCode="Matrix-R">
+    <OrderLines>
+        <OrderLine DeliveryMethod="" FulfillmentType="SHIP_TO_HOME" OrderedQty="2" PrimeLineNo="1" ReqDeliveryDate="2024-03-08T16:00:45" ReservationID="2403051600458563" SCAC="" ShipNode="">
+            <Item ItemID="100123" ProductClass="Good" UnitCost="" UnitOfMeasure="EACH"/>
+            <LinePriceInfo IsPriceLocked="Y" ListPrice="" UnitPrice=""/>
+        </OrderLine>
+    </OrderLines>
+    <PersonInfoShipTo AddressLine1="234 Copley Place" City="Boston" Country="US" DayPhone="" EMailID="sheetal.raina@acuverconsulting.com" FirstName="Sheetal" LastName="Raina" MobilePhone="" State="MA" ZipCode="02116"/>
+    <PersonInfoBillTo AddressLine1="234 Copley Place" City="Boston" Country="US" DayPhone="" EMailID="sheetal.raina@acuverconsulting.com" FirstName="Sheetal" LastName="Raina" MobilePhone="" State="MA" ZipCode="02116"/>
+    <PaymentMethods>
+        <PaymentMethod CreditCardExpDate="2028-08-05:00" CreditCardNo="411111vjOiXS1111" CreditCardType="visa" DisplayCreditCardNo="1111" FirstName="test" PaymentReference1="" PaymentReference2="" PaymentReference3="bankAuthCode" PaymentReference4="933857" PaymentReference7="visa-1111" PaymentType="CREDIT_CARD" SvcNo="">
+            <PaymentDetailsList>
+                <PaymentDetails ChargeType="CHARGE" ProcessedAmount="859.95"/>
+            </PaymentDetailsList>
+        </PaymentMethod>
+    </PaymentMethods>
+    <HeaderCharges>
+        <HeaderCharge ChargeAmount="9.95" ChargeCategory="Shipping" ChargeName="ShippingCharge" IsShippingCharge="Y"/>
+    </HeaderCharges>
+</Order>

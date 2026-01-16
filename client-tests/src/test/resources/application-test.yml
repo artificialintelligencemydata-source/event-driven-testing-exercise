@@ -1,2 +1,13 @@
+spring:
+  datasource:
+    embedded-database-connection: none
+
+  config:
+    import: "classpath:application-postgres.yml"
+
+  sql:
+    init:
+      mode: never
+
 autwit:
-  database: h2
+  database: postgres

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Order DocumentType="0001" EnterpriseCode="Matrix" OrderNo="Auto_2023112717503199" ShipNode="" PaymentStatus="AUTHORIZED">
+    <OrderLines>
+        <OrderLine OrderedQty="2" ReservationID="" ShipNode="Matrix_WH1">
+            <Item ItemID="100015" UnitCost="10.0" UnitOfMeasure="EACH" ProductClass="Good" />
+        </OrderLine>
+        <OrderLine OrderedQty="2" ReservationID="" ShipNode="Matrix_WH1">
+            <Item ItemID="100091" UnitCost="10.0" UnitOfMeasure="EACH" ProductClass="Good" />
+        </OrderLine>
+    </OrderLines>
+    <PersonInfoShipTo AddressLine1="234 Copley Place" City="Boston" Country="US" DayPhone="" EMailID="sheetal.raina@acuverconsulting.com" FirstName="Sheetal" LastName="Raina" MobilePhone="" State="MA" ZipCode="02116"/>
+    <PersonInfoBillTo AddressLine1="234 Copley Place" City="Boston" Country="US" DayPhone="" EMailID="sheetal.raina@acuverconsulting.com" FirstName="Sheetal" LastName="Raina" MobilePhone="" State="MA" ZipCode="02116"/>
+</Order>

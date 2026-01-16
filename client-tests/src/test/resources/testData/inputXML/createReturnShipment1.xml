@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Shipment Action="Create" EnterpriseCode="Matrix-R" IgnoreOrdering="Y" OrderNo="RT20240306121025">
+    <OrderReleases>
+        <OrderRelease AssociationAction="Add" OrderReleaseKey="20240306121026600860" ReleaseNo="1"/>
+    </OrderReleases>
+</Shipment>

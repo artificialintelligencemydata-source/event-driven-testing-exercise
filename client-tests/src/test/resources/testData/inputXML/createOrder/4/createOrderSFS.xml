@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Order CarrierServiceCode="Ground" DocumentType="0001" EnterpriseCode="Matrix-R" OrderDate="2024-02-14T13:08:57" OrderNo="Auto_2024021413085739" PaymentStatus="AUTHORIZED" ReqDeliveryDate="2024-02-17T13:08:56" SCAC="FEDX">
+    <OrderLines>
+		  <OrderLine DeliveryMethod="SHP" FulfillmentType="SHIP_FROM_STORE" OrderedQty="3" PrimeLineNo="1" ReqDeliveryDate="2024-03-08T16:01:04" ReservationID="2403051601037149" SCAC="" ShipNode="">
+            <Item ItemID="200472" ProductClass="Good" UnitCost="" UnitOfMeasure="EACH"/>
+              <LinePriceInfo IsPriceLocked="Y" ListPrice="" UnitPrice=""/>
+        </OrderLine>
+		  <OrderLine DeliveryMethod="SHP" FulfillmentType="SHIP_FROM_STORE" OrderedQty="5" PrimeLineNo="2" ReqDeliveryDate="2024-03-08T16:01:04" ReservationID="2403051601037149" SCAC="" ShipNode="">
+            <Item ItemID="200473" ProductClass="Good" UnitCost="" UnitOfMeasure="EACH"/>
+              <LinePriceInfo IsPriceLocked="Y" ListPrice="" UnitPrice=""/>
+        </OrderLine>
+		  <OrderLine DeliveryMethod="SHP" FulfillmentType="SHIP_FROM_STORE" OrderedQty="7" PrimeLineNo="3" ReqDeliveryDate="2024-03-08T16:01:04" ReservationID="2403051601037149" SCAC="" ShipNode="">
+            <Item ItemID="200474" ProductClass="Good" UnitCost="" UnitOfMeasure="EACH"/>
+              <LinePriceInfo IsPriceLocked="Y" ListPrice="" UnitPrice=""/>
+        </OrderLine>
+		  <OrderLine DeliveryMethod="SHP" FulfillmentType="SHIP_FROM_STORE" OrderedQty="9" PrimeLineNo="4" ReqDeliveryDate="2024-03-08T16:01:04" ReservationID="2403051601037149" SCAC="" ShipNode="">
+            <Item ItemID="200475" ProductClass="Good" UnitCost="" UnitOfMeasure="EACH"/>
+              <LinePriceInfo IsPriceLocked="Y" ListPrice="" UnitPrice=""/>
+        </OrderLine>
+    </OrderLines>
+    <PersonInfoShipTo AddressLine1="234 Copley Place" City="Boston" Country="US" DayPhone="" EMailID="sheetal.raina@acuverconsulting.com" FirstName="Sheetal" LastName="Raina" MobilePhone="" State="MA" ZipCode="02116"/>
+    <PersonInfoBillTo AddressLine1="234 Copley Place" City="Boston" Country="US" DayPhone="" EMailID="sheetal.raina@acuverconsulting.com" FirstName="Sheetal" LastName="Raina" MobilePhone="" State="MA" ZipCode="02116"/>
+    <PaymentMethods>
+        <PaymentMethod CreditCardExpDate="2028-08-05:00" CreditCardNo="411111vjOiXS1111" CreditCardType="visa" DisplayCreditCardNo="1111" FirstName="test" PaymentReference1="" PaymentReference2="" PaymentReference3="bankAuthCode" PaymentReference4="933857" PaymentReference7="visa-1111" PaymentType="CREDIT_CARD" SvcNo="">
+            <PaymentDetailsList>
+                <PaymentDetails ChargeType="CHARGE" ProcessedAmount="859.95"/>
+            </PaymentDetailsList>
+        </PaymentMethod>
+    </PaymentMethods>
+    <HeaderCharges>
+        <HeaderCharge ChargeAmount="9.95" ChargeCategory="Shipping" ChargeName="ShippingCharge" IsShippingCharge="Y"/>
+    </HeaderCharges>
+</Order>

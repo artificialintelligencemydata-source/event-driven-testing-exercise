@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><MultiApi>
+    <API Name="changeOrderStatus">
+        <Input>
+            <OrderStatusChange BaseDropStatus="1100.01" ChangeForAllAvailableQty="Y" IgnoreOrdering="Y" OrderHeaderKey="20240306121025600829" Override="N" TransactionId="AUTHORIZE_RETURN.0003">
+                <OrderLines>
+                    <OrderLine OrderLineKey="20240306121025600828" YFC_NODE_NUMBER="1"/>
+                </OrderLines>
+            </OrderStatusChange>
+        </Input>
+    </API>
+    <API Name="changeOrder">
+        <Input>
+            <Order DocumentType="0003" EnterpriseCode="Matrix-R" IgnoreOrdering="Y" ModificationReasonCode="" ModificationReasonText="" OrderHeaderKey="20240306121025600829" Override="Y" changeOrder="Y">
+                <Notes>
+                    <Note ContactTime="2024-02-13T16:14:17" ContactType="EMAIL" ContactUser="admin" NoteText="return" ReasonCode="YCD_RETURN_INFO"/>
+                </Notes>
+            </Order>
+        </Input>
+    </API>
+</MultiApi>

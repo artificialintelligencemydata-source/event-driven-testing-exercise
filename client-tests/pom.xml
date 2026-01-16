@@ -24,8 +24,6 @@
         <maven.surefire.plugin.version>3.2.5</maven.surefire.plugin.version>
     </properties>
 
-
-    <!-- ========================= -->
     <!-- Dependency Management     -->
     <!-- Import Spring Boot BOM   -->
     <!-- ========================= -->
@@ -87,7 +85,18 @@
             <version>${project.version}</version>
         </dependency>
 
-        <!-- Cucumber + TestNG -->
+        <dependency>
+                <groupId>com.acuver</groupId>
+                <artifactId>autwit-adapter-postgres</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+            </dependency>
+
+            <!-- Cucumber + TestNG -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -108,6 +117,25 @@
             <version>${testng.version}</version>
             <scope>test</scope>
         </dependency>
+
+           <!-- &lt;!&ndash; DATABASE DRIVERS - Required at Runtime &ndash;&gt;
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <scope>runtime</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <scope>runtime</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver-sync</artifactId>
+                <scope>runtime</scope>
+            </dependency>-->
 
         <dependency>
             <groupId>com.vaadin.external.google</groupId>
@@ -137,6 +165,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring.boot.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -149,8 +178,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
-
     </dependencies>
 
     <build>
@@ -173,18 +200,6 @@
                             <version>${lombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
-                </configuration>
-            </plugin>
-
-            <!-- FORMATTER -->
-            <plugin>
-                <groupId>com.diffplug.spotless</groupId>
-                <artifactId>spotless-maven-plugin</artifactId>
-                <version>2.46.1</version>
-                <configuration>
-                    <java>
-                        <googleJavaFormat/>
-                    </java>
                 </configuration>
             </plugin>
 
@@ -231,6 +246,34 @@
                 </executions>
             </plugin>
 
+            <!-- Copy database configs from autwit-runner -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-db-configs</id>
+                        <phase>generate-test-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../autwit-runner/src/main/resources</directory>
+                                    <includes>
+                                        <include>application-postgres.yml</include>
+                                        <include>application-mongo.yml</include>
+                                        <include>application-h2.yml</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 

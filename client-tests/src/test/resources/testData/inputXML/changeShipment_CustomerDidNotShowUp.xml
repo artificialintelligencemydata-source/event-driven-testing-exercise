@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Shipment Action="Cancel" BackOrderRemovedQuantity="Y" IgnoreOrdering="Y" OverrideModificationRules="Y" ShipmentKey="20240207094322544342">
+    <ShipmentStatusAudit ReasonCode="YCD_CUST_DELAY_CONS" ReasonText="Customer Did Not Show Up"/>
+</Shipment>

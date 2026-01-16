@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Receipt DocumentType="0003" IgnoreOrdering="Y" NumOfCartons="1" NumOfPallets="0" ReceiptDate="2024-03-06T12:10:28" ReceiptNo="0612102831" ReceivingNode="Matrix_WH1" Refresh="refresh" ShipmentKey="20240306121027600872">
+    <Shipment BolNo="" BuyerOrganizationCode="" EnterpriseCode="Matrix-R" ExpectedDeliveryDate="2024-02-23T00:13:16" SCAC="" SellerOrganizationCode="Matrix" ShipmentNo="100000460"/>
+</Receipt>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Shipment EnterpriseCode="Matrix" SellerOrganizationCode="Matrix" ShipNode="Matrix_WH1" ShipmentNo="2415540263">
+    <ShipmentLines>
+        <ShipmentLine DocumentType="0001" ItemID="" OrderNo="Auto_2024012415535365" PrimeLineNo="1" Quantity="1" ShipAdviceNo="Auto_2024012415535365_1" SubLineNo="1" UnitOfMeasure="EACH">
+        </ShipmentLine>
+        <ShipmentLine DocumentType="0001" ItemID="" OrderNo="Auto_2024012415531522" PrimeLineNo="2" Quantity="1" ShipAdviceNo="Auto_2024012415531522_1" SubLineNo="1" UnitOfMeasure="EACH">
+        </ShipmentLine>
+    </ShipmentLines>
+    <OrderRelease OrderReleaseKey="20240124155359309427" ReleaseNo="1" ShipAdviceNo="Auto_2024012415535365_1">
+        <Order DocumentType="0001" EnterpriseCode="Matrix" OrderNo="Auto_2024012415535365"/>
+    </OrderRelease>
+    <Containers>
+        <Container ActualWei77ght="" ContainerGrossWeight="15.100000" ContainerGrossWeightUOM="KG" ContainerHeight="300" ContainerHeightUOM="MM" ContainerLength="300" ContainerLengthUOM="MM" ContainerNo="Container_2316474699" ContainerSeqNo="1" ContainerType="PARCEL" ContainerWidth="300" ContainerWidthUOM="MM" TrackingNo="2316474632">
+            <ContainerDetails>
+                <ContainerDetail Quantity="4">
+                    <ShipmentLine DocumentType="0001" ItemID="100015" OrderNo="Auto_2024022316473512" PrimeLineNo="1" Quantity="4" ShipAdviceNo="Auto_2024022316473512_1" SubLineNo="1" UnitOfMeasure="EACH">
+                    </ShipmentLine>
+                </ContainerDetail>
+            </ContainerDetails>
+        </Container>
+        <Container ActualWei77ght="" ContainerGrossWeight="15.100000" ContainerGrossWeightUOM="KG" ContainerHeight="300" ContainerHeightUOM="MM" ContainerLength="300" ContainerLengthUOM="MM" ContainerNo="Container_2316474672" ContainerSeqNo="1" ContainerType="PARCEL" ContainerWidth="300" ContainerWidthUOM="MM" TrackingNo="2316474696">
+            <ContainerDetails>
+                <ContainerDetail Quantity="7">
+                    <ShipmentLine DocumentType="0001" ItemID="100013" OrderNo="Auto_2024022316473512" PrimeLineNo="2" Quantity="7" ShipAdviceNo="Auto_2024022316473512_1" SubLineNo="1" UnitOfMeasure="EACH">
+                    </ShipmentLine>
+                </ContainerDetail>
+            </ContainerDetails>
+        </Container>
+    </Containers>
+</Shipment>

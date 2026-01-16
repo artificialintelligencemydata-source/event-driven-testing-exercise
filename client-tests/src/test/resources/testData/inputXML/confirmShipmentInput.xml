@@ -1,0 +1,6 @@
+<Shipment Action="Create-Modify" EnterpriseCode="Matrix" ShipmentNo="112314091">
+    <ShipmentLines>
+        <ShipmentLine DocumentType="0001" OrderHeaderKey="2023112314062629812" PrimeLineNo="1" ProductClass="Good"
+                      Quantity="1" ReleaseNo="1" SubLineNo="1" UnitOfMeasure=""/>
+    </ShipmentLines>
+</Shipment>

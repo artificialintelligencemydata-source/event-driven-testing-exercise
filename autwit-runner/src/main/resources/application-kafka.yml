@@ -8,10 +8,10 @@ kafka:
   groupId: autwit-runner
 
 topics:
-  - order-created
-  - order-updated
-  - shipment-created
-  - shipment-delivered
+#  - ex. order-created
+#  - ex. order-updated
+#  - ex. shipment-created
+#  - ex. hipment-delivered
 
   # Optional enterprise settings
   securityProtocol:

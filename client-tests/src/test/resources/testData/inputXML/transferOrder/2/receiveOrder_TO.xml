@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Receipt DocumentType="0006" ReceiptDate="" ReceivingNode="Mtrx_Store_2">
+    <Shipment DocumentType="0006" SellerOrganizationCode="Matrix" ShipNode="STORE_VENDOR02" ShipmentNo="2615013111"/>
+    <ReceiptLines>
+        <ReceiptLine ItemID="100013" OrderNo="Auto_2024022615012927" PrimeLineNo="1" Quantity="10" SubLineNo="1" UnitOfMeasure="EACH"/>
+        <ReceiptLine ItemID="100015" OrderNo="Auto_2024022615012927" PrimeLineNo="2" Quantity="10" SubLineNo="1" UnitOfMeasure="EACH"/>
+    </ReceiptLines>
+</Receipt>

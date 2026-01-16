@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Errors>
+    <Error ErrorCode="org.xml.sax.SAXParseException" ErrorDescription="Error description not available" ErrorRelatedMoreInfo="">
+        <Attribute Name="ErrorCode" Value="org.xml.sax.SAXParseException"/>
+        <Attribute Name="ErrorDescription" Value="Error description not available"/>
+        <Error ErrorCode="org.xml.sax.SAXParseException" ErrorDescription="" ErrorRelatedMoreInfo="Content is not allowed in prolog.">
+            <Stack>org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.&#13;
+	at org.apache.xerces.parsers.DOMParser.parse(Unknown Source)&#13;
+	at org.apache.xerces.jaxp.DocumentBuilderImpl.parse(Unknown Source)&#13;
+	at com.yantra.yfc.dom.YFCDocument.parse(YFCDocument.java:519)&#13;
+	at com.yantra.yfc.dom.YFCDocument.parse(YFCDocument.java:506)&#13;
+	at com.yantra.interop.client.InteropHttpServlet.handleApiRequest(InteropHttpServlet.java:552)&#13;
+	at com.yantra.interop.client.InteropHttpServlet.processRequest(InteropHttpServlet.java:222)&#13;
+	at com.yantra.interop.client.InteropHttpServlet.doPost(InteropHttpServlet.java:174)&#13;
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:751)&#13;
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:844)&#13;
+	at weblogic.servlet.internal.StubSecurityHelper$ServletServiceAction.run(StubSecurityHelper.java:280)&#13;
+	at weblogic.servlet.internal.StubSecurityHelper$ServletServiceAction.run(StubSecurityHelper.java:254)&#13;
+	at weblogic.servlet.internal.StubSecurityHelper.invokeServlet(StubSecurityHelper.java:136)&#13;
+	at weblogic.servlet.internal.ServletStubImpl.execute(ServletStubImpl.java:346)&#13;
+	at weblogic.servlet.internal.TailFilter.doFilter(TailFilter.java:25)&#13;
+	at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:79)&#13;
+	at com.sterlingcommerce.security.dv.web.SCUIRequestValidatorFilter.doFilter(SCUIRequestValidatorFilter.java:43)&#13;
+	at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:79)&#13;
+	at com.sterlingcommerce.security.dv.web.SCUISafeRequestFilter.doFilter(SCUISafeRequestFilter.java:64)&#13;
+	at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:79)&#13;
+	at com.sterlingcommerce.security.csrf.SCUIcsrfFilter.doFilter(SCUIcsrfFilter.java:96)&#13;
+	at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:79)&#13;
+	at com.sterlingcommerce.woodstock.security.FileNotFoundSuppressor.doFileNotFoundSuppressedFilter(FileNotFoundSuppressor.java:23)&#13;
+	at com.sterlingcommerce.woodstock.security.CrossFrameProtectionFilter.doFilter(CrossFrameProtectionFilter.java:76)&#13;
+	at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:79)&#13;
+	at com.sterlingcommerce.woodstock.security.UserAuthenticationFilter.doFilter(UserAuthenticationFilter.java:121)&#13;
+	at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:79)&#13;
+	at weblogic.servlet.internal.RequestEventsFilter.doFilter(RequestEventsFilter.java:27)&#13;
+	at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:79)&#13;
+	at weblogic.servlet.internal.WebAppServletContext$ServletInvocationAction.wrapRun(WebAppServletContext.java:3436)&#13;
+	at weblogic.servlet.internal.WebAppServletContext$ServletInvocationAction.run(WebAppServletContext.java:3402)&#13;
+	at weblogic.security.acl.internal.AuthenticatedSubject.doAs(AuthenticatedSubject.java:321)&#13;
+	at weblogic.security.service.SecurityManager.runAs(SecurityManager.java:120)&#13;
+	at weblogic.servlet.provider.WlsSubjectHandle.run(WlsSubjectHandle.java:57)&#13;
+	at weblogic.servlet.internal.WebAppServletContext.doSecuredExecute(WebAppServletContext.java:2285)&#13;
+	at weblogic.servlet.internal.WebAppServletContext.securedExecute(WebAppServletContext.java:2201)&#13;
+	at weblogic.servlet.internal.WebAppServletContext.execute(WebAppServletContext.java:2179)&#13;
+	at weblogic.servlet.internal.ServletRequestImpl.run(ServletRequestImpl.java:1572)&#13;
+	at weblogic.servlet.provider.ContainerSupportProviderImpl$WlsRequestExecutor.run(ContainerSupportProviderImpl.java:255)&#13;
+	at weblogic.work.ExecuteThread.execute(ExecuteThread.java:311)&#13;
+	at weblogic.work.ExecuteThread.run(ExecuteThread.java:263)&#13;
+</Stack>
+        </Error>
+        <Stack>com.yantra.yfc.util.YFCException&#13;
+	at com.yantra.interop.client.InteropHttpServlet.handleApiRequest(InteropHttpServlet.java:595)&#13;
+	at com.yantra.interop.client.InteropHttpServlet.processRequest(InteropHttpServlet.java:222)&#13;
+	at com.yantra.interop.client.InteropHttpServlet.doPost(InteropHttpServlet.java:174)&#13;
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:751)&#13;
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:844)&#13;
+	at weblogic.servlet.internal.StubSecurityHelper$ServletServiceAction.run(StubSecurityHelper.java:280)&#13;
+	at weblogic.servlet.internal.StubSecurityHelper$ServletServiceAction.run(StubSecurityHelper.java:254)&#13;
+	at weblogic.servlet.internal.StubSecurityHelper.invokeServlet(StubSecurityHelper.java:136)&#13;
+	at weblogic.servlet.internal.ServletStubImpl.execute(ServletStubImpl.java:346)&#13;
+	at weblogic.servlet.internal.TailFilter.doFilter(TailFilter.java:25)&#13;
+	at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:79)&#13;
+	at com.sterlingcommerce.security.dv.web.SCUIRequestValidatorFilter.doFilter(SCUIRequestValidatorFilter.java:43)&#13;
+	at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:79)&#13;
+	at com.sterlingcommerce.security.dv.web.SCUISafeRequestFilter.doFilter(SCUISafeRequestFilter.java:64)&#13;
+	at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:79)&#13;
+	at com.sterlingcommerce.security.csrf.SCUIcsrfFilter.doFilter(SCUIcsrfFilter.java:96)&#13;
+	at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:79)&#13;
+	at com.sterlingcommerce.woodstock.security.FileNotFoundSuppressor.doFileNotFoundSuppressedFilter(FileNotFoundSuppressor.java:23)&#13;
+	at com.sterlingcommerce.woodstock.security.CrossFrameProtectionFilter.doFilter(CrossFrameProtectionFilter.java:76)&#13;
+	at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:79)&#13;
+	at com.sterlingcommerce.woodstock.security.UserAuthenticationFilter.doFilter(UserAuthenticationFilter.java:121)&#13;
+	at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:79)&#13;
+	at weblogic.servlet.internal.RequestEventsFilter.doFilter(RequestEventsFilter.java:27)&#13;
+	at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:79)&#13;
+	at weblogic.servlet.internal.WebAppServletContext$ServletInvocationAction.wrapRun(WebAppServletContext.java:3436)&#13;
+	at weblogic.servlet.internal.WebAppServletContext$ServletInvocationAction.run(WebAppServletContext.java:3402)&#13;
+	at weblogic.security.acl.internal.AuthenticatedSubject.doAs(AuthenticatedSubject.java:321)&#13;
+	at weblogic.security.service.SecurityManager.runAs(SecurityManager.java:120)&#13;
+	at weblogic.servlet.provider.WlsSubjectHandle.run(WlsSubjectHandle.java:57)&#13;
+	at weblogic.servlet.internal.WebAppServletContext.doSecuredExecute(WebAppServletContext.java:2285)&#13;
+	at weblogic.servlet.internal.WebAppServletContext.securedExecute(WebAppServletContext.java:2201)&#13;
+	at weblogic.servlet.internal.WebAppServletContext.execute(WebAppServletContext.java:2179)&#13;
+	at weblogic.servlet.internal.ServletRequestImpl.run(ServletRequestImpl.java:1572)&#13;
+	at weblogic.servlet.provider.ContainerSupportProviderImpl$WlsRequestExecutor.run(ContainerSupportProviderImpl.java:255)&#13;
+	at weblogic.work.ExecuteThread.execute(ExecuteThread.java:311)&#13;
+	at weblogic.work.ExecuteThread.run(ExecuteThread.java:263)&#13;
+</Stack>
+    </Error>
+</Errors>

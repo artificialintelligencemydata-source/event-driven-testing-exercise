@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ReserveItemInventory ExpirationDate="2023-11-25" ItemID="100015" OrganizationCode="Matrix" ProductClass="Good"
+                      QtyToBeCancelled="" QtyToBeReserved="5" ReservationID="231124085139" ShipNode="Matrix_WH1"
+                      UnitOfMeasure="EACH">
+</ReserveItemInventory>

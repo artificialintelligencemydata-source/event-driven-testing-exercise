@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Items>
+    <Item AdjustmentType="ADJUSTMENT" ItemID="100015" OrganizationCode="Matrix" ProductClass="Good" Quantity="100.0"
+          ShipNode="Matrix_WH1" SupplyType="ONHAND" UnitOfMeasure="EACH">
+    </Item>
+</Items>

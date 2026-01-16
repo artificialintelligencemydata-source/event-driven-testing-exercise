@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Shipment EnterpriseCode="Matrix" SellerOrganizationCode="Matrix" ShipNode="STORE_VENDOR01" ShipmentNo="1015073893">
+    <ShipmentLines>
+        <ShipmentLine DocumentType="0005" ItemID="100123" OrderNo="Auto_2025021015073613" PrimeLineNo="1" Quantity="75" ShipAdviceNo="Auto_2025021015073613_1" SubLineNo="1" UnitOfMeasure="EACH">
+        </ShipmentLine>
+    </ShipmentLines>
+    <OrderRelease OrderReleaseKey="202502101507384208262" ReleaseNo="1" ShipAdviceNo="Auto_2025021015073613_1">
+        <Order DocumentType="0005" EnterpriseCode="Matrix" OrderNo="Auto_2025021015073613"/>
+    </OrderRelease>
+    <Containers>
+        <Container ActualWei77ght="" ContainerGrossWeight="15.100000" ContainerGrossWeightUOM="KG" ContainerHeight="300" ContainerHeightUOM="MM" ContainerLength="300" ContainerLengthUOM="MM" ContainerNo="Container_1015073861" ContainerSeqNo="1" ContainerType="PARCEL" ContainerWidth="300" ContainerWidthUOM="MM" TrackingNo="1015073893">
+            <ContainerDetails>
+                <ContainerDetail Quantity="75">
+                    <ShipmentLine DocumentType="0005" ItemID="100123" OrderNo="Auto_2025021015073613" PrimeLineNo="1" Quantity="75" ShipAdviceNo="Auto_2025021015073613_1" SubLineNo="1" UnitOfMeasure="EACH">
+                    </ShipmentLine>
+                </ContainerDetail>
+            </ContainerDetails>
+        </Container>
+    </Containers>
+</Shipment>

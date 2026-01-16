@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Order BillToKey="2023111313100472532" Createts="2024-03-06T12:10:25-05:00"
+       CustomerEMailID="sheetal.raina@acuverconsulting.com" CustomerFirstName="Sheetal" CustomerLastName="Raina"
+       CustomerPONo="" CustomerPhoneNo=" " CustomerZipCode="02116" DocumentType="0003" EnterpriseCode="Matrix-R"
+       MaxOrderStatus="3700.0101" MaxOrderStatusDesc="Awaiting Invoice" MinOrderStatus="3700.0101"
+       MinOrderStatusDesc="Awaiting Invoice" OrderDate="2024-03-06T12:10:25-05:00" OrderHeaderKey="20240306121025600829"
+       OrderName="" OrderNo="RT20240306121025" OriginalTax="0.00" OriginalTotalAmount="681.00" OtherCharges="0.00"
+       PaymentStatus="AUTHORIZED" SellerOrganizationCode="Matrix" ShipToKey="2023111313100472532"
+       Status="Awaiting Invoice">
+    <PaymentMethods/>
+    <ChargeTransactionDetails AdditionalExpectedAuthorizations="0.00" TotalCredits="0.00" TotalDebits="0.00"
+                              TotalOpenAuthorizations="0.00" TotalOpenBookings="0.00" TotalTransferredIn="0.00"
+                              TotalTransferredOut="0.00"/>
+    <OrderLines>
+        <OrderLine AddToOrderReleaseKey="" ApptStatus="" BackorderNotificationQty="0.00" BasicCapacityRequired="0.00"
+                   CanAddServiceLines="N" CannotMeetAppt="" CapacityUOM="" CarrierAccountNo="" CarrierServiceCode=""
+                   ConditionVariable1="" ConditionVariable2="" Createprogid="SterlingHttpTester"
+                   Createts="2024-03-06T12:10:25-05:00" Createuserid="admin" CustomerLinePONo="" CustomerPONo=""
+                   DeliveryCode="" DeliveryMethod="SHP" DepartmentCode="" DependencyRatio="0.00"
+                   DerivedFromExternalOrder="N" DerivedFromOrderHeaderKey="20240306121016600534"
+                   DerivedFromOrderLineKey="20240306121016600535" EarliestDeliveryDate="2024-03-06T12:10:25-05:00"
+                   EarliestShipDate="2024-03-06T12:10:25-05:00" FillQuantity="0.00" FixedCapacityQtyPerLine="0.00"
+                   FixedPricingQtyPerLine="0.00" FreightTerms="" FulfillmentType="" GiftFlag="N" HoldFlag="N"
+                   HoldReasonCode="" ImportLicenseNo="" IntentionalBackorder="N" InvoiceBasedOnActuals="N"
+                   InvoiceComplete="Y" InvoicedExtendedPrice="681.00" InvoicedQuantity="2.00" IsBlindLine="N"
+                   IsCapacityOverridden="N" IsCostOverridden="Y" IsFirmPredefinedNode="Y" IsPriceMatched="N"
+                   IsStandaloneService="" ItemGroupCode="PROD" KitCode="" LineSeqNo="1.1" LineType="Credit" Lockid="2"
+                   MaintainRatio="" Modifyprogid="SterlingHttpTester" Modifyts="2024-03-06T12:10:29-05:00"
+                   Modifyuserid="admin" OptionCapacityRequired="0.00" OrderClass="NEW"
+                   OrderHeaderKey="20240306121025600829" OrderLineKey="20240306121025600828" OrderedQty="2.00"
+                   OrderingUOM="EACH" OriginalOrderedQty="2.00" OtherCharges="0.00" OverReceiptQuantity="0.00"
+                   PackListType="" ParentOfDependentGroup="N" PersonalizeCode="" PersonalizeFlag="" PickableFlag="Y"
+                   PipelineKey="YCD_RETURN-10.0" PricingDate="2024-03-06" PrimeLineNo="1" PropagationQty="0.00"
+                   PropagationToParentRequired="" Purpose="" QuantityToSplit="0.00" ReceivedAsComponents=""
+                   ReceivedQty="0.00" ReservationID="" ReservationMandatory="N" ReservationPool=""
+                   ReturnReason="Not Required Anymore" SCAC="" SchedFailureReasonCode="" Segment="" SegmentType=""
+                   SerialNo="" ShipNode="Matrix_WH1" ShipTogetherNo="" ShippedQuantity="2.00" SplitFromLineKey=""
+                   SplitFromPrimeLineNo="0" SplitFromSubLineNo="0" SplitQty="0.00" SubLineNo="1" Timezone=""
+                   TotalQtyToCancel="0.00" TranDiscrepancyQty="0.00" TransactionalLineId="" WaitForSeqLine="N"
+                   isHistory="N">
+            <Item CostCurrency="" CountryOfOrigin="" CustomerItem="100703"
+                  CustomerItemDesc="Alpha Refrigerator - White/Bottom/Left" ECCNNo="" HarmonizedCode="" ISBN=""
+                  ItemDesc="Alpha Refrigerator - White/Bottom/Left" ItemID="100703"
+                  ItemShortDesc="Alpha Refrigerator - White/Bottom/Left" ItemWeight="0.00" ItemWeightUOM="LBS"
+                  ManufacturerItem="" ManufacturerItemDesc="" ManufacturerName="" NMFCClass="" NMFCCode=""
+                  NMFCDescription="" ProductClass="Good" ProductLine="" ScheduleBCode="" SupplierItem=""
+                  SupplierItemDesc="" TaxProductCode="" UPCCode="" UnitCost="340.50" UnitOfMeasure="EACH"/>
+            <LinePriceInfo ActualPricingQty="2.00" DiscountPercentage="0.00" DiscountReference="" DiscountType=""
+                           InvoicedLineTotal="681.00" InvoicedPricingQty="2.00" IsEligibleForShippingDiscount="Y"
+                           IsPriceLocked="N" LineTotal="681.00" ListPrice="340.50" OrderedPricingQty="2.00"
+                           PricingQtyConversionFactor="0.00" PricingQuantityStrategy="IQTY" PricingUOM="EACH"
+                           RepricingQty="2.00" RetailPrice="340.50" SettledAmount="0.00" SettledQuantity="0.00"
+                           Tax="0.00" TaxableFlag="N" UnitPrice="340.50"/>
+            <ItemDetails CanUseAsServiceTool="N" GlobalItemID="" IsItemSuperseded="N" ItemGroupCode="PROD"
+                         ItemID="100703" ItemKey="2009071703215256900" UnitOfMeasure="EACH"/>
+            <Schedules>
+                <Schedule Quantity="2.00" ShipNode="Matrix_WH1"/>
+            </Schedules>
+            <LineOverallTotals AdditionalLinePriceTotal="0.00" Charges="0.00" Discount="0.00" ExtendedPrice="681.00"
+                               LineCost="681.00" LineTotal="681.00" LineTotalWithoutTax="681.00"
+                               ManualDiscountPercentage="0.00" ManualOverridePercentage="0.00" OptionPrice="0.00"
+                               PercentProfitMargin="0.00" PricingQty="2.00" ShippingBaseCharge="0.00"
+                               ShippingCharges="0.00" ShippingDiscount="0.00" ShippingTotal="0.00" Tax="0.00"
+                               UnitPrice="340.50"/>
+            <LineInvoicedTotals AdditionalLinePriceTotal="0.00" Charges="0.00" Discount="0.00" ExtendedPrice="681.00"
+                                LineTotal="681.00" OptionPrice="0.00" PricingQty="2.00" Tax="0.00" UnitPrice="340.50"/>
+            <LineRemainingTotals AdditionalLinePriceTotal="0.00" Charges="0.00" Discount="0.00" ExtendedPrice="0.00"
+                                 LineTotal="0.00" OptionPrice="0.00" PricingQty="0.00" Tax="0.00" UnitPrice="340.50"/>
+            <OrderStatuses>
+                <OrderStatus OrderHeaderKey="20240306121025600829" OrderLineKey="20240306121025600828"
+                             OrderLineScheduleKey="2024030612011025600830" OrderReleaseKey="20240306121026600860"
+                             OrderReleaseStatusKey="2024030612471027600883" PipelineKey="YCD_RETURN-10.0"
+                             ShipNode="Matrix_WH1" Status="3700.0101" StatusDate="2024-03-06T12:10:27-05:00"
+                             StatusDescription="Awaiting Invoice" StatusQty="2.00" TotalQuantity="2.00"/>
+            </OrderStatuses>
+        </OrderLine>
+    </OrderLines>
+    <PersonInfoShipTo AddressLine1="234 Copley Place" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5=""
+                      AddressLine6="" AlternateEmailID="" Beeper="" City="Boston" Company="" Country="US"
+                      Createprogid="SterlingHttpTester" Createts="2023-11-13T13:10:03-05:00" Createuserid="admin"
+                      DayFaxNo="" DayPhone="" Department="" EMailID="sheetal.raina@acuverconsulting.com" ErrorTxt=""
+                      EveningFaxNo="" EveningPhone="" FirstName="Sheetal" HttpUrl="" JobTitle="" LastName="Raina"
+                      Lockid="0" MiddleName="" MobilePhone="" Modifyprogid="SterlingHttpTester"
+                      Modifyts="2023-11-13T13:10:03-05:00" Modifyuserid="admin" OtherPhone="" PersonID=""
+                      PersonInfoKey="2023111313100472532" PreferredShipAddress="" ShortZipCode="02116" State="MA"
+                      Suffix="" Title="" UseCount="0" VerificationStatus="" ZipCode="02116" isHistory="N"/>
+    <PersonInfoBillTo AddressLine1="234 Copley Place" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5=""
+                      AddressLine6="" AlternateEmailID="" Beeper="" City="Boston" Company="" Country="US"
+                      Createprogid="SterlingHttpTester" Createts="2023-11-13T13:10:03-05:00" Createuserid="admin"
+                      DayFaxNo="" DayPhone="" Department="" EMailID="sheetal.raina@acuverconsulting.com" ErrorTxt=""
+                      EveningFaxNo="" EveningPhone="" FirstName="Sheetal" HttpUrl="" JobTitle="" LastName="Raina"
+                      Lockid="0" MiddleName="" MobilePhone="" Modifyprogid="SterlingHttpTester"
+                      Modifyts="2023-11-13T13:10:03-05:00" Modifyuserid="admin" OtherPhone="" PersonID=""
+                      PersonInfoKey="2023111313100472532" PreferredShipAddress="" ShortZipCode="02116" State="MA"
+                      Suffix="" Title="" UseCount="0" VerificationStatus="" ZipCode="02116" isHistory="N"/>
+    <OrderStatuses>
+        <OrderStatus OrderHeaderKey="20240306121025600829" OrderLineKey="20240306121025600828"
+                     OrderLineScheduleKey="2024030612011025600830" OrderReleaseKey="20240306121026600860"
+                     OrderReleaseStatusKey="2024030612471027600883" PipelineKey="YCD_RETURN-10.0" ShipNode="Matrix_WH1"
+                     Status="3700.0101" StatusDate="2024-03-06T12:10:27-05:00" StatusDescription="Awaiting Invoice"
+                     StatusQty="2.00" TotalQuantity="2.00"/>
+    </OrderStatuses>
+</Order>

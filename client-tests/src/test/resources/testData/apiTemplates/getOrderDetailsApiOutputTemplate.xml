@@ -1,0 +1,46 @@
+<Order Createts="" CustomerContactID="" CustomerDOB="" CustomerEMailID="" CustomerFirstName="" CustomerLastName=""
+       CustomerPONo="" CustomerPhoneNo="" CustomerRewardsNo="" CustomerZipCode="" DocumentType="" EnterpriseCode=""
+       MaxOrderStatus="" MaxOrderStatusDesc="" MinOrderStatus="" MinOrderStatusDesc="" OrderDate="" OrderHeaderKey=""
+       OrderName="" OrderNo="" OrderPurpose="" PaymentStatus="" ReceivingNode="" ReqCancelDate="" ReqDeliveryDate=""
+       SellerOrganizationCode="" Status="" BillToKey="" ShipToKey="" OriginalTax="" OriginalTotalAmount=""
+       OtherCharges="">
+<OrderStatuses>
+<OrderStatus OrderHeaderKey="" OrderLineKey="" OrderLineScheduleKey="" OrderReleaseKey="" OrderReleaseStatusKey="" PipelineKey="" ReceivingNode="" ShipNode="" Status="" StatusDate="" StatusDescription="" StatusQty="" StatusReason="" TotalQuantity="">
+</OrderStatus>
+</OrderStatuses>
+<PaymentMethods>
+</PaymentMethods>
+<ChargeTransactionDetails>
+</ChargeTransactionDetails>
+<OrderLines>
+<OrderLine >
+            <PriceInfo/>
+<Item />
+            <ItemDetails CanUseAsServiceTool="" GlobalItemID="" IsItemSuperseded="" ItemGroupCode="" ItemID="" ItemKey="" SubCatalogOrganizationCode="" UnitOfMeasure=""/>
+            <LinePriceInfo/>
+<Schedules>
+<Schedule ProcureFromNode=""  Quantity="" ShipNode="" >
+</Schedule>
+</Schedules>
+            <LineOverallTotals/>
+            <LineInvoicedTotals/>
+            <LineRemainingTotals/>
+            <LineCharges/>
+            <LineTaxes/>
+            <OrderStatuses>
+                <OrderStatus OrderHeaderKey="" OrderLineKey=""
+                             OrderLineScheduleKey="" OrderReleaseKey=""
+                             OrderReleaseStatusKey="" PipelineKey=""
+                             ShipNode="" Status="" StatusDate=""
+                             StatusDescription="" StatusQty="" TotalQuantity="" />
+            </OrderStatuses>
+            <DerivedFromOrderLine PrimeLineNo="" SubLineNo="">
+                <Item ItemID="" UnitOfMeasure=""/>
+            </DerivedFromOrderLine>
+</OrderLine>
+</OrderLines>
+    <PersonInfoShipTo>
+            </PersonInfoShipTo>
+    <PersonInfoBillTo>
+            </PersonInfoBillTo>
+</Order>
