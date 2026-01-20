@@ -77,14 +77,6 @@ Feature: BOPIC - WCS Cart Submission to OES (Event Driven Validation)
 #    to publish to Topic  - No access for QA3 - Darshan asked to using API
 #    to consume to Topic  - To Consume message i need access for the topic
 #    API CURD Operation   - Token is blocking
-
-
-
-
-
-
-
-
     Examples:
       | testcaseName              | TopicName             | Key |
       | BOPIC_SINGLELINE_REGULAR  | wcs.cart.submit.topic | 1   |

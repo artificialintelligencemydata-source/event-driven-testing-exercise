@@ -1,0 +1,11 @@
+# Build output (Maven/Gradle)
+target/
+
+# Logs
+logs/
+*.log
+
+# Allure
+allure-results/
+allure-artifacts/
+allure-report/
