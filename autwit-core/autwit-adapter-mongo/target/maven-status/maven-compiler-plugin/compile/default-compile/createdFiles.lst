@@ -1,9 +1,0 @@
-com\acuver\autwit\adapter\mongo\MongoAdapterConfig.class
-com\acuver\autwit\adapter\mongo\scenario\MongoScenarioContextEntity.class
-com\acuver\autwit\adapter\mongo\MongoEventContextEntity$MongoEventContextEntityBuilder.class
-com\acuver\autwit\adapter\mongo\MongoEventContextAdapter.class
-com\acuver\autwit\adapter\mongo\MongoEventContextRepository.class
-com\acuver\autwit\adapter\mongo\scenario\MongoScenarioContextAdapter.class
-com\acuver\autwit\adapter\mongo\MongoEventContextEntity.class
-com\acuver\autwit\adapter\mongo\MongoSchemaInitializer.class
-com\acuver\autwit\adapter\mongo\scenario\MongoScenarioContextRepository.class

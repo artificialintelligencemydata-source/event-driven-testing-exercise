@@ -1,8 +1,0 @@
-com\acuver\autwit\engine\bus\InMemoryEventBus.class
-com\acuver\autwit\engine\config\EngineAutoConfiguration.class
-com\acuver\autwit\engine\scheduler\MongoEventPoller.class
-com\acuver\autwit\engine\resume\ResumeEngine.class
-com\acuver\autwit\engine\scenarioStateTracker\ScenarioStateTracker.class
-com\acuver\autwit\engine\scheduler\H2EventPoller.class
-com\acuver\autwit\engine\notifier\EventStepNotifier.class
-com\acuver\autwit\engine\scheduler\PostgresEventPoller.class
