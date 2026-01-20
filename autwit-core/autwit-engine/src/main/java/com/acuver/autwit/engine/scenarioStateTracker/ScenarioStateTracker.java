@@ -45,7 +45,18 @@ public class ScenarioStateTracker implements ScenarioStatePort {
             state.setStepData(new HashMap<>());
             state.setTestCaseId(runtimeContextPort.get("testCaseId"));
             state.setExampleId(runtimeContextPort.get("exampleKey"));
+            state.setScenarioKey(runtimeContextPort.get("scenarioKey"));
 
+        }
+
+        // ✅ Ensure scenarioKey is never missing (critical safety)
+        if (state.getScenarioKey() == null || state.getScenarioKey().isBlank()) {
+            state.setScenarioKey(runtimeContextPort.get("scenarioKey"));
+        }
+
+        // ✅ Ensure scenarioName exists too
+        if (state.getScenarioName() == null || state.getScenarioName().isBlank()) {
+            state.setScenarioName(scenario);
         }
 
         // 3️⃣ Defensive map initialization (CRITICAL)
@@ -155,7 +166,13 @@ public class ScenarioStateTracker implements ScenarioStatePort {
         }
 
         if (state == null) {
-            state = new ScenarioStateContext(scenario);
+            state = new ScenarioStateContext();
+            state.setScenarioName(scenario);
+            state.setStepStatus(new HashMap<>());
+            state.setStepData(new HashMap<>());
+            state.setTestCaseId(runtimeContextPort.get("testCaseId"));
+            state.setExampleId(runtimeContextPort.get("exampleKey"));
+            state.setScenarioKey(runtimeContextPort.get("scenarioKey"));
         }
 
         state.setScenarioStatus(status);

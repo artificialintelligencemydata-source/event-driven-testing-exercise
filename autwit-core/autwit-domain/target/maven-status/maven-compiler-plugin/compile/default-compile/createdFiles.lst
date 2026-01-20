@@ -5,8 +5,10 @@ com\acuver\autwit\core\ports\EventMatcherPort.class
 com\acuver\autwit\core\ports\runtime\RuntimeContextPort.class
 com\acuver\autwit\core\domain\ScenarioStateContext.class
 com\acuver\autwit\core\ports\EventReceiverPort.class
+com\acuver\autwit\core\utils\CanonicalKeyGenerator$KeyComponents.class
 com\acuver\autwit\core\domain\ScenarioStateContext$ScenarioStateContextBuilder.class
 com\acuver\autwit\core\ports\ScenarioStatePort.class
 com\acuver\autwit\core\utils\CanonicalKeyGenerator.class
 com\acuver\autwit\core\domain\EventContext$EventContextBuilder.class
+com\acuver\autwit\core\utils\CanonicalKeyGenerator$KeyFormat.class
 com\acuver\autwit\core\domain\EventContext.class

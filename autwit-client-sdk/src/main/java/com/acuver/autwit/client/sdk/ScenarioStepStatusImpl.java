@@ -2,11 +2,16 @@ package com.acuver.autwit.client.sdk;
 
 import com.acuver.autwit.core.ports.ScenarioStatePort;
 import com.acuver.autwit.core.ports.runtime.RuntimeContextPort;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Scenario Step Status Implementation.
+ *
+ * @author AUTWIT Framework
+ * @since 2.0.0
+ */
 class ScenarioStepStatusImpl implements Autwit.ScenarioStepStatus {
 
     private final ScenarioStatePort scenarioStatePort;
@@ -19,36 +24,27 @@ class ScenarioStepStatusImpl implements Autwit.ScenarioStepStatus {
 
     @Override
     public void markStepSuccess() {
-        scenarioStatePort.markStep(
-                currentScenario(),
-                currentStep(),
-                "success",
-                Collections.emptyMap()
-        );
+        String scenario = currentScenario();
+        String step = currentStep();
+        scenarioStatePort.markStep(scenario, step, "success", Collections.emptyMap());
     }
 
     @Override
     public void markStepFailed(String reason) {
+        String scenario = currentScenario();
+        String step = currentStep();
         Map<String, String> data = new HashMap<>();
         data.put("reason", reason);
-        scenarioStatePort.markStep(
-                currentScenario(),
-                currentStep(),
-                "FAILED",
-                data
-        );
+        scenarioStatePort.markStep(scenario, step, "FAILED", data);
     }
 
+    @Override
     public void markStepSkipped(String reason) {
+        String scenario = currentScenario();
+        String step = currentStep();
         Map<String, String> data = new HashMap<>();
         data.put("reason", reason);
-
-        scenarioStatePort.markStep(
-                currentScenario(),
-                currentStep(),
-                "skipped",
-                data
-        );
+        scenarioStatePort.markStep(scenario, step, "skipped", data);
     }
 
     @Override
@@ -59,34 +55,27 @@ class ScenarioStepStatusImpl implements Autwit.ScenarioStepStatus {
         if (!scenarioStatePort.isStepAlreadySuccessful(scenarioKey, stepName)) {
             return false;
         }
-
-        // 🔁 Restore step data (OLD AUTWIT BEHAVIOR)
-        Map<String, String> stepData =
-                scenarioStatePort.getStepData(scenarioKey, stepName);
+        Map<String, String> stepData = scenarioStatePort.getStepData(scenarioKey, stepName);
 
         if (stepData == null || stepData.isEmpty()) {
-            return true; // step succeeded but had no data
+            return true;
         }
 
         for (Map.Entry<String, String> entry : stepData.entrySet()) {
             runtimeContext.set(entry.getKey(), entry.getValue());
         }
-
         return true;
     }
 
     @Override
     public Map<String, String> getStepData() {
-        return scenarioStatePort.getStepData(
-                currentScenario(),
-                currentStep()
-        );
+        return scenarioStatePort.getStepData(currentScenario(), currentStep());
     }
 
     private String currentScenario() {
         String scenarioName = runtimeContext.get("scenarioName");
         if (scenarioName == null) {
-            throw new IllegalStateException("scenarioName not set in RuntimeContext - Hooks.beforeScenario() may not have run");
+            throw new IllegalStateException("scenarioName not set in RuntimeContext");
         }
         return scenarioName;
     }
@@ -94,7 +83,7 @@ class ScenarioStepStatusImpl implements Autwit.ScenarioStepStatus {
     private String currentStep() {
         String step = runtimeContext.get("currentStep");
         if (step == null) {
-            throw new IllegalStateException("currentStep not set in RuntimeContext - step must call setCurrentStep() before markStepSuccess()");
+            throw new IllegalStateException("currentStep not set - ensure StepContextPlugin is configured");
         }
         return step;
     }

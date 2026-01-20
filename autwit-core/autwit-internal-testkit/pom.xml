@@ -36,11 +36,13 @@
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
+      <version>5.5.6</version>
     </dependency>
 
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>json-path</artifactId>
+      <version>5.5.6</version>
     </dependency>
 
     <dependency>
@@ -149,6 +151,11 @@
       <version>${commons.lang3.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.14.0</version>
+    </dependency>
     <!-- ===================== -->
     <!-- Mongo + Kafka (optional support if needed in testkit) -->
     <!-- ===================== -->
@@ -198,6 +205,13 @@
     <dependency>
       <groupId>jakarta.annotation</groupId>
       <artifactId>jakarta.annotation-api</artifactId>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-autoconfigure</artifactId>
+      <scope>compile</scope>
     </dependency>
 
   </dependencies>

@@ -1,16 +1,18 @@
 autwit:
   database: postgres
+  debug:
+    loaded-from-postgres-yml: YES
 
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/autwit
     driver-class-name: org.postgresql.Driver
-    username: autwit
-    password: autwit
+    username: admin
+    password: admin
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -19,3 +21,9 @@ spring:
     init:
       mode: always
       schema-locations: classpath:schema-postgres.sql
+      continue-on-error: false
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration

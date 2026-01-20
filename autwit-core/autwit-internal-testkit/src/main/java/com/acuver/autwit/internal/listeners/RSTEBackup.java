@@ -15,7 +15,7 @@ public class RSTEBackup {
     public void executeRetries() {
         LOG.info("Starting retry executor...");
         for (int attempt = 1; attempt <= MAX_RETRY; attempt++) {
-            List<ITestResult> skipped = TestNGListener.skippedTests.stream().filter(r -> r.getStatus() == ITestResult.SKIP).toList();
+            List<ITestResult> skipped = TestNGListenerNew.skippedTests.stream().filter(r -> r.getStatus() == ITestResult.SKIP).toList();
             if (skipped.isEmpty()) {
                 LOG.info("No skipped tests remaining.");
                 break;

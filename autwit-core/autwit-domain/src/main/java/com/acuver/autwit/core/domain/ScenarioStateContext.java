@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Persisted scenario scenarioStateTracker (database-backed).
@@ -16,9 +17,10 @@ import java.util.Map;
 @AllArgsConstructor
 @Builder
 public class ScenarioStateContext {
-    private String _id;
+    private UUID _id;
     private String exampleId;
     private String testCaseId;
+    private String scenarioKey;
     private String scenarioName;
     @Builder.Default
     private Map<String, String> stepStatus = new HashMap<>();

@@ -1,28 +1,40 @@
 package com.acuver.autwit.adapter.h2;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+import jakarta.persistence.EntityManagerFactory;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.core.env.Environment;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Map;
 
-@Slf4j
+
 @Configuration
 @ConditionalOnProperty(name = "autwit.database", havingValue = "h2")
 @EnableJpaRepositories(basePackages = "com.acuver.autwit.adapter.h2")
 @EntityScan(basePackages = "com.acuver.autwit.adapter.h2")
 public class H2JpaConfig {
-
+    private static final Logger log = LogManager.getLogger(H2JpaConfig.class);
     // Box drawing characters and dimensions
     private static final int CONTENT_WIDTH = 59;
     private static final String BORDER_LEFT = "│  ";
@@ -35,8 +47,120 @@ public class H2JpaConfig {
     @Autowired
     private Environment env;
 
-    @Autowired(required = false)
+    // Lazy injection to avoid circular dependency (DataSource is created in this class)
+    @Autowired
+    @org.springframework.context.annotation.Lazy
     private DataSource dataSource;
+
+    // ─────────────────────────────────────────────────────────────
+    // DataSource Bean - Adapter owns its infrastructure
+    // ─────────────────────────────────────────────────────────────
+    /**
+     * Creates H2 DataSource bean.
+     * 
+     * This adapter OWNS the DataSource creation. Spring Boot's
+     * DataSourceAutoConfiguration is excluded, so adapters must
+     * create their own DataSource beans.
+     * 
+     * Configuration is read from spring.datasource.* properties
+     * in application-h2.yml profile.
+     */
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource")
+    public DataSource dataSource() {
+        log.info("Creating H2 DataSource bean");
+        
+        String url = env.getProperty("spring.datasource.url", 
+            "jdbc:h2:mem:autwit;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE");
+        String driverClassName = env.getProperty("spring.datasource.driver-class-name", 
+            "org.h2.Driver");
+        String username = env.getProperty("spring.datasource.username", "sa");
+        String password = env.getProperty("spring.datasource.password", "");
+        
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl(url);
+        config.setDriverClassName(driverClassName);
+        config.setUsername(username);
+        config.setPassword(password);
+        config.setPoolName("AUTWIT-H2-Pool");
+        config.setMaximumPoolSize(10);
+        config.setMinimumIdle(2);
+        config.setConnectionTimeout(30000);
+        config.setIdleTimeout(600000);
+        config.setMaxLifetime(1800000);
+        
+        log.info("H2 DataSource configured: url={}, username={}", url, username);
+        return new HikariDataSource(config);
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // EntityManagerFactory Bean - Adapter owns JPA infrastructure
+    // ─────────────────────────────────────────────────────────────
+    /**
+     * Creates EntityManagerFactory bean for JPA repositories.
+     * 
+     * CRITICAL: Since HibernateJpaAutoConfiguration is excluded at framework level,
+     * adapters MUST create their own EntityManagerFactory beans. This ensures:
+     * - Adapters own their complete JPA infrastructure
+     * - No Spring Boot auto-configuration interference
+     * - Deterministic startup
+     */
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+        log.info("Creating H2 EntityManagerFactory bean");
+        
+        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+        em.setDataSource(dataSource);
+        em.setPackagesToScan("com.acuver.autwit.adapter.h2");
+        
+        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        em.setJpaVendorAdapter(vendorAdapter);
+        
+        // Build JPA properties from Environment (since HibernateJpaAutoConfiguration is excluded)
+        Map<String, Object> properties = new java.util.HashMap<>();
+        
+        // Read Hibernate dialect (required for H2)
+        String dialect = env.getProperty("spring.jpa.properties.hibernate.dialect",
+                env.getProperty("spring.jpa.hibernate.dialect",
+                        "org.hibernate.dialect.H2Dialect"));
+        properties.put("hibernate.dialect", dialect);
+        
+        // Read DDL auto mode
+        String ddlAuto = env.getProperty("spring.jpa.hibernate.ddl-auto",
+                env.getProperty("spring.jpa.properties.hibernate.hbm2ddl.auto", "none"));
+        properties.put("hibernate.hbm2ddl.auto", ddlAuto);
+        
+        // Read show SQL
+        String showSql = env.getProperty("spring.jpa.show-sql", "false");
+        properties.put("hibernate.show_sql", showSql);
+        
+        // Read format SQL
+        String formatSql = env.getProperty("spring.jpa.properties.hibernate.format_sql",
+                env.getProperty("spring.jpa.properties.hibernate.format-sql", "false"));
+        properties.put("hibernate.format_sql", formatSql);
+        
+        em.setJpaPropertyMap(properties);
+        
+        log.info("H2 EntityManagerFactory configured");
+        return em;
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // TransactionManager Bean - Required for JPA transactions
+    // ─────────────────────────────────────────────────────────────
+    /**
+     * Creates PlatformTransactionManager bean for JPA transactions.
+     * 
+     * CRITICAL: Since HibernateJpaAutoConfiguration is excluded, adapters
+     * must create their own transaction manager.
+     */
+    @Bean
+    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+        log.info("Creating H2 TransactionManager bean");
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory);
+        return transactionManager;
+    }
 
     public H2JpaConfig() {
         log.info("╔═══════════════════════════════════════════════════════════════╗");

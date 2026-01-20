@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -5,7 +6,6 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <!-- Runner is fully independent -->
   <groupId>com.acuver</groupId>
   <artifactId>autwit-runner</artifactId>
   <version>1.0.0-SNAPSHOT</version>
@@ -18,54 +18,38 @@
     <java.version>21</java.version>
     <spring.boot.version>3.5.7</spring.boot.version>
     <lombok.version>1.18.36</lombok.version>
-
     <cucumber.version>7.11.0</cucumber.version>
+    <log4j.version>2.24.3</log4j.version>
     <testng.version>7.9.0</testng.version>
-
-    <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
-    <maven.surefire.plugin.version>3.2.5</maven.surefire.plugin.version>
+    <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
+    <maven.surefire.plugin.version>3.5.2</maven.surefire.plugin.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-
 
   <!-- ========================= -->
   <!-- Dependency Management     -->
-  <!-- Import Spring Boot BOM   -->
   <!-- ========================= -->
   <dependencyManagement>
     <dependencies>
-
-      <!-- Spring Boot BOM controls versions -->
+      <!-- Spring Boot BOM - manages ALL Spring versions -->
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
         <version>${spring.boot.version}</version>
         <type>pom</type>
-<!--        <scope>provided</scope>-->
         <scope>import</scope>
       </dependency>
 
+      <!-- Log4j2 BOM -->
       <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <version>${lombok.version}</version>
-        <scope>provided</scope>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-bom</artifactId>
+        <version>${log4j.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
-
-
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-logging</artifactId>
-        <exclusions>
-          <exclusion>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-to-slf4j</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-
     </dependencies>
   </dependencyManagement>
-
 
   <!-- ========================= -->
   <!-- Dependencies              -->
@@ -141,6 +125,13 @@
     </dependency>
 
     <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+      <!-- Version from Spring Boot BOM -->
+    </dependency>
+
+    <dependency>
       <groupId>com.vaadin.external.google</groupId>
       <artifactId>android-json</artifactId>
       <version>0.0.20131108.vaadin1</version>
@@ -153,29 +144,24 @@
       </exclusions>
     </dependency>
 
-    <!-- LOGGING (FIX FOR SLF4J WARNING) -->
+    <!-- LOGGING -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
+      <!-- Version from Log4j2 BOM -->
     </dependency>
 
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-slf4j2-impl</artifactId>
+      <!-- Version from Log4j2 BOM -->
     </dependency>
 
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
-      <scope>provided</scope>  <!-- ✅ ADDED -->
-    </dependency>
-
-    <!-- SPRING BOOT TEST (without default logging) -->
+    <!-- SPRING BOOT TEST -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
 <!--      <scope>test</scope>-->
-      <scope>provided</scope>
       <exclusions>
         <exclusion>
           <groupId>org.springframework.boot</groupId>
@@ -188,32 +174,22 @@
       </exclusions>
     </dependency>
 
+    <!-- SPRING TEST - Version now comes from Spring Boot BOM -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+<!--      <scope>test</scope>-->
+      <!-- Version managed by Spring Boot BOM -->
+    </dependency>
+
   </dependencies>
-
-
-  <!-- ========================= -->
-  <!-- Repositories              -->
-  <!-- ========================= -->
-  <repositories>
-    <repository>
-      <id>autwit-releases</id>
-      <url>http://localhost:8085/repository/maven-releases/</url>
-    </repository>
-    <repository>
-      <id>autwit-snapshots</id>
-      <url>http://localhost:8085/repository/maven-snapshots</url>
-      <snapshots><enabled>true</enabled></snapshots>
-    </repository>
-  </repositories>
-
 
   <!-- ========================= -->
   <!-- Build Plugins             -->
   <!-- ========================= -->
   <build>
     <plugins>
-
-      <!--JAVA COMPILER-->
+      <!-- JAVA COMPILER -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -222,35 +198,16 @@
           <source>${java.version}</source>
           <target>${java.version}</target>
           <release>${java.version}</release>
-                <encoding>UTF-8</encoding>
-                  <annotationProcessorPaths>
-                    <path>
-                      <groupId>org.projectlombok</groupId>
-                      <artifactId>lombok</artifactId>
-                      <version>${lombok.version}</version>
-                    </path>
-                  </annotationProcessorPaths>
+          <encoding>UTF-8</encoding>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>${lombok.version}</version>
+            </path>
+          </annotationProcessorPaths>
         </configuration>
       </plugin>
-
-
-      <!-- SPRING BOOT -->
-<!--      <plugin>-->
-<!--        <groupId>org.springframework.boot</groupId>-->
-<!--        <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--        <version>${spring.boot.version}</version>-->
-<!--        <configuration>-->
-<!--          <mainClass>com.acuver.autwit.runner.RunnerApp</mainClass>-->
-<!--        </configuration>-->
-<!--        <executions>-->
-<!--          <execution>-->
-<!--            <goals>-->
-<!--              <goal>repackage</goal>-->
-<!--            </goals>-->
-<!--          </execution>-->
-<!--        </executions>-->
-<!--      </plugin>-->
-
 
       <!-- FORMATTER -->
       <plugin>
@@ -263,101 +220,6 @@
           </java>
         </configuration>
       </plugin>
-
-      <!-- CLEAN ALLURE RESULTS -->
-<!--      <plugin>-->
-<!--        <groupId>org.apache.maven.plugins</groupId>-->
-<!--        <artifactId>maven-antrun-plugin</artifactId>-->
-<!--        <version>1.8</version>-->
-<!--        <executions>-->
-<!--          <execution>-->
-<!--            <phase>pre-clean</phase>-->
-<!--            <goals><goal>run</goal></goals>-->
-<!--            <configuration>-->
-<!--              <target>-->
-<!--                <delete dir="${project.basedir}/allure-results">-->
-<!--                  <exclude name="history/**"/>-->
-<!--                  <exclude name="categories.json"/>-->
-<!--                  <exclude name="environment.properties"/>-->
-<!--                </delete>-->
-<!--              </target>-->
-<!--            </configuration>-->
-<!--          </execution>-->
-<!--        </executions>-->
-<!--      </plugin>-->
-
-<!--      &lt;!&ndash; SUREFIRE TESTNG &ndash;&gt;-->
-<!--      <plugin>-->
-<!--        <groupId>org.apache.maven.plugins</groupId>-->
-<!--        <artifactId>maven-surefire-plugin</artifactId>-->
-<!--        <version>${maven.surefire.plugin.version}</version>-->
-<!--        <configuration>-->
-<!--          <suiteXmlFiles>-->
-<!--            <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>-->
-<!--          </suiteXmlFiles>-->
-<!--          <useSystemClassLoader>true</useSystemClassLoader>-->
-<!--&lt;!&ndash;          <skipTests>true</skipTests>  &lt;!&ndash; ✅ Runner has no tests, clients do &ndash;&gt;&ndash;&gt;-->
-<!--          <testNGArtifactName>org.testng:testng</testNGArtifactName>-->
-<!--        </configuration>-->
-<!--        <dependencies>-->
-<!--          <dependency>-->
-<!--            <groupId>org.apache.maven.surefire</groupId>-->
-<!--            <artifactId>surefire-testng</artifactId>-->
-<!--            <version>${maven.surefire.plugin.version}</version>-->
-<!--          </dependency>-->
-<!--        </dependencies>-->
-<!--      </plugin>-->
-
-
-<!--      <plugin>-->
-<!--        <groupId>org.apache.maven.plugins</groupId>-->
-<!--        <artifactId>maven-resources-plugin</artifactId>-->
-<!--        <version>3.3.1</version>-->
-<!--        <executions>-->
-<!--          <execution>-->
-<!--            <id>copy-client-features</id>-->
-<!--            <phase>process-test-resources</phase>-->
-<!--            <goals>-->
-<!--              <goal>copy-resources</goal>-->
-<!--            </goals>-->
-<!--            <configuration>-->
-<!--              <outputDirectory>-->
-<!--                ${project.build.testOutputDirectory}/features-->
-<!--              </outputDirectory>-->
-<!--              <resources>-->
-<!--                <resource>-->
-<!--                  <directory>-->
-<!--                    ${project.basedir}/../client-tests/src/test/resources/features-->
-<!--                  </directory>-->
-<!--                  <includes>-->
-<!--                    <include>**/*.features</include>-->
-<!--                  </includes>-->
-<!--                </resource>-->
-<!--              </resources>-->
-<!--            </configuration>-->
-<!--          </execution>-->
-
-<!--          <execution>-->
-<!--            <id>copy-client-cucumber-properties</id>-->
-<!--            <phase>process-test-resources</phase>-->
-<!--            <goals>-->
-<!--              <goal>copy-resources</goal>-->
-<!--            </goals>-->
-<!--            <configuration>-->
-<!--              <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>-->
-<!--              <resources>-->
-<!--                <resource>-->
-<!--                  <directory>../client-tests/src/test/resources</directory>-->
-<!--                  <includes>-->
-<!--                    <include>cucumber.properties</include>-->
-<!--                  </includes>-->
-<!--                </resource>-->
-<!--              </resources>-->
-<!--            </configuration>-->
-<!--          </execution>-->
-<!--        </executions>-->
-<!--      </plugin>-->
-
     </plugins>
   </build>
 

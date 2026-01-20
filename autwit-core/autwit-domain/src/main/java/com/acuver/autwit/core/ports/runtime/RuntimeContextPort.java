@@ -12,5 +12,6 @@ public interface RuntimeContextPort {
     <T> void set(String key, T value);
     <T> T get(String key);
     void remove(String key);
+    void clear();
 }
 

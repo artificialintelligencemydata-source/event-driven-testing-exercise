@@ -41,5 +41,6 @@ public final class ScenarioContext {
     public static <T> T api() {
         return get("api");
     }
+    public static void removeThread() {store.remove(); }
 }
 

@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,12 +33,24 @@ public class PostgresEventContextEntity {
     @Column(name = "kafka_payload", columnDefinition = "TEXT")
     private String kafkaPayload;
 
+    @Column(name = "paused")
     private boolean paused;
+
+    @Column(name = "resume_ready")
     private boolean resumeReady;
+
+    @Column(name = "retry_count")
     private int retryCount;
+
+    @Column(name = "first_paused_at")
     private long firstPausedAt;
+
+    @Column(name = "last_retry_at")
     private long lastRetryAt;
 
+    @Column(name = "status")
     private String status;
+
+    @Column(name = "timestamp")
     private long timestamp;
 }

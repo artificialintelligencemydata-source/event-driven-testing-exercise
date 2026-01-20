@@ -1,292 +1,316 @@
 package com.acuver.autwit.core.utils;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 /**
- * CanonicalKeyGenerator - Generates unique keys for event matching and scenario identification.
+ * CanonicalKeyGenerator - Generates and parses canonical keys for AUTWIT.
  *
- * <h2>KEY FORMATS</h2>
+ * <h2>PURPOSE</h2>
+ * <p>Canonical keys uniquely identify an event expectation in the system.
+ * They are used for:</p>
  * <ul>
- *   <li><b>V2 (Recommended)</b>: {@code scenarioName::orderId::eventType}</li>
- *   <li><b>V1 (Deprecated)</b>: {@code orderId::eventType}</li>
+ *   <li>Database lookups (finding paused contexts, matching events)</li>
+ *   <li>Waiter registry (EventStepNotifier futures)</li>
+ *   <li>Resume engine matching</li>
  * </ul>
  *
- * <h2>WHY SCENARIO NAME IS NEEDED</h2>
- * <p>Without scenario name, two different scenarios testing the same orderId could collide:</p>
+ * <h2>KEY FORMATS</h2>
+ *
+ * <h3>V2 Format (PREFERRED)</h3>
  * <pre>
- * Scenario A: expects ORDER_CREATED for order123
- * Scenario B: expects ORDER_CREATED for order123 (different test case)
- *
- * V1 key for both: order123::ORDER_CREATED (COLLISION!)
- * V2 key: ScenarioA::order123::ORDER_CREATED vs ScenarioB::order123::ORDER_CREATED (UNIQUE!)
+ * scenarioName::orderId::eventType
+ * Example: "Verify_Order_Ships::ORD-123::ORDER_SHIPPED"
  * </pre>
+ * <p>V2 format includes scenario name, which prevents collisions when
+ * multiple scenarios test the same orderId with the same eventType.</p>
  *
- * <h2>BACKWARD COMPATIBILITY</h2>
- * <p>V1 format is still supported for reading existing data. New data should use V2.</p>
+ * <h3>V1 Format (DEPRECATED)</h3>
+ * <pre>
+ * orderId::eventType
+ * Example: "ORD-123::ORDER_SHIPPED"
+ * </pre>
+ * <p>V1 format is maintained for backward compatibility but should not
+ * be used for new code. It can cause cross-scenario collisions.</p>
+ *
+ * <h3>FULL Format (EXTENDED)</h3>
+ * <pre>
+ * featureName::lineNumber::exampleId::orderId::eventType
+ * Example: "OrderFeature::42::example-1::ORD-123::ORDER_SHIPPED"
+ * </pre>
+ * <p>Full format provides maximum disambiguation for complex scenarios.</p>
+ *
+ * <h2>MIGRATION</h2>
+ * <p>Code should migrate from V1 to V2 format. During migration:</p>
+ * <ul>
+ *   <li>Use {@link #generate(String, String, String)} for V2 keys</li>
+ *   <li>Use {@link #forOrder(String, String)} only for backward compatibility</li>
+ *   <li>Use {@link #matches(String, String)} for cross-format comparison</li>
+ *   <li>Use {@link #parse(String)} to extract components from any format</li>
+ * </ul>
  *
  * @author AUTWIT Framework
- * @since 1.0.0
+ * @since 2.0.0
  */
 public final class CanonicalKeyGenerator {
 
-    /** Delimiter between key components */
-    public static final String DELIMITER = "::";
+    /** Separator between key components */
+    public static final String SEPARATOR = "::";
 
-    /** Maximum key length to prevent excessive storage */
-    private static final int MAX_KEY_LENGTH = 500;
+    /** Pattern for V2 format detection */
+    private static final Pattern V2_PATTERN = Pattern.compile("^[^:]+::[^:]+::[^:]+$");
+
+    /** Pattern for FULL format detection */
+    private static final Pattern FULL_PATTERN = Pattern.compile("^[^:]+::[^:]+::[^:]+::[^:]+::[^:]+$");
 
     private CanonicalKeyGenerator() {
         // Utility class - no instantiation
     }
 
     // =========================================================================
-    // V2 FORMAT (RECOMMENDED)
+    // V2 KEY GENERATION (PREFERRED)
     // =========================================================================
 
     /**
-     * Generate canonical key WITH scenario name (V2 format - recommended).
+     * Generate V2 canonical key.
      *
-     * <p>Format: {@code scenarioName::orderId::eventType}</p>
+     * <p>This is the PREFERRED method for generating canonical keys.
+     * V2 format includes scenario name to prevent cross-scenario collisions.</p>
      *
-     * <p>This format ensures uniqueness across different scenarios testing the same order.</p>
-     *
-     * @param scenarioName Scenario name (from Cucumber)
-     * @param orderId Business correlation ID
-     * @param eventType Expected event type
-     * @return Canonical key in V2 format
+     * @param scenarioName Name of the scenario (required)
+     * @param orderId Order ID (required)
+     * @param eventType Event type (required)
+     * @return V2 canonical key in format: scenarioName::orderId::eventType
+     * @throws IllegalArgumentException if any parameter is null or blank
      */
     public static String generate(String scenarioName, String orderId, String eventType) {
-        // Validate inputs
-        if (isBlank(orderId)) {
-            throw new IllegalArgumentException("orderId cannot be null or blank");
-        }
-        if (isBlank(eventType)) {
-            throw new IllegalArgumentException("eventType cannot be null or blank");
-        }
+        validateNotBlank(scenarioName, "scenarioName");
+        validateNotBlank(orderId, "orderId");
+        validateNotBlank(eventType, "eventType");
 
-        // If no scenario name, fall back to V1
-        if (isBlank(scenarioName)) {
-            return forOrder(orderId, eventType);
-        }
-
-        String key = String.join(DELIMITER,
-                sanitize(scenarioName),
-                sanitize(orderId),
-                sanitize(eventType)
-        );
-
-        return truncateIfNeeded(key);
+        return sanitize(scenarioName) + SEPARATOR + sanitize(orderId) + SEPARATOR + sanitize(eventType);
     }
 
     /**
-     * Generate canonical key with full context.
-     *
-     * <p>Format: {@code featureName::scenarioLine::exampleId::orderId::eventType}</p>
-     *
-     * <p>Use this for maximum uniqueness in complex test suites.</p>
+     * Generate FULL canonical key with maximum disambiguation.
      *
      * @param featureName Feature file name
-     * @param scenarioLine Scenario line number
-     * @param exampleId Example ID (for Scenario Outline)
-     * @param orderId Business correlation ID
-     * @param eventType Expected event type
-     * @return Canonical key with full context
+     * @param lineNumber Scenario line number
+     * @param exampleId Example ID for parameterized scenarios
+     * @param orderId Order ID
+     * @param eventType Event type
+     * @return FULL canonical key
      */
-    public static String generateFull(String featureName, int scenarioLine, String exampleId,
+    public static String generateFull(String featureName, int lineNumber, String exampleId,
                                       String orderId, String eventType) {
-        String key = String.join(DELIMITER,
-                sanitize(featureName),
-                String.valueOf(scenarioLine),
-                sanitize(exampleId),
-                sanitize(orderId),
-                sanitize(eventType)
-        );
+        validateNotBlank(orderId, "orderId");
+        validateNotBlank(eventType, "eventType");
 
-        return truncateIfNeeded(key);
+        String feature = featureName != null ? sanitize(featureName) : "unknown";
+        String line = String.valueOf(lineNumber);
+        String example = exampleId != null ? sanitize(exampleId) : "default";
+
+        return feature + SEPARATOR + line + SEPARATOR + example + SEPARATOR +
+                sanitize(orderId) + SEPARATOR + sanitize(eventType);
     }
 
     // =========================================================================
-    // V1 FORMAT (DEPRECATED - FOR BACKWARD COMPATIBILITY)
+    // V1 KEY GENERATION (DEPRECATED)
     // =========================================================================
 
     /**
-     * Generate canonical key WITHOUT scenario name (V1 format).
+     * Generate V1 canonical key.
      *
-     * <p>Format: {@code orderId::eventType}</p>
+     * @deprecated Use {@link #generate(String, String, String)} instead.
+     *             V1 format can cause cross-scenario collisions.
      *
-     * <p><b>WARNING:</b> This format can cause collisions if multiple scenarios
-     * test the same order. Use {@link #generate(String, String, String)} instead.</p>
-     *
-     * @param orderId Business correlation ID
-     * @param eventType Expected event type
-     * @return Canonical key in V1 format
-     * @deprecated Use {@link #generate(String, String, String)} instead
+     * @param orderId Order ID
+     * @param eventType Event type
+     * @return V1 canonical key in format: orderId::eventType
      */
-    @Deprecated(since = "1.1.0", forRemoval = false)
+    @Deprecated
     public static String forOrder(String orderId, String eventType) {
-        if (isBlank(orderId)) {
-            throw new IllegalArgumentException("orderId cannot be null or blank");
-        }
-        if (isBlank(eventType)) {
-            throw new IllegalArgumentException("eventType cannot be null or blank");
-        }
+        validateNotBlank(orderId, "orderId");
+        validateNotBlank(eventType, "eventType");
 
-        return sanitize(orderId) + DELIMITER + sanitize(eventType);
+        return sanitize(orderId) + SEPARATOR + sanitize(eventType);
     }
 
     // =========================================================================
-    // PARSING
+    // KEY PARSING
     // =========================================================================
 
     /**
      * Parse a canonical key into its components.
      *
-     * <p>Automatically detects V1 vs V2 format based on number of components.</p>
+     * <p>Automatically detects the format (V1, V2, or FULL) and extracts
+     * the appropriate components.</p>
      *
-     * @param canonicalKey Key to parse
-     * @return Parsed components, or null if invalid
+     * @param canonicalKey The key to parse
+     * @return KeyComponents record with extracted values
+     * @throws IllegalArgumentException if key format is invalid
      */
     public static KeyComponents parse(String canonicalKey) {
-        if (isBlank(canonicalKey)) {
-            return null;
+        if (canonicalKey == null || canonicalKey.isBlank()) {
+            throw new IllegalArgumentException("Canonical key cannot be null or blank");
         }
 
-        String[] parts = canonicalKey.split(DELIMITER);
+        String[] parts = canonicalKey.split(SEPARATOR);
 
         return switch (parts.length) {
             case 2 -> // V1 format: orderId::eventType
-                    new KeyComponents(null, parts[0], parts[1], KeyFormat.V1);
+                    new KeyComponents(null, null, null, parts[0], parts[1], KeyFormat.V1);
             case 3 -> // V2 format: scenarioName::orderId::eventType
-                    new KeyComponents(parts[0], parts[1], parts[2], KeyFormat.V2);
-            case 5 -> // Full format: featureName::line::exampleId::orderId::eventType
-                    new KeyComponents(parts[0] + "_" + parts[2], parts[3], parts[4], KeyFormat.FULL);
-            default -> null;
+                    new KeyComponents(parts[0], null, null, parts[1], parts[2], KeyFormat.V2);
+            case 5 -> // FULL format: feature::line::example::orderId::eventType
+                    new KeyComponents(null, parts[0], parts[2], parts[3], parts[4], KeyFormat.FULL);
+            default ->
+                    throw new IllegalArgumentException("Invalid canonical key format: " + canonicalKey);
         };
     }
 
-    /**
-     * Check if a key is in V2 format (has scenario name).
-     *
-     * @param canonicalKey Key to check
-     * @return true if V2 format
-     */
-    public static boolean isV2Format(String canonicalKey) {
-        KeyComponents parsed = parse(canonicalKey);
-        return parsed != null && parsed.format() != KeyFormat.V1;
-    }
-
-    /**
-     * Extract orderId from a canonical key.
-     *
-     * @param canonicalKey Key to parse
-     * @return orderId, or null if parsing fails
-     */
-    public static String extractOrderId(String canonicalKey) {
-        KeyComponents parsed = parse(canonicalKey);
-        return parsed != null ? parsed.orderId() : null;
-    }
-
-    /**
-     * Extract eventType from a canonical key.
-     *
-     * @param canonicalKey Key to parse
-     * @return eventType, or null if parsing fails
-     */
-    public static String extractEventType(String canonicalKey) {
-        KeyComponents parsed = parse(canonicalKey);
-        return parsed != null ? parsed.eventType() : null;
-    }
-
-    /**
-     * Extract scenarioName from a canonical key.
-     *
-     * @param canonicalKey Key to parse
-     * @return scenarioName, or null if V1 format or parsing fails
-     */
-    public static String extractScenarioName(String canonicalKey) {
-        KeyComponents parsed = parse(canonicalKey);
-        return parsed != null ? parsed.scenarioName() : null;
-    }
-
     // =========================================================================
-    // MATCHING
+    // FORMAT DETECTION
     // =========================================================================
 
     /**
-     * Check if two keys match for resume purposes.
+     * Check if key is in V2 format.
      *
-     * <p>Handles V1 to V2 migration by comparing orderId + eventType components.</p>
+     * @param key The key to check
+     * @return true if V2 format (scenarioName::orderId::eventType)
+     */
+    public static boolean isV2Format(String key) {
+        if (key == null) return false;
+        return V2_PATTERN.matcher(key).matches();
+    }
+
+    /**
+     * Check if key is in V1 format.
+     *
+     * @param key The key to check
+     * @return true if V1 format (orderId::eventType)
+     */
+    public static boolean isV1Format(String key) {
+        if (key == null) return false;
+        String[] parts = key.split(SEPARATOR);
+        return parts.length == 2;
+    }
+
+    /**
+     * Check if key is in FULL format.
+     *
+     * @param key The key to check
+     * @return true if FULL format
+     */
+    public static boolean isFullFormat(String key) {
+        if (key == null) return false;
+        return FULL_PATTERN.matcher(key).matches();
+    }
+
+    /**
+     * Get the format of a canonical key.
+     *
+     * @param key The key to analyze
+     * @return KeyFormat enum value
+     */
+    public static KeyFormat getFormat(String key) {
+        if (isFullFormat(key)) return KeyFormat.FULL;
+        if (isV2Format(key)) return KeyFormat.V2;
+        if (isV1Format(key)) return KeyFormat.V1;
+        return KeyFormat.UNKNOWN;
+    }
+
+    // =========================================================================
+    // CROSS-FORMAT MATCHING
+    // =========================================================================
+
+    /**
+     * Check if two keys match, allowing for V1/V2 cross-compatibility.
+     *
+     * <p>Keys match if their orderId and eventType components are equal,
+     * regardless of whether one is V1 and the other is V2.</p>
      *
      * @param key1 First key
      * @param key2 Second key
-     * @return true if keys match
+     * @return true if keys match (same orderId and eventType)
      */
     public static boolean matches(String key1, String key2) {
-        if (Objects.equals(key1, key2)) {
-            return true;
-        }
+        if (key1 == null || key2 == null) return false;
+        if (key1.equals(key2)) return true;
 
-        KeyComponents c1 = parse(key1);
-        KeyComponents c2 = parse(key2);
+        try {
+            KeyComponents c1 = parse(key1);
+            KeyComponents c2 = parse(key2);
 
-        if (c1 == null || c2 == null) {
+            return Objects.equals(c1.orderId(), c2.orderId()) &&
+                    Objects.equals(c1.eventType(), c2.eventType());
+        } catch (IllegalArgumentException e) {
             return false;
         }
+    }
 
-        // Both must have same orderId and eventType
-        if (!Objects.equals(c1.orderId(), c2.orderId()) ||
-                !Objects.equals(c1.eventType(), c2.eventType())) {
-            return false;
-        }
+    /**
+     * Convert a V1 key to V2 format by adding scenario name.
+     *
+     * @param v1Key V1 format key
+     * @param scenarioName Scenario name to add
+     * @return V2 format key
+     */
+    public static String toV2(String v1Key, String scenarioName) {
+        KeyComponents components = parse(v1Key);
+        return generate(scenarioName, components.orderId(), components.eventType());
+    }
 
-        // If both have scenario names, they must match
-        if (c1.hasScenarioName() && c2.hasScenarioName()) {
-            return Objects.equals(c1.scenarioName(), c2.scenarioName());
-        }
+    /**
+     * Extract orderId from any key format.
+     *
+     * @param key The canonical key
+     * @return Order ID component
+     */
+    public static String extractOrderId(String key) {
+        return parse(key).orderId();
+    }
 
-        // One or both are V1 format - match on orderId + eventType only
-        return true;
+    /**
+     * Extract eventType from any key format.
+     *
+     * @param key The canonical key
+     * @return Event type component
+     */
+    public static String extractEventType(String key) {
+        return parse(key).eventType();
+    }
+
+    /**
+     * Extract scenarioName from V2 or FULL key format.
+     *
+     * @param key The canonical key
+     * @return Scenario name or null if V1 format
+     */
+    public static String extractScenarioName(String key) {
+        return parse(key).scenarioName();
     }
 
     // =========================================================================
-    // HELPERS
+    // HELPER METHODS
     // =========================================================================
 
     /**
-     * Sanitize a string for use in canonical key.
-     *
-     * <p>Replaces delimiter characters and trims whitespace.</p>
+     * Sanitize a key component by replacing separator characters.
      */
     private static String sanitize(String value) {
-        if (value == null) {
-            return "null";
-        }
-
-        return value.trim()
-                .replace(DELIMITER, "_")  // Escape delimiter
-                .replaceAll("\\s+", "_")  // Replace whitespace
-                .replaceAll("[^a-zA-Z0-9_\\-\\.]", "_");  // Keep safe chars only
+        if (value == null) return "";
+        // Replace any colons and spaces with underscores
+        return value.replaceAll("[:\\s]", "_").trim();
     }
 
     /**
-     * Check if a string is null or blank.
+     * Validate that a value is not null or blank.
      */
-    private static boolean isBlank(String value) {
-        return value == null || value.trim().isEmpty();
-    }
-
-    /**
-     * Truncate key if it exceeds maximum length.
-     */
-    private static String truncateIfNeeded(String key) {
-        if (key.length() <= MAX_KEY_LENGTH) {
-            return key;
+    private static void validateNotBlank(String value, String name) {
+        if (value == null || value.isBlank()) {
+            throw new IllegalArgumentException(name + " cannot be null or blank");
         }
-
-        // Truncate but keep a hash suffix for uniqueness
-        int hash = key.hashCode();
-        String suffix = "_" + Integer.toHexString(hash);
-        return key.substring(0, MAX_KEY_LENGTH - suffix.length()) + suffix;
     }
 
     // =========================================================================
@@ -294,33 +318,28 @@ public final class CanonicalKeyGenerator {
     // =========================================================================
 
     /**
-     * Key format version.
+     * Key format enumeration.
      */
     public enum KeyFormat {
-        /** orderId::eventType */
-        V1,
-        /** scenarioName::orderId::eventType */
-        V2,
-        /** featureName::line::exampleId::orderId::eventType */
-        FULL
+        V1,      // orderId::eventType
+        V2,      // scenarioName::orderId::eventType
+        FULL,    // feature::line::example::orderId::eventType
+        UNKNOWN
     }
 
     /**
-     * Parsed components of a canonical key.
-     *
-     * @param scenarioName Scenario name (null for V1 format)
-     * @param orderId Business correlation ID
-     * @param eventType Event type
-     * @param format Key format version
+     * Record holding parsed key components.
      */
     public record KeyComponents(
             String scenarioName,
+            String featureName,
+            String exampleId,
             String orderId,
             String eventType,
             KeyFormat format
     ) {
         /**
-         * Check if this key has a scenario name (V2 or FULL format).
+         * Check if this key has scenario name (V2 or FULL format).
          */
         public boolean hasScenarioName() {
             return scenarioName != null && !scenarioName.isBlank();
@@ -334,10 +353,28 @@ public final class CanonicalKeyGenerator {
         }
 
         /**
-         * Convert to V2 format key string.
+         * Check if this is V2 format.
          */
-        public String toV2Key(String newScenarioName) {
-            return CanonicalKeyGenerator.generate(newScenarioName, orderId, eventType);
+        public boolean isV2() {
+            return format == KeyFormat.V2;
+        }
+
+        /**
+         * Convert to V2 key string.
+         */
+        public String toV2Key(String scenarioName) {
+            String scenario = this.scenarioName != null ? this.scenarioName : scenarioName;
+            if (scenario == null || scenario.isBlank()) {
+                throw new IllegalArgumentException("Scenario name required for V2 key");
+            }
+            return generate(scenario, orderId, eventType);
+        }
+
+        /**
+         * Convert to V1 key string.
+         */
+        public String toV1Key() {
+            return forOrder(orderId, eventType);
         }
     }
 }

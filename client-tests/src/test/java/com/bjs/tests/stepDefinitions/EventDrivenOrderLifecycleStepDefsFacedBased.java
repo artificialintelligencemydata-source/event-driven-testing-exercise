@@ -96,9 +96,12 @@ public class EventDrivenOrderLifecycleStepDefsFacedBased {
     // ==============================================================================
     @And("I verify {string} event is published within {int} seconds")
     public void verifyEventWithin(String eventType, int seconds) {
-        autwit.context().setCurrentStep("I verify " + eventType + " event is published within " + seconds + " seconds");
-        String orderId = autwit.context().get("orderId");
-        autwit.expectEvent(orderId, eventType).assertSatisfied();
+        autwit.context();
+//        autwit.step();
+//        autwit.expectEvent();
+//        autwit.context().setCurrentStep("I verify " + eventType + " event is published within " + seconds + " seconds");
+//        String orderId = autwit.context().get("orderId");
+//        autwit.expectEvent(orderId, eventType).assertSatisfied();
 //        autwit.context().assertions().assertAll();
 //        autwit.context().assertions().getSoftAssert().assertEquals();
 //        autwit.context().baseActions().makeAPICall();

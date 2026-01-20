@@ -1,4 +1,4 @@
-package com.acuver.autwit.adapter.postgres.scenario;
+package com.acuver.autwit.adapter.postgres;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,10 +16,10 @@ import java.util.Map;
  * JPA Converter for PostgreSQL
  * Converts Map<String, String> to JSONB in PostgreSQL
  */
-@Slf4j
+
 @Converter
 public class MapStringStringConverter implements AttributeConverter<Map<String, String>, String> {
-
+    private static final Logger log = LogManager.getLogger(MapStringStringConverter.class);
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override

@@ -1,5 +1,7 @@
 autwit:
   database: postgres
+  debug:
+    loaded-from-postgres-yml: YES
 
 spring:
   datasource:
@@ -10,15 +12,18 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none  # ← CRITICAL: Hibernate does NOT manage schema
-      show-sql: false
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
 
   sql:
     init:
       mode: always
       schema-locations: classpath:schema-postgres.sql
-      continue-on-error: false  # ← Fail fast on schema errors
+      continue-on-error: false
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration

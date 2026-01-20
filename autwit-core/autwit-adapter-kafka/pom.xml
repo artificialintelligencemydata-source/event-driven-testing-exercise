@@ -34,18 +34,12 @@
             <version>${project.version}</version>
         </dependency>
 
-        <!-- adapter modules (optional visibility to event storage) -->
-        <dependency>
-            <groupId>com.acuver</groupId>
-            <artifactId>autwit-engine</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
         <!-- Logging -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
@@ -56,6 +50,12 @@
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

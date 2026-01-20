@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  *
  * <h2>RESPONSIBILITY</h2>
  * <ul>
- *   <li>Retry SKIPPED tests tracked in-memory by TestNGListener</li>
+ *   <li>Retry SKIPPED tests tracked in-memory by TestNGListenerNew</li>
  *   <li>Execute retries via programmatic TestNG</li>
  * </ul>
  *
@@ -133,13 +133,13 @@ public class RetrySkippedTestsExecutor implements IExecutionListener {
             log.warn("⚠️ Retry phase completed - {} test(s) still skipped after {} attempts",
                     remaining.size(), maxRetries);
             for (ITestResult r : remaining) {
-                log.warn("   - {}", TestNGListener.getTestKey(r));
+                log.warn("   - {}", TestNGListenerNew.getTestKey(r));
             }
         }
     }
 
     /**
-     * Get skipped tests from in-memory TestNGListener tracking.
+     * Get skipped tests from in-memory TestNGListenerNew tracking.
      *
      * <p><b>NOTE:</b> This does NOT check the database. DB resume is handled
      * exclusively by ResumeScheduler to avoid duplicate triggers and race conditions.</p>
@@ -147,10 +147,10 @@ public class RetrySkippedTestsExecutor implements IExecutionListener {
      * @return List of skipped test results from memory
      */
     private List<ITestResult> getSkippedFromMemory() {
-        return TestNGListener.skippedTests.stream()
+        return TestNGListenerNew.skippedTests.stream()
                 .filter(r -> r.getStatus() == ITestResult.SKIP)
-                .filter(r -> !TestNGListener.passedTestKeys.contains(TestNGListener.getTestKey(r)))
-                .filter(r -> !TestNGListener.failedTestKeys.contains(TestNGListener.getTestKey(r)))
+                .filter(r -> !TestNGListenerNew.passedTestKeys.contains(TestNGListenerNew.getTestKey(r)))
+                .filter(r -> !TestNGListenerNew.failedTestKeys.contains(TestNGListenerNew.getTestKey(r)))
                 .collect(Collectors.toList());
     }
 
@@ -162,7 +162,7 @@ public class RetrySkippedTestsExecutor implements IExecutionListener {
         Map<Class<?>, List<ITestNGMethod>> grouped = new HashMap<>();
 
         for (ITestResult r : skipped) {
-            String key = TestNGListener.getTestKey(r);
+            String key = TestNGListenerNew.getTestKey(r);
 
             int count = retryCount.getOrDefault(key, 0);
             if (count >= maxRetries) {
@@ -215,7 +215,7 @@ public class RetrySkippedTestsExecutor implements IExecutionListener {
         try {
             TestNG ng = new TestNG();
             ng.setXmlSuites(Collections.singletonList(suite));
-            ng.addListener(new TestNGListener());
+            ng.addListener(new TestNGListenerNew());
             ng.setUseDefaultListeners(true);
             ng.run();
         } catch (Exception e) {
@@ -235,7 +235,7 @@ public class RetrySkippedTestsExecutor implements IExecutionListener {
     /**
      * Get current retry count for a test key.
      *
-     * @param testKey Test key (from TestNGListener.getTestKey())
+     * @param testKey Test key (from TestNGListenerNew.getTestKey())
      * @return Current retry count (0 if not retried yet)
      */
     public int getRetryCount(String testKey) {

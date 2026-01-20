@@ -30,7 +30,7 @@ public class H2ScenarioContextAdapter implements ScenarioContextPort {
         H2ScenarioContextEntity entityToSave;
 
         // Check if this is an UPDATE (existing record) or CREATE (new record)
-        if (ctx.get_id() != null && !ctx.get_id().isEmpty()) {
+        if (ctx.get_id() != null) {
             // Has an ID - check if it exists in DB
             Optional<H2ScenarioContextEntity> existingById = repo.findById(ctx.get_id());
             if (existingById.isPresent()) {

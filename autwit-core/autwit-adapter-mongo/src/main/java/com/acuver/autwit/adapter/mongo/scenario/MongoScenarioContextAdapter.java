@@ -37,6 +37,7 @@ public class MongoScenarioContextAdapter implements ScenarioContextPort {
     private MongoScenarioContextEntity toEntity(ScenarioStateContext ctx) {
         return new MongoScenarioContextEntity(
                 ctx.get_id(),
+                ctx.getScenarioKey(),
                 ctx.getExampleId(),
                 ctx.getTestCaseId(),
                 ctx.getScenarioName(),
@@ -50,6 +51,7 @@ public class MongoScenarioContextAdapter implements ScenarioContextPort {
     private ScenarioStateContext toDomain(MongoScenarioContextEntity e) {
         return new ScenarioStateContext(
                 e.get_id(),
+                e.getScenarioKey(),
                 e.getExampleId(),
                 e.getTestCaseId(),
                 e.getScenarioName(),

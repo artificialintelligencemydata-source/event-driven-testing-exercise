@@ -4,8 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface H2ScenarioContextRepository extends JpaRepository<H2ScenarioContextEntity, String> {
+public interface H2ScenarioContextRepository extends JpaRepository<H2ScenarioContextEntity, UUID> {
 
     /**
      * Find by scenario name (for non-parameterized scenarios)

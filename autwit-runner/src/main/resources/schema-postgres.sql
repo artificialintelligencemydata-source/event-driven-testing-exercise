@@ -10,7 +10,7 @@
 --    • Used by ResumeEngine / Pollers
 -- ======================================================
 
-CREATE TABLE IF NOT EXISTS event_context (
+    CREATE TABLE IF NOT EXISTS event_context (
     canonical_key   VARCHAR(200) PRIMARY KEY,
     order_id        VARCHAR(100) NOT NULL,
     event_type      VARCHAR(200),
@@ -87,17 +87,20 @@ CREATE INDEX IF NOT EXISTS idx_scenario_audit_log_timestamp
 -- ======================================================
 
 CREATE TABLE IF NOT EXISTS scenario_context (
-    id              VARCHAR(255) PRIMARY KEY,           -- scenarioId
-    example_id      VARCHAR(255),                       -- exampleId (Cucumber)
-    test_case_id    VARCHAR(255),                       -- testCaseId
-    scenario_name   VARCHAR(255) NOT NULL,              -- human-readable name
-    step_status     JSONB DEFAULT '{}'::jsonb,           -- Map<String, String>
-    step_data       JSONB DEFAULT '{}'::jsonb,           -- Map<String, Map<String, String>>
-    last_updated    BIGINT,                              -- epoch millis
-    scenario_status VARCHAR(100)                         -- overall status
+    id              UUID PRIMARY KEY,                  -- internal DB id (UUID)
+    scenario_key    VARCHAR(300) NOT NULL UNIQUE,      -- AUTWIT Scenario Key (String)
+    example_id      VARCHAR(255),                      -- exampleId (Cucumber)
+    test_case_id    VARCHAR(255),                      -- testCaseId
+    scenario_name   VARCHAR(255) NOT NULL,             -- human-readable name
+    step_status     JSONB DEFAULT '{}'::jsonb,          -- Map<String, String>
+    step_data       JSONB DEFAULT '{}'::jsonb,          -- Map<String, Map<String, String>>
+    last_updated    BIGINT,                            -- epoch millis
+    scenario_status VARCHAR(100)                       -- overall status
 );
-
 -- Indexes
+CREATE INDEX IF NOT EXISTS idx_scenario_context_scenario_key
+    ON scenario_context(scenario_key);
+
 CREATE INDEX IF NOT EXISTS idx_scenario_context_scenario_name
     ON scenario_context(scenario_name);
 

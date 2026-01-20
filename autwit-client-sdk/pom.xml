@@ -24,11 +24,6 @@
 
     <!-- SINGLE FRAMEWORK DEPENDENCY -->
     <!-- SDK wraps Core, never exposes internals -->
-<!--    <dependency>-->
-<!--      <groupId>com.acuver</groupId>-->
-<!--      <artifactId>autwit-core</artifactId>-->
-<!--      <version>${project.version}</version>-->
-<!--    </dependency>-->
 
     <!-- Domain ports (temporary internal bridge) -->
     <dependency>
@@ -36,12 +31,6 @@
       <artifactId>autwit-domain</artifactId>
       <version>${project.version}</version>
     </dependency>
-
-<!--    &lt;!&ndash; Spring annotations only (no boot, no autoconfig) &ndash;&gt;-->
-<!--    <dependency>-->
-<!--      <groupId>org.springframework</groupId>-->
-<!--      <artifactId>spring-context</artifactId>-->
-<!--    </dependency>-->
 
     <!-- Lombok (compile-time only) -->
     <dependency>
@@ -54,6 +43,7 @@
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
       <version>${testng.version}</version>
+      <scope>provided</scope>
     </dependency>
 
     <!-- Jackson for JSON payload parsing (read-only) -->

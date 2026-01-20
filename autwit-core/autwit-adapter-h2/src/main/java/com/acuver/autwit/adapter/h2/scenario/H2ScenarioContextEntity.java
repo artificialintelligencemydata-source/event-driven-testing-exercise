@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Entity
 @Table(name = "scenario_context", indexes = {
@@ -30,7 +31,7 @@ public class H2ScenarioContextEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", length = 255)
-    private String id;
+    private UUID id;
 
     @Column(name = "example_id", length = 255)
     private String exampleId;

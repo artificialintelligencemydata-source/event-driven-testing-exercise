@@ -2,7 +2,6 @@ package com.acuver.autwit.internal.integration;
 
 
 import com.acuver.autwit.internal.config.FileReaderManager;
-import com.acuver.autwit.internal.listeners.TestNGListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;

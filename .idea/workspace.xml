@@ -5,86 +5,232 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4bc6adf-0206-40e7-9eb3-669ef6b24efe" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autwit-client-sdk/autwit-client-sdk.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/ApiClientImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/Autwit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/AutwitImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/ContextAccessorImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/EventExpectationImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/ScenarioStepStatusImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/SoftAssertionsImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/scenario/MapStringStringConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/scenario/NestedMapConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/bootstrap/CucumberGlueBootstrap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/exceptions/InternalStepSkipException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/reporting/AllureLifecycleManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autwit-runner/src/main/java/com/acuver/autwit/AutwitProfileInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autwit-runner/src/main/java/com/acuver/autwit/config/AutwitClientAutoConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autwit-runner/src/main/java/com/acuver/autwit/runner/BaseAutwitCucumberRunner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-tests/src/test/java/com/bjs/tests/config/ClientTestApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-tests/src/test/java/com/bjs/tests/config/CucumberSpringConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-tests/src/test/java/com/bjs/tests/runner/ClientCucumberRunner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-tests/src/test/java/com/bjs/tests/stepDefinitions/EventDrivenOrderLifecycleStepDefsFacedBased.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/application-test.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/.cursor/rules.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/Readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/features/event-dispatcher/Digital-OES-DelayedQueue-Service (DQS).feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/features/event-dispatcher/Digital-OES-Idempotency-Service (IDS).feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/features/event-dispatcher/Digital-OES-OrderAudit-Service (OAS).feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/features/notes/Digital-OES-OrderNotes-Service (ONS).feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/features/order-domain/Digital-OES-OrderInvoice-Service (OIS).feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/features/order-domain/Digital-OES-OrderProcess-Service (OPS).feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/features/order-router/Digital-OES-OrderUniversalAPI-Service (OUS).feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/br1-tests/features/payment-service/Digital-OES-OrderPayment-Service (OPAYS).feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/features/Notes Services/notes-create.feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-tests/src/test/resources/testng.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/event-driven-testing-exercise.iml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/AUTWIT_DATASOURCE_ARCHITECTURE_FIX.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MAVEN_DEPENDENCY_ANALYSIS_REPORT.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/resources/BOX_ALIGNMENT_FIX_README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dependency-tree.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/Autwit.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/Autwit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/AutwitImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/AutwitImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/BaseActionsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/BaseActionsImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/ConfigReaderImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/ConfigReaderImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/ContextAccessorImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/ContextAccessorImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/EventExpectationImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/EventExpectationImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/ScenarioStepStatusImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/ScenarioStepStatusImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/SoftAssertionsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/SoftAssertionsImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/SterlingApiImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/SterlingApiImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/XmlUtilsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/XmlUtilsImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/target/autwit-client-sdk-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/target/autwit-client-sdk-1.0.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/target/classes/com/acuver/autwit/client/sdk/ApiClientImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/target/classes/com/acuver/autwit/client/sdk/Autwit$ContextAccessor$ApiClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/target/classes/com/acuver/autwit/client/sdk/Autwit$ContextAccessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/target/classes/com/acuver/autwit/client/sdk/Autwit$ContextAccessor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/target/classes/com/acuver/autwit/client/sdk/Autwit$EventExpectation.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/target/classes/com/acuver/autwit/client/sdk/Autwit$EventExpectation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/target/classes/com/acuver/autwit/client/sdk/AutwitImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/target/classes/com/acuver/autwit/client/sdk/AutwitImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/target/classes/com/acuver/autwit/client/sdk/ContextAccessorImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/target/classes/com/acuver/autwit/client/sdk/ContextAccessorImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/target/classes/com/acuver/autwit/client/sdk/EventExpectationImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/target/classes/com/acuver/autwit/client/sdk/EventExpectationImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/target/classes/com/acuver/autwit/client/sdk/ScenarioStepStatusImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/target/classes/com/acuver/autwit/client/sdk/ScenarioStepStatusImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/target/classes/com/acuver/autwit/client/sdk/SoftAssertionsImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/target/classes/com/acuver/autwit/client/sdk/SoftAssertionsImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-client-sdk/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/H2JpaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/H2JpaConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/src/main/java/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-mongo/src/main/java/com/acuver/autwit/adapter/mongo/MongoSchemaInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-mongo/src/main/java/com/acuver/autwit/adapter/mongo/MongoSchemaInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/target/autwit-adapter-h2-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/target/autwit-adapter-h2-1.0.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/target/classes/com/acuver/autwit/adapter/h2/H2JpaConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/target/classes/com/acuver/autwit/adapter/h2/H2JpaConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/target/classes/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/target/classes/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextAdapter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/target/classes/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextEntity$H2ScenarioContextEntityBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/target/classes/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextEntity$H2ScenarioContextEntityBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/target/classes/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/target/classes/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/target/classes/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-h2/target/classes/com/acuver/autwit/adapter/h2/scenario/H2ScenarioContextRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-kafka/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-kafka/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-kafka/src/main/java/com/acuver/autwit/adapter/kafka/EventContextMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-kafka/src/main/java/com/acuver/autwit/adapter/kafka/EventContextMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-kafka/target/autwit-adapter-kafka-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-kafka/target/autwit-adapter-kafka-1.0.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-kafka/target/classes/com/acuver/autwit/adapter/kafka/EventContextMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-kafka/target/classes/com/acuver/autwit/adapter/kafka/EventContextMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-mongo/src/main/java/com/acuver/autwit/adapter/mongo/scenario/MongoScenarioContextAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-mongo/src/main/java/com/acuver/autwit/adapter/mongo/scenario/MongoScenarioContextAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-mongo/src/main/java/com/acuver/autwit/adapter/mongo/scenario/MongoScenarioContextEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-mongo/src/main/java/com/acuver/autwit/adapter/mongo/scenario/MongoScenarioContextEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-mongo/target/autwit-adapter-mongo-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-mongo/target/autwit-adapter-mongo-1.0.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-mongo/target/classes/com/acuver/autwit/adapter/mongo/scenario/MongoScenarioContextAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-mongo/target/classes/com/acuver/autwit/adapter/mongo/scenario/MongoScenarioContextAdapter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-mongo/target/classes/com/acuver/autwit/adapter/mongo/scenario/MongoScenarioContextEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-mongo/target/classes/com/acuver/autwit/adapter/mongo/scenario/MongoScenarioContextEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/MapStringStringConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/MapStringStringConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/NestedMapConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/NestedMapConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/PostgresEventContextEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/PostgresEventContextEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/PostgresJpaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/PostgresJpaConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/scenario/PostgresScenarioContextAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/scenario/PostgresScenarioContextAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/scenario/PostgresScenarioContextEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/scenario/PostgresScenarioContextEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-client-sdk/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-client-sdk/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/BaseStep.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-client-sdk/src/main/java/com/acuver/autwit/client/sdk/testData/TestData.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/domain/ScenarioContext.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/ports/EventContextPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/ports/EventContextPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/PostgresScenarioContextAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/PostgresScenarioContextAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/PostgresScenarioContextEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/PostgresScenarioContextEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/PostgresScenarioContextRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/src/main/java/com/acuver/autwit/adapter/postgres/PostgresScenarioContextRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/target/autwit-adapter-postgres-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/target/autwit-adapter-postgres-1.0.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/target/classes/com/acuver/autwit/adapter/postgres/PostgresEventContextEntity$PostgresEventContextEntityBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/target/classes/com/acuver/autwit/adapter/postgres/PostgresEventContextEntity$PostgresEventContextEntityBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/target/classes/com/acuver/autwit/adapter/postgres/PostgresEventContextEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/target/classes/com/acuver/autwit/adapter/postgres/PostgresEventContextEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/target/classes/com/acuver/autwit/adapter/postgres/PostgresJpaConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/target/classes/com/acuver/autwit/adapter/postgres/PostgresJpaConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/target/classes/com/acuver/autwit/adapter/postgres/scenario/PostgresScenarioContextAdapter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/target/classes/com/acuver/autwit/adapter/postgres/scenario/PostgresScenarioContextEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/target/classes/com/acuver/autwit/adapter/postgres/scenario/PostgresScenarioContextRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-adapter-postgres/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/domain/ScenarioStateContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/domain/ScenarioStateContext.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/ports/ScenarioContextPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/ports/ScenarioContextPort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/ports/ScenarioStatePort.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/ports/ScenarioStatePort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-engine/src/main/java/com/acuver/autwit/engine/resume/ResumeEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-engine/src/main/java/com/acuver/autwit/engine/resume/ResumeEngine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-engine/src/main/java/com/acuver/autwit/engine/state/ScenarioStateTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-engine/src/main/java/com/acuver/autwit/engine/scenarioStateTracker/ScenarioStateTracker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/ports/runtime/RuntimeContextPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/ports/runtime/RuntimeContextPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/utils/CanonicalKeyGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-domain/src/main/java/com/acuver/autwit/core/utils/CanonicalKeyGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-domain/target/autwit-domain-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-domain/target/autwit-domain-1.0.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-domain/target/classes/com/acuver/autwit/core/domain/ScenarioStateContext$ScenarioStateContextBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-domain/target/classes/com/acuver/autwit/core/domain/ScenarioStateContext$ScenarioStateContextBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-domain/target/classes/com/acuver/autwit/core/domain/ScenarioStateContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-domain/target/classes/com/acuver/autwit/core/domain/ScenarioStateContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-domain/target/classes/com/acuver/autwit/core/ports/runtime/RuntimeContextPort.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-domain/target/classes/com/acuver/autwit/core/ports/runtime/RuntimeContextPort.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-domain/target/classes/com/acuver/autwit/core/utils/CanonicalKeyGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-domain/target/classes/com/acuver/autwit/core/utils/CanonicalKeyGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-domain/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-domain/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-engine/src/main/java/com/acuver/autwit/engine/notifier/EventStepNotifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-engine/src/main/java/com/acuver/autwit/engine/notifier/EventStepNotifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-engine/src/main/java/com/acuver/autwit/engine/scenarioStateTracker/ScenarioStateTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-engine/src/main/java/com/acuver/autwit/engine/scenarioStateTracker/ScenarioStateTracker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-engine/src/main/java/com/acuver/autwit/engine/scheduler/H2EventPoller.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-engine/src/main/java/com/acuver/autwit/engine/scheduler/H2EventPoller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-engine/src/main/java/com/acuver/autwit/engine/scheduler/MongoEventPoller.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-engine/src/main/java/com/acuver/autwit/engine/scheduler/MongoEventPoller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-engine/src/main/java/com/acuver/autwit/engine/scheduler/PostgresEventPoller.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-engine/src/main/java/com/acuver/autwit/engine/scheduler/PostgresEventPoller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-engine/target/autwit-engine-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-engine/target/autwit-engine-1.0.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-engine/target/classes/com/acuver/autwit/engine/notifier/EventStepNotifier.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-engine/target/classes/com/acuver/autwit/engine/notifier/EventStepNotifier.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-engine/target/classes/com/acuver/autwit/engine/scenarioStateTracker/ScenarioStateTracker.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-engine/target/classes/com/acuver/autwit/engine/scenarioStateTracker/ScenarioStateTracker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-engine/target/classes/com/acuver/autwit/engine/scheduler/H2EventPoller.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-engine/target/classes/com/acuver/autwit/engine/scheduler/H2EventPoller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-engine/target/classes/com/acuver/autwit/engine/scheduler/MongoEventPoller.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-engine/target/classes/com/acuver/autwit/engine/scheduler/MongoEventPoller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-engine/target/classes/com/acuver/autwit/engine/scheduler/PostgresEventPoller.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-engine/target/classes/com/acuver/autwit/engine/scheduler/PostgresEventPoller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/Hooks.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/Hooks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/api/SterlingApiCalls.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/api/SterlingApiCalls.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/config/ConfigFileReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/config/ConfigFileReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/config/FileReaderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/config/FileReaderManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/context/RuntimeContextAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/context/RuntimeContextAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/context/ScenarioContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/context/ScenarioContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/reporting/AllureAttachmentUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/reporting/AllureAttachmentUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/stepDef/ReusableStepDefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/stepDef/ReusableStepDefs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/helper/BaseActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/helper/BaseActions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/integration/CreateIssue.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/integration/CreateIssue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/listeners/RSTEBackup.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/listeners/RSTEBackup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/listeners/RetrySkippedTestsExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/listeners/RetrySkippedTestsExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/listeners/TestNGListenerNew.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/listeners/TestNGListenerNew.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/resume/ResumeExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/resume/ResumeExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/resume/ResumeScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/resume/ResumeScheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/utils/XmlUpdater.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/src/main/java/com/acuver/autwit/internal/utils/XmlUpdater.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/autwit-internal-testkit-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/autwit-internal-testkit-1.0.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/Hooks.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/Hooks.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/api/ApiCalls.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/api/ApiRequestBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/bootstrap/CucumberGlueBootstrap.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/config/ConfigFileReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/config/ConfigFileReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/config/FileReaderManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/config/FileReaderManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/context/RuntimeContextAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/context/RuntimeContextAdapter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/context/ScenarioContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/context/ScenarioContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/engine/InternalAwaiterAdapter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/engine/TestKitEventBridge.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/exceptions/InternalStepSkipException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/helper/BaseActions.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/helper/BaseActions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/integration/CreateIssue.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/integration/CreateIssue.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/listeners/RSTEBackup.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/listeners/RSTEBackup.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/listeners/RetrySkippedTestsExecutor.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/listeners/RetrySkippedTestsExecutor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/listeners/TestNGListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/reporting/AllureAttachmentUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/classes/com/acuver/autwit/internal/reporting/AllureAttachmentUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-internal-testkit/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-core/autwit-shared/target/autwit-shared-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/autwit-shared/target/autwit-shared-1.0.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/autwit-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-core/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/autwit-runner/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-runner/src/main/java/com/acuver/autwit/runner/RunnerApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/src/main/java/com/acuver/autwit/runner/RunnerApp.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-runner/src/main/resources/application-h2.yml" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/src/main/resources/application-h2.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/src/main/java/com/acuver/autwit/AutwitProfileInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/src/main/java/com/acuver/autwit/AutwitProfileInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/src/main/java/com/acuver/autwit/runner/BaseAutwitCucumberRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/src/main/java/com/acuver/autwit/runner/BaseAutwitCucumberRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/src/main/resources/ReadMe.txt" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/src/main/resources/ReadMe.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/src/main/resources/application-postgres.yml" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/src/main/resources/application-postgres.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/autwit-runner/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-runner/src/main/resources/schema-h2.sql" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/src/main/resources/schema-h2.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/autwit-runner/src/main/resources/schema-postgres.sql" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/src/main/resources/schema-postgres.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-runner/src/test/java/com/acuver/autwit/config/CucumberSpringConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-runner/src/test/java/com/acuver/autwit/runner/CucumberTestRunner.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-runner/src/test/java/com/acuver/autwit/stepdef/EventDrivenOrderLifecycleStepDefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/client-tests/src/test/java/com/bjs/tests/stepDefinitions/EventDrivenOrderLifecycleStepDefs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-runner/src/test/resources/ReadMe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-runner/src/test/resources/application-test.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-runner/src/test/resources/configuration.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-runner/src/test/resources/features/sample_order_event.feature" beforeDir="false" afterPath="$PROJECT_DIR$/client-tests/src/test/resources/features/sample_order_event.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autwit-runner/src/test/resources/testng.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/target/autwit-runner-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/target/autwit-runner-1.0.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/target/classes/application-h2.yml" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/target/classes/application-h2.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/target/classes/application-kafka.yml" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/target/classes/application-kafka.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/target/classes/application-postgres.yml" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/target/classes/application-postgres.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/target/classes/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/target/classes/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/target/classes/com/acuver/autwit/AutwitProfileInitializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/target/classes/com/acuver/autwit/AutwitProfileInitializer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/target/classes/com/acuver/autwit/runner/BaseAutwitCucumberRunner.class" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/target/classes/com/acuver/autwit/runner/BaseAutwitCucumberRunner.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/target/classes/schema-h2.sql" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/target/classes/schema-h2.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autwit-runner/target/classes/schema-postgres.sql" beforeDir="false" afterPath="$PROJECT_DIR$/autwit-runner/target/classes/schema-postgres.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/0367e6cb-b004-4c20-af02-c159b68e77b6-container.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/05d85295-2ce2-4fa8-a443-8ea58a26a377-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/066fac94-51b1-410c-99e5-06a843989d55-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/0deea839-aa1e-4e27-a125-e296fae2969e-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/0f66620c-81af-4185-a9e4-c3b8029254c7-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/169401ee-c486-4b19-9a3a-c9695fda0efc-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/18b5642c-2c39-4184-b77a-221aa9706fff-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/2080c68d-3e72-4e0b-81de-95b7426326ec-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/2651384d-e018-4de8-a645-350bd45d040f-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/26e89cdf-4386-4edd-9462-a29f3b50dda4-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/29486f14-d676-41d6-a993-4c3a9ca4c8a9-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/372a8438-7dd1-47cf-bfa7-82bf2d9e9fc0-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/3be4e442-f910-47e1-88a2-ef7eff90b68d-container.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/3e014903-c18f-45c2-b8bf-3b432f2e5de0-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/40456843-262a-4bcb-910f-791e3c50fb6f-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/42ae9099-5813-4205-a1d6-cdbbdfdd91a5-container.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/46aaa301-39cf-43d1-a352-cd0965e5c8c2-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/47d2dca5-9a82-4993-a96d-4374be41bcf3-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/4cf7c093-0a25-4051-9ecf-7d1432c0134f-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/4ecbb768-7ffb-4b64-89da-559e48560125-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/5286edf2-138f-4924-a0cf-bb704d3be623-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/547f3eb3-400e-42b0-806e-05c3f8243a77-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/55202611-d79e-48c7-8eb6-8611820824fe-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/56cddb30-1de5-4d44-ba77-2d26001e0132-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/58ecfdae-3fa9-4fc1-9318-2799fea799c2-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/5b2adce0-8d9a-44d7-9c96-51e8e17f432b-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/5d62893b-144d-4bf9-bb9d-9a833175c6c9-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/60535ce9-6fdd-4aec-92c4-0e6f29720c6d-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/6b788596-9da6-4c76-b717-f6f94992c319-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/7170c6f0-5038-465b-af4e-7b268a900b56-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/7d075493-1377-45c8-96ee-b526b5f038e4-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/7d31e611-8e88-497e-a3dd-b10fbd969b3b-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/87a00391-89c5-4671-8596-a314afa3d394-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/8ac96a60-1c50-471e-8ebd-c276a6432932-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/8c5399b3-5c7d-49fe-9517-c0f903059804-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/8f163408-7aa5-4a94-b4fe-2ed41434d333-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/92c846eb-c2da-4155-a56a-9ac280f7db52-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/9552489f-c73a-4d29-a554-820d04edab53-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/95ae46d9-4b2a-459d-b6d1-89d376ff093b-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/976decc7-4621-462b-9a05-c486dca7f1fd-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/97b4697b-d958-4c7a-b0e9-be7719d5aaa0-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/9b6d97ef-ef2b-4ffe-aa91-26a39b96d2b7-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/9f439123-5080-454f-8a53-be4005fc48ec-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/a367211d-60aa-4363-8192-13ac40c1d63f-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/a9df28bc-ed0f-4101-9487-7b70794badcc-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/ab52c604-419b-4fab-b269-c6367ad46cac-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/abd3b813-7e9e-4aac-8909-6ece54caad65-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/b942cbbe-a2cc-4c23-a609-566fcf046886-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/b963dc5c-3b34-4a08-a2ba-0beb2736b7a8-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/ba010ec0-51ab-4f3c-84de-5bdc12c97119-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/bfecd913-fb3e-4afa-ac9a-04790d492863-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/c45a23e3-60f2-466f-ae7e-5d97f5b642b7-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/ca409552-77a5-405a-816b-07755ab15be8-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/cba82f21-0ea7-41c2-938e-c9f0b640dc09-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/d0f6f636-fb73-49a4-a2fa-91ff8fdb6dee-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/d46fbe9c-5520-45ff-9a88-0d0cda847ef1-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/d757d0d5-aea7-4742-80c2-ad05a35be29d-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/e552482a-8fa2-4fc4-a1de-a40e6da1b29d-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/f0773a24-0f0a-4c1c-b521-d42613d37563-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/f370cbd7-0e5b-4875-b62b-e0bfd387846e-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/f3870a5e-244e-4c0d-9fbb-ae5618d0803a-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/f4c75f3b-92e3-4033-bd5e-bf83d1abbfff-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/f6026b69-9795-4f89-823e-0f520189c68c-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/f8ed76f5-ab9c-44a9-a7bf-57440873d868-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/allure-results/fa7033ac-e8b7-4823-b80c-689b510b6195-attachment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/logs/application.log" beforeDir="false" afterPath="$PROJECT_DIR$/client-tests/logs/application.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/src/test/java/com/bjs/tests/stepDefinitions/EventDrivenOrderLifecycleStepDefsFacedBased.java" beforeDir="false" afterPath="$PROJECT_DIR$/client-tests/src/test/java/com/bjs/tests/stepDefinitions/EventDrivenOrderLifecycleStepDefsFacedBased.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/target/cucumber-reports.html" beforeDir="false" afterPath="$PROJECT_DIR$/client-tests/target/cucumber-reports.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/target/surefire-reports/ClientSuite/CucumberTests.html" beforeDir="false" afterPath="$PROJECT_DIR$/client-tests/target/surefire-reports/ClientSuite/CucumberTests.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/target/surefire-reports/ClientSuite/CucumberTests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client-tests/target/surefire-reports/ClientSuite/CucumberTests.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/target/surefire-reports/ClientSuite/testng-failed.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/target/surefire-reports/TEST-TestSuite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client-tests/target/surefire-reports/TEST-TestSuite.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/target/surefire-reports/TestSuite.txt" beforeDir="false" afterPath="$PROJECT_DIR$/client-tests/target/surefire-reports/TestSuite.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/target/surefire-reports/emailable-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/client-tests/target/surefire-reports/emailable-report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/target/surefire-reports/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client-tests/target/surefire-reports/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/target/surefire-reports/junitreports/TEST-com.bjs.tests.runner.ClientCucumberRunner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client-tests/target/surefire-reports/junitreports/TEST-com.bjs.tests.runner.ClientCucumberRunner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/target/surefire-reports/testng-failed.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/target/surefire-reports/testng-results.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client-tests/target/surefire-reports/testng-results.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/target/test-classes/com/bjs/tests/stepDefinitions/BR1StepDefStyl2.class" beforeDir="false" afterPath="$PROJECT_DIR$/client-tests/target/test-classes/com/bjs/tests/stepDefinitions/BR1StepDefStyl2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/target/test-classes/com/bjs/tests/stepDefinitions/EventDrivenOrderLifecycleStepDefsFacedBased.class" beforeDir="false" afterPath="$PROJECT_DIR$/client-tests/target/test-classes/com/bjs/tests/stepDefinitions/EventDrivenOrderLifecycleStepDefsFacedBased.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/target/test-classes/features/BR1-Style_2.feature" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/target/test-classes/workSpace/BR1/sample_order_event.feature" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-tests/target/testData/Thread_31/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/client-tests/target/testData/Thread_31/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,6 +241,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Python Script" />
         <option value="Class" />
       </list>
     </option>
@@ -117,44 +264,67 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven.autwit-client-sdk [clean].executor": "Run",
-    "Maven.autwit-root [clean].executor": "Run",
-    "Maven.autwit-root [compile].executor": "Run",
-    "Maven.autwit-root [install].executor": "Run",
-    "Maven.autwit-root [test].executor": "Run",
-    "Maven.autwit-runner [clean].executor": "Run",
-    "Maven.autwit-runner [install].executor": "Run",
-    "Maven.autwit-runner [test].executor": "Run",
-    "Maven.client-tests [clean].executor": "Run",
-    "Maven.client-tests [install].executor": "Run",
-    "Maven.client-tests [test].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.codeium.enabled": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/mohan.kumar_acuverco/Autwit/client-tests/src/test/resources/br1-tests/docs/lucid",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.40574712",
-    "settings.editor.selected.configurable": "MavenSettings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Maven.autwit-client-sdk [-q,help:effective-pom...].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.autwit-client-sdk [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.autwit-core [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.autwit-root [-q,dependency:tree...].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.autwit-root [-q,help:effective-pom,|...].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.autwit-root [clean,compile,-pl...].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.autwit-root [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.autwit-root [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.autwit-root [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.autwit-root [site].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.autwit-root [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.autwit-runner [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.autwit-runner [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.autwit-runner [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.autwit-runner [validate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.client-tests [-q,dependency:tree,|...].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.client-tests [-q,help:effective-pom,|...].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.client-tests [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.client-tests [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.client-tests [test].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/mohan.kumar_acuverco/Autwit/client-tests/src/test/resources&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.40574712&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mohan.kumar_acuverco\Autwit\client-tests\src\test\resources" />
       <recent name="C:\Users\mohan.kumar_acuverco\Autwit\client-tests\src\test\resources\br1-tests\docs\lucid" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\mohan.kumar_acuverco\Autwit\client-tests\src\test\resources\br1-tests\features\features" />
-      <recent name="C:\Users\mohan.kumar_acuverco\Autwit\autwit-runner\src\test\resources" />
       <recent name="C:\Users\mohan.kumar_acuverco\Autwit\client-tests\src\test\resources\features" />
-      <recent name="C:\Users\mohan.kumar_acuverco\Autwit\autwit-runner\src\test\resources\features" />
+      <recent name="C:\Users\mohan.kumar_acuverco\Autwit\client-tests\src\test\resources\workSpace\BR1" />
+      <recent name="C:\Users\mohan.kumar_acuverco\Autwit\autwit-runner\src\main\resources" />
+      <recent name="C:\Users\mohan.kumar_acuverco\Autwit\client-tests\src\test\resources" />
+      <recent name="C:\Users\mohan.kumar_acuverco\Autwit\client-tests\src\test\resources\workSpace" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.acuver.autwit.runner" />
       <recent name="com.bjs.tests.stepDefinitions" />
     </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean compile -pl autwit-core -am" />
+      <command value="mvn -q help:effective-pom | findstr &quot;application-postgres&quot; " />
+      <command value="mvn -q dependency:tree | findstr postgresql" />
+      <command value="mvn -q dependency:tree -Dverbose -Dincludes=org.springframework,org.postgresql,org.slf4j,log4j,org.json " />
+      <command value="mvn -q help:effective-pom | findstr application-postgres " />
+    </option>
   </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
@@ -237,6 +407,17 @@
       <updated>1767600924323</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

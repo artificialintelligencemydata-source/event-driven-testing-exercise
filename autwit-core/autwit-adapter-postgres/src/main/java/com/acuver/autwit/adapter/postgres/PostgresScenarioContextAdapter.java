@@ -1,4 +1,4 @@
-package com.acuver.autwit.adapter.postgres.scenario;
+package com.acuver.autwit.adapter.postgres;
 
 import com.acuver.autwit.core.domain.ScenarioStateContext;
 import com.acuver.autwit.core.ports.ScenarioContextPort;
@@ -17,8 +17,8 @@ public class PostgresScenarioContextAdapter implements ScenarioContextPort {
     private final PostgresScenarioContextRepository repo;
 
     @Override
-    public Optional<ScenarioStateContext> findByScenarioName(String name) {
-        return repo.findById(name).map(this::toDomain);
+    public Optional<ScenarioStateContext> findByScenarioName(String scenarioName) {
+        return repo.findByScenarioName(scenarioName).map(this::toDomain);
     }
 
     @Override
@@ -27,8 +27,8 @@ public class PostgresScenarioContextAdapter implements ScenarioContextPort {
     }
 
     @Override
-    public void delete(String scenarioName) {
-        repo.deleteById(scenarioName);
+    public void delete(String scenarioKey) {
+        repo.deleteByScenarioKey(scenarioKey);
     }
 
     @Override
@@ -40,6 +40,7 @@ public class PostgresScenarioContextAdapter implements ScenarioContextPort {
     private PostgresScenarioContextEntity toEntity(ScenarioStateContext ctx) {
         return new PostgresScenarioContextEntity(
                 ctx.get_id(),
+                ctx.getScenarioKey(),
                 ctx.getExampleId(),
                 ctx.getTestCaseId(),
                 ctx.getScenarioName(),
@@ -53,6 +54,7 @@ public class PostgresScenarioContextAdapter implements ScenarioContextPort {
     private ScenarioStateContext toDomain(PostgresScenarioContextEntity e) {
         return new ScenarioStateContext(
                 e.getId(),
+                e.getScenarioKey(),
                 e.getExampleId(),
                 e.getTestCaseId(),
                 e.getScenarioName(),

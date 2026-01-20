@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/autwit-client-sdk/autwit-client-sdk.iml" filepath="$PROJECT_DIR$/autwit-client-sdk/autwit-client-sdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/autwit-core/autwit-core.iml" filepath="$PROJECT_DIR$/autwit-core/autwit-core.iml" />
     </modules>
   </component>
 </project>
