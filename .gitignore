@@ -1,11 +1,19 @@
-# Build output (Maven/Gradle)
-target/
+# Ignore build folders in all modules
+**/target/
 
 # Logs
 logs/
+**/logs/
 *.log
 
 # Allure
 allure-results/
 allure-artifacts/
 allure-report/
+**/allure-results/
+**/allure-artifacts/
+**/allure-report/
+
+# IntelliJ
+.idea/
+*.iml
