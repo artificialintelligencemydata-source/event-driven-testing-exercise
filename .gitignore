@@ -17,3 +17,6 @@ allure-report/
 # IntelliJ
 .idea/
 *.iml
+
+# Ignore all markdown docs
+*.md
