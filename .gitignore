@@ -19,4 +19,4 @@ allure-report/
 *.iml
 
 # Ignore all markdown docs
-*.md
+*.mdclient-tests/src/test/resources/configs/config.properties
