@@ -1,44 +1,39 @@
 package com.acuver.autwit.core.ports;
 
-import com.acuver.autwit.core.domain.ScenarioStateContext;
+import com.acuver.autwit.core.domain.ScenarioStateContextEntities;
 
-import java.awt.print.Pageable;
-import java.time.Duration;
-import java.time.Instant;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 public interface ScenarioContextPort {
     // Existing methods
-    Optional<ScenarioStateContext> findByScenarioName(String name);
-    ScenarioStateContext save(ScenarioStateContext state);
+    Optional<ScenarioStateContextEntities> findByScenarioName(String name);
+    ScenarioStateContextEntities save(ScenarioStateContextEntities state);
     void delete(String scenarioName);
     void deleteAll();
 
     // Find by different criteria
-//    Optional<ScenarioStateContext> findByScenarioKey(String scenarioKey);
-//    Optional<ScenarioStateContext> findByTestCaseId(String testCaseId);
-//    List<ScenarioStateContext> findByScenarioStatus(String status);
-//    List<ScenarioStateContext> findByExampleId(String exampleId);
+//    Optional<ScenarioStateContextEntities> findByScenarioKey(String scenarioKey);
+//    Optional<ScenarioStateContextEntities> findByTestCaseId(String testCaseId);
+//    List<ScenarioStateContextEntities> findByScenarioStatus(String status);
+//    List<ScenarioStateContextEntities> findByExampleId(String exampleId);
 
     // Existence checks
 //    boolean existsByScenarioName(String scenarioName);
 //    boolean existsByScenarioKey(String scenarioKey);
 
     // Bulk operations
-//    List<ScenarioStateContext> saveAll(List<ScenarioStateContext> states);
+//    List<ScenarioStateContextEntities> saveAll(List<ScenarioStateContextEntities> states);
 //    void deleteByScenarioKeys(List<String> scenarioKeys);
-//    List<ScenarioStateContext> findAll();
+//    List<ScenarioStateContextEntities> findAll();
 
     // Status updates (avoid full object fetch-modify-save)
 //    void updateScenarioStatus(String scenarioKey, String newStatus);
 //    void updateStepStatus(String scenarioKey, Map<String, String> stepStatus);
 
     // Query by date/time
-//    List<ScenarioStateContext> findByLastUpdatedAfter(Instant timestamp);
-//    List<ScenarioStateContext> findByLastUpdatedBefore(Instant timestamp);
-//    List<ScenarioStateContext> findByLastUpdatedBetween(Instant start, Instant end);
+//    List<ScenarioStateContextEntities> findByLastUpdatedAfter(Instant timestamp);
+//    List<ScenarioStateContextEntities> findByLastUpdatedBefore(Instant timestamp);
+//    List<ScenarioStateContextEntities> findByLastUpdatedBetween(Instant start, Instant end);
 
     // Count operations
 //    long count();
@@ -46,9 +41,9 @@ public interface ScenarioContextPort {
 //    long countByExampleId(String exampleId);
 
     // Step-specific queries
-//    List<ScenarioStateContext> findByStepStatusContaining(String stepName, String status);
-//    List<ScenarioStateContext> findFailedScenarios(); // where stepStatus contains "FAILED"
-//    List<ScenarioStateContext> findPendingScenarios(); // where scenarioStatus is "PENDING"
+//    List<ScenarioStateContextEntities> findByStepStatusContaining(String stepName, String status);
+//    List<ScenarioStateContextEntities> findFailedScenarios(); // where stepStatus contains "FAILED"
+//    List<ScenarioStateContextEntities> findPendingScenarios(); // where scenarioStatus is "PENDING"
 
     // Cleanup operations
 //    void deleteByScenarioStatus(String status);
@@ -56,6 +51,6 @@ public interface ScenarioContextPort {
 //    int deleteStaleScenarios(Duration olderThan); // returns count deleted
 
     // Pagination support
-    //Page<ScenarioStateContext> findAll(Pageable pageable);
-    //Page<ScenarioStateContext> findByScenarioStatus(String status, Pageable pageable);
+    //Page<ScenarioStateContextEntities> findAll(Pageable pageable);
+    //Page<ScenarioStateContextEntities> findByScenarioStatus(String status, Pageable pageable);
 }

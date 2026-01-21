@@ -7,16 +7,16 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Persisted scenario scenarioStateTracker (database-backed).
+ * Persisted scenario service (database-backed).
  * 
  * This is NOT runtime context (see RuntimeScenarioContext in internal-testkit).
- * This scenarioStateTracker is persisted to support resume across JVM restarts.
+ * This service is persisted to support resume across JVM restarts.
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ScenarioStateContext {
+public class ScenarioStateContextEntities {
     private UUID _id;
     private String exampleId;
     private String testCaseId;
@@ -28,7 +28,7 @@ public class ScenarioStateContext {
     private Map<String, Map<String, String>> stepData = new HashMap<>();
     private long lastUpdated;
     private String scenarioStatus;
-    public ScenarioStateContext(String scenarioName) {
+    public ScenarioStateContextEntities(String scenarioName) {
         this.scenarioName = scenarioName;
     }
 }

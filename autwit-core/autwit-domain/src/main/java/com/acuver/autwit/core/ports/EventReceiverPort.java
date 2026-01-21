@@ -1,7 +1,7 @@
 
 package com.acuver.autwit.core.ports;
 
-import com.acuver.autwit.core.domain.EventContext;
+import com.acuver.autwit.core.domain.EventContextEntities;
 
 public interface EventReceiverPort {
 
@@ -10,6 +10,6 @@ public interface EventReceiverPort {
      * Used by Kafka adapter and any other inbound event adapters.
      * Called by adapters when a new event arrives (Kafka, DB changes, etc.)
      */
-    void receive(EventContext context);
+    void receive(EventContextEntities context);
 }
 

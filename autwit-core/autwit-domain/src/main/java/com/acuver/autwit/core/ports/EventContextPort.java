@@ -1,6 +1,6 @@
 package com.acuver.autwit.core.ports;
 
-import com.acuver.autwit.core.domain.EventContext;
+import com.acuver.autwit.core.domain.EventContextEntities;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,25 +16,25 @@ import java.util.Optional;
 public interface EventContextPort {
 
     /**
-     * Persist or update an EventContext.
+     * Persist or update an EventContextEntities.
      */
-    void save(EventContext ctx);
+    void save(EventContextEntities ctx);
 
     /**
      * Find the most recent event matching orderId + eventType.
      */
-    Optional<EventContext> findLatest(String orderId, String eventType);
+    Optional<EventContextEntities> findLatest(String orderId, String eventType);
 
     /**
      * Find event or paused context by canonical key.
      */
-    Optional<EventContext> findByCanonicalKey(String key);
+    Optional<EventContextEntities> findByCanonicalKey(String key);
 
     /**
      * Mark a scenario as paused (waiting for event).
      * Can be called by client code when throwing SkipException.
      */
-    void markPaused(EventContext ctx);
+    void markPaused(EventContextEntities ctx);
 
     /**
      * Mark a paused scenario as ready for resume.
@@ -66,10 +66,10 @@ public interface EventContextPort {
     /**
      * Find all events for a given order.
      */
-    List<EventContext> findByOrderId(String orderId);
+    List<EventContextEntities> findByOrderId(String orderId);
 
     /**
      * Find all paused scenarios (for polling).
      */
-    List<EventContext> findPaused();
+    List<EventContextEntities> findPaused();
 }

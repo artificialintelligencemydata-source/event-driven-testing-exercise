@@ -5,13 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class EventContext {
+public class EventContextEntities {
     private String canonicalKey;
     private String orderId;
     private String eventType;

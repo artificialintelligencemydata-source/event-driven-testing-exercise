@@ -3,8 +3,8 @@ package com.acuver.autwit.core.ports.runtime;
 /**
  * Port for accessing runtime (ThreadLocal) scenario context.
  * 
- * This port provides access to execution-time, thread-scoped scenarioStateTracker.
- * It is NOT for persisted scenarioStateTracker (use ScenarioContextPort for that).
+ * This port provides access to execution-time, thread-scoped service.
+ * It is NOT for persisted service (use ScenarioContextPort for that).
  * 
  * Implemented by internal-testkit's RuntimeContextAdapter.
  */

@@ -1,6 +1,6 @@
-package com.acuver.autwit.engine.scenarioStateTracker;
+package com.acuver.autwit.engine.service;
 
-import com.acuver.autwit.core.domain.ScenarioStateContext;
+import com.acuver.autwit.core.domain.ScenarioStateContextEntities;
 import com.acuver.autwit.core.ports.ScenarioContextPort;
 import com.acuver.autwit.core.ports.ScenarioStatePort;
 import com.acuver.autwit.core.ports.runtime.RuntimeContextPort;
@@ -11,12 +11,12 @@ import java.util.Map;
 import java.util.Optional;
 
 @Component
-public class ScenarioStateTracker implements ScenarioStatePort {
+public class ScenarioStateService implements ScenarioStatePort {
 
     private final ScenarioContextPort scenarioContextPort;
     private final RuntimeContextPort runtimeContextPort;
 
-    public ScenarioStateTracker(ScenarioContextPort port, RuntimeContextPort runtimeContextPort) {
+    public ScenarioStateService(ScenarioContextPort port, RuntimeContextPort runtimeContextPort) {
         this.scenarioContextPort = port;
         this.runtimeContextPort = runtimeContextPort;
     }
@@ -27,10 +27,10 @@ public class ScenarioStateTracker implements ScenarioStatePort {
                          String status,
                          Map<String, String> stepData) {
 
-        ScenarioStateContext state = null;
+        ScenarioStateContextEntities state = null;
 
         // 1️⃣ Load existing scenario state (if any)
-        Optional<ScenarioStateContext> optional =
+        Optional<ScenarioStateContextEntities> optional =
                 scenarioContextPort.findByScenarioName(scenario);
 
         if (optional.isPresent()) {
@@ -39,7 +39,7 @@ public class ScenarioStateTracker implements ScenarioStatePort {
 
         // 2️⃣ Create scenario state if missing (OLD behavior parity)
         if (state == null) {
-            state = new ScenarioStateContext();
+            state = new ScenarioStateContextEntities();
             state.setScenarioName(scenario);
             state.setStepStatus(new HashMap<>());
             state.setStepData(new HashMap<>());
@@ -94,9 +94,9 @@ public class ScenarioStateTracker implements ScenarioStatePort {
     @Override
     public boolean isStepAlreadySuccessful(String scenario, String step) {
 
-        ScenarioStateContext state = null;
+        ScenarioStateContextEntities state = null;
 
-        Optional<ScenarioStateContext> optional =
+        Optional<ScenarioStateContextEntities> optional =
                 scenarioContextPort.findByScenarioName(scenario);
 
         if (optional.isPresent()) {
@@ -120,9 +120,9 @@ public class ScenarioStateTracker implements ScenarioStatePort {
     @Override
     public Map<String, String> getStepData(String scenario, String step) {
 
-        ScenarioStateContext state = null;
+        ScenarioStateContextEntities state = null;
 
-        Optional<ScenarioStateContext> optional =
+        Optional<ScenarioStateContextEntities> optional =
                 scenarioContextPort.findByScenarioName(scenario);
 
         if (optional.isPresent()) {
@@ -156,9 +156,9 @@ public class ScenarioStateTracker implements ScenarioStatePort {
     @Override
     public void updateScenarioStatus(String scenario, String status) {
 
-        ScenarioStateContext state = null;
+        ScenarioStateContextEntities state = null;
 
-        Optional<ScenarioStateContext> optional =
+        Optional<ScenarioStateContextEntities> optional =
                 scenarioContextPort.findByScenarioName(scenario);
 
         if (optional.isPresent()) {
@@ -166,7 +166,7 @@ public class ScenarioStateTracker implements ScenarioStatePort {
         }
 
         if (state == null) {
-            state = new ScenarioStateContext();
+            state = new ScenarioStateContextEntities();
             state.setScenarioName(scenario);
             state.setStepStatus(new HashMap<>());
             state.setStepData(new HashMap<>());

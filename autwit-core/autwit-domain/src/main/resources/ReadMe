@@ -37,3 +37,73 @@ autwit-adapter-postgres/
 
 autwit-engine/
    └─ ScenarioStateTracker (uses ScenarioContextPort)
+
+
+
+   package com.acuver.autwit.adapter.mongo.scenario;
+
+   import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+   import org.springframework.data.mongodb.repository.MongoRepository;
+   import org.springframework.stereotype.Repository;
+
+   import java.util.List;
+   import java.util.Optional;
+
+   /**
+    * Spring Data MongoDB repository for MongoApiContextEntity.
+    *
+    * <h2>VISIBILITY</h2>
+    * Package-private - internal to the MongoDB adapter.
+    *
+    * @author AUTWIT Framework
+    * @since 2.0.0
+    */
+   @Repository
+   @ConditionalOnProperty(name = "autwit.database.type", havingValue = "mongodb")
+   interface MongoApiContextRepository extends MongoRepository<MongoApiContextEntity, String> {
+
+       Optional<MongoApiContextEntity> findByApiName(String apiName);
+
+       List<MongoApiContextEntity> findByIsServiceTrue();
+
+       List<MongoApiContextEntity> findByServiceName(String serviceName);
+
+       List<MongoApiContextEntity> findByHttpMethod(String httpMethod);
+
+       List<MongoApiContextEntity> findByDataRepresentation(String dataRepresentation);
+
+       boolean existsByApiName(String apiName);
+   }
+   ```
+
+   ## Key Fixes Made:
+
+   1. **MongoApiContextAdapter**:
+      - Removed duplicate `save()` method
+      - Fixed all method return types to use `ApiContextEntities` (domain object)
+      - Fixed `toDocument()` to accept `ApiContextEntities` and return `MongoApiContextEntity`
+      - Fixed `toDomain()` to accept `MongoApiContextEntity` and return `ApiContextEntities`
+      - Removed references to non-existent `HttpMethod` enum (now uses `ApiContextEntities.HttpMethod`)
+
+   2. **MongoApiContextEntity**:
+      - Made it package-private (removed `public`)
+      - This is the MongoDB-specific document, not exposed outside the adapter
+
+   3. **MongoApiContextRepository**:
+      - Made it package-private (changed from `public interface` to `interface`)
+      - Fixed generic type from `MongoEventContextAdapter` to `MongoApiContextEntity`
+      - Fixed method parameter from `ApiContextEntities.HttpMethod` to `String` (since it's stored as string in MongoDB)
+      - Repository methods now return `MongoApiContextEntity` internally
+
+   ## Summary of Architecture:
+   ```
+   Domain Layer (autwit-domain):
+   └── ApiContextEntities (domain object - what business logic uses)
+   └── ApiContextPort (interface defining storage contract)
+
+   Adapter Layer (autwit-adapter-mongodb):
+   └── MongoApiContextAdapter (implements ApiContextPort)
+       ├── Converts ApiContextEntities ↔ MongoApiContextEntity
+       └── Uses MongoApiContextRepository
+   └── MongoApiContextEntity (MongoDB document - internal only)
+   └── MongoApiContextRepository (Spring Data MongoDB repo - internal only)
