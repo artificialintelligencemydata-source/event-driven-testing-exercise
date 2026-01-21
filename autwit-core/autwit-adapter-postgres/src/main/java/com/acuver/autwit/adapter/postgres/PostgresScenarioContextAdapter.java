@@ -1,6 +1,6 @@
 package com.acuver.autwit.adapter.postgres;
 
-import com.acuver.autwit.core.domain.ScenarioStateContext;
+import com.acuver.autwit.core.domain.ScenarioStateContextEntities;
 import com.acuver.autwit.core.ports.ScenarioContextPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -17,12 +17,12 @@ public class PostgresScenarioContextAdapter implements ScenarioContextPort {
     private final PostgresScenarioContextRepository repo;
 
     @Override
-    public Optional<ScenarioStateContext> findByScenarioName(String scenarioName) {
+    public Optional<ScenarioStateContextEntities> findByScenarioName(String scenarioName) {
         return repo.findByScenarioName(scenarioName).map(this::toDomain);
     }
 
     @Override
-    public ScenarioStateContext save(ScenarioStateContext state) {
+    public ScenarioStateContextEntities save(ScenarioStateContextEntities state) {
         return toDomain(repo.save(toEntity(state)));
     }
 
@@ -37,7 +37,7 @@ public class PostgresScenarioContextAdapter implements ScenarioContextPort {
     }
 
     // ---------- Mapping ----------
-    private PostgresScenarioContextEntity toEntity(ScenarioStateContext ctx) {
+    private PostgresScenarioContextEntity toEntity(ScenarioStateContextEntities ctx) {
         return new PostgresScenarioContextEntity(
                 ctx.get_id(),
                 ctx.getScenarioKey(),
@@ -51,8 +51,8 @@ public class PostgresScenarioContextAdapter implements ScenarioContextPort {
         );
     }
 
-    private ScenarioStateContext toDomain(PostgresScenarioContextEntity e) {
-        return new ScenarioStateContext(
+    private ScenarioStateContextEntities toDomain(PostgresScenarioContextEntity e) {
+        return new ScenarioStateContextEntities(
                 e.getId(),
                 e.getScenarioKey(),
                 e.getExampleId(),

@@ -28,7 +28,7 @@ public final class ApiContext {
     public static RequestSpecification request() {
         RequestSpecification req = threadLocalRequest.get();
         if (req == null) {
-            throw new IllegalStateException("Request not initialized. Call ApiContext.initRequest() first.");
+            throw new IllegalStateException("Request not initialized. Call ApiContextEntities.initRequest() first.");
         }
         return req;
     }

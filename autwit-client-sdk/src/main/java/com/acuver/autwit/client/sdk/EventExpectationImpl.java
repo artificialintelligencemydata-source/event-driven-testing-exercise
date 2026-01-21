@@ -1,6 +1,6 @@
 package com.acuver.autwit.client.sdk;
 
-import com.acuver.autwit.core.domain.EventContext;
+import com.acuver.autwit.core.domain.EventContextEntities;
 import com.acuver.autwit.core.ports.EventMatcherPort;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +34,7 @@ class EventExpectationImpl implements Autwit.EventExpectation {
        // log.debug("Asserting event: {} for orderId={}", eventType, orderId);
 
         try {
-            EventContext ctx = matcher.match(orderId, eventType).getNow(null);
+            EventContextEntities ctx = matcher.match(orderId, eventType).getNow(null);
 
             if (ctx == null) {
                // log.info("Event not yet available: {} for orderId={} - pausing scenario", eventType, orderId);

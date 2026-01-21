@@ -1,6 +1,6 @@
 package com.acuver.autwit.adapter.h2.scenario;
 
-import com.acuver.autwit.core.domain.ScenarioStateContext;
+import com.acuver.autwit.core.domain.ScenarioStateContextEntities;
 import com.acuver.autwit.core.ports.ScenarioContextPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,13 +18,13 @@ public class H2ScenarioContextAdapter implements ScenarioContextPort {
     private final H2ScenarioContextRepository repo;
 
     @Override
-    public Optional<ScenarioStateContext> findByScenarioName(String name) {
+    public Optional<ScenarioStateContextEntities> findByScenarioName(String name) {
         return repo.findByScenarioName(name).map(this::toDomain);
     }
 
     @Override
-    public ScenarioStateContext save(ScenarioStateContext ctx) {
-        log.debug("Saving ScenarioStateContext: scenarioName={}, exampleId={}, _id={}",
+    public ScenarioStateContextEntities save(ScenarioStateContextEntities ctx) {
+        log.debug("Saving ScenarioStateContextEntities: scenarioName={}, exampleId={}, _id={}",
                 ctx.getScenarioName(), ctx.getExampleId(), ctx.get_id());
 
         H2ScenarioContextEntity entityToSave;
@@ -92,7 +92,7 @@ public class H2ScenarioContextAdapter implements ScenarioContextPort {
     // ----------------------------------------------------------------------
     // Mapping: Create NEW Entity (ID will be auto-generated)
     // ----------------------------------------------------------------------
-    private H2ScenarioContextEntity toNewEntity(ScenarioStateContext ctx) {
+    private H2ScenarioContextEntity toNewEntity(ScenarioStateContextEntities ctx) {
         return H2ScenarioContextEntity.builder()
                 // NOTE: id is NOT set - JPA will auto-generate it
                 .exampleId(ctx.getExampleId())
@@ -108,7 +108,7 @@ public class H2ScenarioContextAdapter implements ScenarioContextPort {
     // ----------------------------------------------------------------------
     // Update existing entity with new values (preserves ID)
     // ----------------------------------------------------------------------
-    private void updateEntity(H2ScenarioContextEntity entity, ScenarioStateContext ctx) {
+    private void updateEntity(H2ScenarioContextEntity entity, ScenarioStateContextEntities ctx) {
         // ID is preserved - don't change it
         entity.setExampleId(ctx.getExampleId());
         entity.setTestCaseId(ctx.getTestCaseId());
@@ -122,8 +122,8 @@ public class H2ScenarioContextAdapter implements ScenarioContextPort {
     // ----------------------------------------------------------------------
     // Mapping (Entity → Domain)
     // ----------------------------------------------------------------------
-    private ScenarioStateContext toDomain(H2ScenarioContextEntity e) {
-        return ScenarioStateContext.builder()
+    private ScenarioStateContextEntities toDomain(H2ScenarioContextEntity e) {
+        return ScenarioStateContextEntities.builder()
                 ._id(e.getId())
                 .exampleId(e.getExampleId())
                 .testCaseId(e.getTestCaseId())

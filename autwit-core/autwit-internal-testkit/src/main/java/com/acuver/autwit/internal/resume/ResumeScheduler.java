@@ -1,6 +1,6 @@
 package com.acuver.autwit.internal.resume;
 
-import com.acuver.autwit.core.domain.EventContext;
+import com.acuver.autwit.core.domain.EventContextEntities;
 import com.acuver.autwit.core.ports.EventContextPort;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -82,7 +82,7 @@ public class ResumeScheduler {
 
         try {
             // 1. Find all paused scenarios that are ready to resume
-            List<EventContext> resumeReady = findResumeReadyScenarios();
+            List<EventContextEntities> resumeReady = findResumeReadyScenarios();
 
             if (resumeReady.isEmpty()) {
                 log.trace("No scenarios ready for resume");
@@ -92,10 +92,10 @@ public class ResumeScheduler {
             log.info("🔄 Found {} scenario(s) ready for resume", resumeReady.size());
 
             // 2. Process in batches to avoid overwhelming system
-            List<List<EventContext>> batches = partition(resumeReady, batchSize);
+            List<List<EventContextEntities>> batches = partition(resumeReady, batchSize);
 
             for (int i = 0; i < batches.size(); i++) {
-                List<EventContext> batch = batches.get(i);
+                List<EventContextEntities> batch = batches.get(i);
                 log.info("📦 Processing batch {}/{} ({} scenarios)",
                         i + 1, batches.size(), batch.size());
                 processBatch(batch);
@@ -120,12 +120,12 @@ public class ResumeScheduler {
     /**
      * Find all scenarios that are ready for resume.
      */
-    private List<EventContext> findResumeReadyScenarios() {
+    private List<EventContextEntities> findResumeReadyScenarios() {
         try {
-            List<EventContext> paused = eventContextPort.findPaused();
+            List<EventContextEntities> paused = eventContextPort.findPaused();
 
             return paused.stream()
-                    .filter(EventContext::isResumeReady)
+                    .filter(EventContextEntities::isResumeReady)
                     .filter(ctx -> ctx.getRetryCount() < maxRetries)
                     .collect(Collectors.toList());
 
@@ -138,7 +138,7 @@ public class ResumeScheduler {
     /**
      * Process a batch of scenarios for resume.
      */
-    private void processBatch(List<EventContext> batch) {
+    private void processBatch(List<EventContextEntities> batch) {
         // Extract unique scenario identifiers
         List<String> scenarioKeys = batch.stream()
                 .map(this::extractScenarioKey)
@@ -152,7 +152,7 @@ public class ResumeScheduler {
             resumeExecutor.execute(scenarioKeys);
 
             // Mark scenarios as processed
-            for (EventContext ctx : batch) {
+            for (EventContextEntities ctx : batch) {
                 markAsProcessed(ctx);
             }
 
@@ -162,19 +162,19 @@ public class ResumeScheduler {
             log.error("❌ Batch execution failed: {}", e.getMessage(), e);
 
             // Increment retry count for failed scenarios
-            for (EventContext ctx : batch) {
+            for (EventContextEntities ctx : batch) {
                 incrementRetryCount(ctx);
             }
         }
     }
 
     /**
-     * Extract scenario key from EventContext.
+     * Extract scenario key from EventContextEntities.
      *
      * <p>The canonical key format is: orderId::eventType
      * For resume, we need the scenario name which may be stored separately.</p>
      */
-    private String extractScenarioKey(EventContext ctx) {
+    private String extractScenarioKey(EventContextEntities ctx) {
         // Current canonical key format: orderId::eventType
         // TODO: After CanonicalKeyGenerator enhancement, this will be: scenarioName::orderId::eventType
         String canonicalKey = ctx.getCanonicalKey();
@@ -191,7 +191,7 @@ public class ResumeScheduler {
     /**
      * Mark scenario as processed after successful resume trigger.
      */
-    private void markAsProcessed(EventContext ctx) {
+    private void markAsProcessed(EventContextEntities ctx) {
         try {
             ctx.setResumeReady(false);
             ctx.setStatus("RESUMED");
@@ -208,7 +208,7 @@ public class ResumeScheduler {
     /**
      * Increment retry count for failed resume attempt.
      */
-    private void incrementRetryCount(EventContext ctx) {
+    private void incrementRetryCount(EventContextEntities ctx) {
         try {
             ctx.setRetryCount(ctx.getRetryCount() + 1);
             ctx.setLastRetryAt(System.currentTimeMillis());

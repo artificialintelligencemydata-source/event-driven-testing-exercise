@@ -1,6 +1,6 @@
 package com.acuver.autwit.adapter.kafka;
 
-import com.acuver.autwit.core.domain.EventContext;
+import com.acuver.autwit.core.domain.EventContextEntities;
 import com.acuver.autwit.core.ports.EventContextPort;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.logging.log4j.LogManager;
@@ -28,7 +28,7 @@ public class KafkaEventConsumer {
      * Manual ack: we only ack after storage.saveEvent succeeds.
      */
     /**
-     * Listens on configured Kafka topic & persists EventContext.
+     * Listens on configured Kafka topic & persists EventContextEntities.
      * Uses manual ack — only acknowledge after successful storage.
      */
     @KafkaListener(
@@ -42,11 +42,11 @@ public class KafkaEventConsumer {
 
         LOG.debug("Kafka received key={} partition={} offset={}", key, rec.partition(), rec.offset());
 
-        EventContext ctx;
+        EventContextEntities ctx;
         try {
             ctx = mapper.fromJson(payload);
         } catch (Exception e) {
-            LOG.error("Failed to map Kafka message → EventContext. key={}  Error={}",
+            LOG.error("Failed to map Kafka message → EventContextEntities. key={}  Error={}",
                     key, e.getMessage(), e);
             // Do NOT ack — either retry or your DLQ policy handles it.
             return;
@@ -60,7 +60,7 @@ public class KafkaEventConsumer {
                     ctx.getCanonicalKey(), ctx.getOrderId(), ctx.getEventType());
 
         } catch (Exception e) {
-            LOG.error("❌ Failed to store EventContext canonicalKey={} — Not ACKing. Error={}",
+            LOG.error("❌ Failed to store EventContextEntities canonicalKey={} — Not ACKing. Error={}",
                     ctx.getCanonicalKey(), e.getMessage(), e);
             // Message will be retried depending on Kafka consumer configuration.
         }

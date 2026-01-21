@@ -1,6 +1,6 @@
 package com.acuver.autwit.adapter.mongo;
 
-import com.acuver.autwit.core.domain.EventContext;
+import com.acuver.autwit.core.domain.EventContextEntities;
 import com.acuver.autwit.core.ports.EventContextPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -20,7 +20,7 @@ public class MongoEventContextAdapter implements EventContextPort {
     // SAVE
     // ----------------------------------------------------------------------
     @Override
-    public void save(EventContext ctx) {
+    public void save(EventContextEntities ctx) {
         repo.save(toEntity(ctx));
     }
 
@@ -28,25 +28,25 @@ public class MongoEventContextAdapter implements EventContextPort {
     // FINDERS
     // ----------------------------------------------------------------------
     @Override
-    public Optional<EventContext> findLatest(String orderId, String eventType) {
+    public Optional<EventContextEntities> findLatest(String orderId, String eventType) {
         return repo.findTopByOrderIdAndEventTypeOrderByEventTimestampDesc(orderId, eventType)
                 .map(this::toDomain);
     }
 
     @Override
-    public Optional<EventContext> findByCanonicalKey(String key) {
+    public Optional<EventContextEntities> findByCanonicalKey(String key) {
         return repo.findById(key).map(this::toDomain);
     }
 
     @Override
-    public List<EventContext> findByOrderId(String orderId) {
+    public List<EventContextEntities> findByOrderId(String orderId) {
         return repo.findByOrderId(orderId).stream()
                 .map(this::toDomain)
                 .toList();
     }
 
     @Override
-    public List<EventContext> findPaused() {
+    public List<EventContextEntities> findPaused() {
         return repo.findByPausedTrue().stream()
                 .map(this::toDomain)
                 .toList();
@@ -56,7 +56,7 @@ public class MongoEventContextAdapter implements EventContextPort {
     // MUTATORS
     // ----------------------------------------------------------------------
     @Override
-    public void markPaused(EventContext ctx) {
+    public void markPaused(EventContextEntities ctx) {
         String key = ctx.getCanonicalKey();
 
         repo.findById(key).ifPresentOrElse(existing -> {
@@ -103,7 +103,7 @@ public class MongoEventContextAdapter implements EventContextPort {
     // ----------------------------------------------------------------------
     // MAPPERS — Domain ↔ Entity (now using builder)
     // ----------------------------------------------------------------------
-    private MongoEventContextEntity toEntity(EventContext ctx) {
+    private MongoEventContextEntity toEntity(EventContextEntities ctx) {
         return MongoEventContextEntity.builder()
                 .canonicalKey(ctx.getCanonicalKey())
                 .orderId(ctx.getOrderId())
@@ -120,8 +120,8 @@ public class MongoEventContextAdapter implements EventContextPort {
                 .build();
     }
 
-    private EventContext toDomain(MongoEventContextEntity e) {
-        return EventContext.builder()
+    private EventContextEntities toDomain(MongoEventContextEntity e) {
+        return EventContextEntities.builder()
                 .canonicalKey(e.getCanonicalKey())
                 .orderId(e.getOrderId())
                 .eventType(e.getEventType())

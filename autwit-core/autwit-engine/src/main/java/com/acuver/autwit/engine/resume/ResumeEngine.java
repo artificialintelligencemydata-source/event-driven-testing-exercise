@@ -1,6 +1,6 @@
 package com.acuver.autwit.engine.resume;
 
-import com.acuver.autwit.core.domain.EventContext;
+import com.acuver.autwit.core.domain.EventContextEntities;
 import com.acuver.autwit.core.ports.EventContextPort;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,7 +14,7 @@ import java.util.function.Consumer;
  *
  * ARCHITECTURAL RESPONSIBILITY:
  * This is the ONLY component in AUTWIT that may transition scenarios
- * from PAUSED to RESUME_READY scenarioStateTracker.
+ * from PAUSED to RESUME_READY service.
  *
  * AUTHORITY ENFORCEMENT:
  * - Pollers MUST notify ResumeEngine via accept()
@@ -29,7 +29,7 @@ import java.util.function.Consumer;
  *  5. Mark scenarios resumeReady=true if conditions satisfied
  *  6. Delegate to runner for actual scenario re-execution
  */
-public class ResumeEngine implements Consumer<EventContext> {
+public class ResumeEngine implements Consumer<EventContextEntities> {
 
     private static final Logger log = LogManager.getLogger(ResumeEngine.class);
     private final EventContextPort storagePort;
@@ -49,7 +49,7 @@ public class ResumeEngine implements Consumer<EventContext> {
      * @param event The event that arrived
      */
     @Override
-    public void accept(EventContext event) {
+    public void accept(EventContextEntities event) {
         if (event == null) {
             log.warn("ResumeEngine: Received null event, ignoring");
             return;
@@ -67,7 +67,7 @@ public class ResumeEngine implements Consumer<EventContext> {
      * 4. Mark resumeReady=true (ONLY DONE HERE)
      * 5. Runner detects resumeReady and re-executes scenario
      */
-    private void onEvent(EventContext event) {
+    private void onEvent(EventContextEntities event) {
 
         final String canonicalKey = event.getCanonicalKey();
 
@@ -87,7 +87,7 @@ public class ResumeEngine implements Consumer<EventContext> {
         // 2️⃣ Look up paused scenarios with matching canonicalKey
         // The storage should return the PAUSED SCENARIO CONTEXT,
         // not the event itself (though they share the same canonicalKey)
-        List<EventContext> pausedScenarios = findPausedScenarios(canonicalKey);
+        List<EventContextEntities> pausedScenarios = findPausedScenarios(canonicalKey);
 
         if (pausedScenarios.isEmpty()) {
             log.debug("ResumeEngine: No paused scenarios for key {}", canonicalKey);
@@ -97,7 +97,7 @@ public class ResumeEngine implements Consumer<EventContext> {
         log.info("ResumeEngine: Found {} paused scenario(s) for key {}", pausedScenarios.size(), canonicalKey);
 
         // 3️⃣ Process each paused scenario
-        for (EventContext paused : pausedScenarios) {
+        for (EventContextEntities paused : pausedScenarios) {
             try {
                 processResume(paused, event);
             } catch (Exception e) {
@@ -116,9 +116,9 @@ public class ResumeEngine implements Consumer<EventContext> {
      *
      * We need to filter for actually paused scenarios.
      */
-    private List<EventContext> findPausedScenarios(String canonicalKey) {
+    private List<EventContextEntities> findPausedScenarios(String canonicalKey) {
         try {
-            Optional<EventContext> found = storagePort.findByCanonicalKey(canonicalKey);
+            Optional<EventContextEntities> found = storagePort.findByCanonicalKey(canonicalKey);
 
             if (found.isPresent() && found.get().isPaused()) {
                 return List.of(found.get());
@@ -135,7 +135,7 @@ public class ResumeEngine implements Consumer<EventContext> {
     /**
      * Evaluate and execute resume for a single paused scenario.
      */
-    private void processResume(EventContext paused, EventContext event) {
+    private void processResume(EventContextEntities paused, EventContextEntities event) {
 
         // 3️⃣ Evaluate resume conditions
         if (!shouldResume(paused, event)) {
@@ -168,7 +168,7 @@ public class ResumeEngine implements Consumer<EventContext> {
      * - Business rules (e.g., order must be in certain status)
      * - Time-based rules (e.g., minimum pause duration)
      */
-    private boolean shouldResume(EventContext paused, EventContext event) {
+    private boolean shouldResume(EventContextEntities paused, EventContextEntities event) {
 
         // Rule 1: Canonical key must match
         if (!paused.getCanonicalKey().equals(event.getCanonicalKey())) {

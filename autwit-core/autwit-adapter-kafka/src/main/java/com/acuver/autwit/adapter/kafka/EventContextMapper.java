@@ -1,6 +1,6 @@
 package com.acuver.autwit.adapter.kafka;
 
-import com.acuver.autwit.core.domain.EventContext;
+import com.acuver.autwit.core.domain.EventContextEntities;
 import com.acuver.autwit.core.utils.CanonicalKeyGenerator;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 /**
- * EventContextMapper - Converts Kafka JSON payload to EventContext domain object.
+ * EventContextMapper - Converts Kafka JSON payload to EventContextEntities domain object.
  *
  * <h2>RESPONSIBILITY</h2>
  * <p>Transform raw Kafka messages into AUTWIT's domain model. This is a pure
@@ -47,17 +47,17 @@ public class EventContextMapper {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     /**
-     * Convert Kafka JSON payload to EventContext domain object.
+     * Convert Kafka JSON payload to EventContextEntities domain object.
      *
      * <p>Extracts required fields from JSON and generates appropriate canonical key.
      * If scenarioName is present in the payload, V2 key format is used. Otherwise,
      * falls back to V1 format.</p>
      *
      * @param json Raw JSON string from Kafka
-     * @return EventContext domain object
+     * @return EventContextEntities domain object
      * @throws RuntimeException if mapping fails
      */
-    public EventContext fromJson(String json) {
+    public EventContextEntities fromJson(String json) {
         try {
             JsonNode node = objectMapper.readTree(json);
 
@@ -101,8 +101,8 @@ public class EventContextMapper {
                         canonicalKey);
             }
 
-            // Build EventContext domain object
-            EventContext eventContext = EventContext.builder()
+            // Build EventContextEntities domain object
+            EventContextEntities eventContext = EventContextEntities.builder()
                     .orderId(orderId)
                     .eventType(eventType)
                     .eventTimestamp(eventTimestamp)
@@ -121,7 +121,7 @@ public class EventContextMapper {
                     .timestamp(System.currentTimeMillis())
                     .build();
 
-            log.debug("EventContextMapper: Successfully mapped Kafka payload to EventContext - key={}",
+            log.debug("EventContextMapper: Successfully mapped Kafka payload to EventContextEntities - key={}",
                     canonicalKey);
 
             return eventContext;
@@ -130,27 +130,27 @@ public class EventContextMapper {
             log.error("EventContextMapper: Validation error - {}", e.getMessage());
             throw e;
         } catch (Exception e) {
-            log.error("EventContextMapper: Failed to map Kafka JSON to EventContext: {}",
+            log.error("EventContextMapper: Failed to map Kafka JSON to EventContextEntities: {}",
                     e.getMessage(), e);
-            throw new RuntimeException("EventContext mapping failed", e);
+            throw new RuntimeException("EventContextEntities mapping failed", e);
         }
     }
 
     /**
-     * Convert EventContext to JSON string.
+     * Convert EventContextEntities to JSON string.
      *
      * <p>Used when publishing events or for logging/debugging.</p>
      *
-     * @param ctx EventContext to serialize
+     * @param ctx EventContextEntities to serialize
      * @return JSON string representation
      */
-    public String toJson(EventContext ctx) {
+    public String toJson(EventContextEntities ctx) {
         try {
             return objectMapper.writeValueAsString(ctx);
         } catch (Exception e) {
-            log.error("EventContextMapper: Failed to serialize EventContext to JSON: {}",
+            log.error("EventContextMapper: Failed to serialize EventContextEntities to JSON: {}",
                     e.getMessage(), e);
-            throw new RuntimeException("EventContext serialization failed", e);
+            throw new RuntimeException("EventContextEntities serialization failed", e);
         }
     }
 

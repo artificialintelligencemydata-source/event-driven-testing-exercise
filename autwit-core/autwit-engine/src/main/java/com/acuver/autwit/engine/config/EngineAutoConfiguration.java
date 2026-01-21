@@ -63,7 +63,7 @@ public class EngineAutoConfiguration {
 
             // Only subscribe if implementation is InMemoryEventBus
             if (notifier instanceof InMemoryEventBus bus) {
-                bus.subscribe(engine);  // Consumer<EventContext>
+                bus.subscribe(engine);  // Consumer<EventContextEntities>
                 log.info("ResumeEngine subscribed to InMemoryEventBus");
             } else {
                 log.info("EventReceiverPort is external implementation (Kafka/Custom). " +

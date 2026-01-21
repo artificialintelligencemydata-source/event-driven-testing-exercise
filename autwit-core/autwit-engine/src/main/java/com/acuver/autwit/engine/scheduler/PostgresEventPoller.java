@@ -1,6 +1,6 @@
 package com.acuver.autwit.engine.scheduler;
 
-import com.acuver.autwit.core.domain.EventContext;
+import com.acuver.autwit.core.domain.EventContextEntities;
 import com.acuver.autwit.core.ports.EventContextPort;
 import com.acuver.autwit.engine.resume.ResumeEngine;
 import org.apache.logging.log4j.LogManager;
@@ -77,7 +77,7 @@ public class PostgresEventPoller {
         log.trace("PostgresEventPoller: Starting poll cycle");
 
         // 1. Find all paused test contexts
-        List<EventContext> pausedContexts = storage.findPaused();
+        List<EventContextEntities> pausedContexts = storage.findPaused();
 
         if (pausedContexts.isEmpty()) {
             log.trace("PostgresEventPoller: No paused contexts found");
@@ -87,7 +87,7 @@ public class PostgresEventPoller {
         log.debug("PostgresEventPoller: Found {} paused context(s) to check", pausedContexts.size());
 
         // 2. For each paused context, check if matching event exists
-        for (EventContext pausedCtx : pausedContexts) {
+        for (EventContextEntities pausedCtx : pausedContexts) {
             try {
                 processPausedContext(pausedCtx);
             } catch (Exception e) {
@@ -109,7 +109,7 @@ public class PostgresEventPoller {
      *
      * @param pausedCtx The paused test context to check
      */
-    private void processPausedContext(EventContext pausedCtx) {
+    private void processPausedContext(EventContextEntities pausedCtx) {
         String canonicalKey = pausedCtx.getCanonicalKey();
         String orderId = pausedCtx.getOrderId();
         String eventType = pausedCtx.getEventType();
@@ -118,10 +118,10 @@ public class PostgresEventPoller {
                 canonicalKey, orderId, eventType);
 
         // Look for matching system event in database
-        Optional<EventContext> matchingEvent = storage.findLatest(orderId, eventType);
+        Optional<EventContextEntities> matchingEvent = storage.findLatest(orderId, eventType);
 
         if (matchingEvent.isPresent()) {
-            EventContext event = matchingEvent.get();
+            EventContextEntities event = matchingEvent.get();
 
             log.info("PostgresEventPoller: Match found for paused context {} - delegating to ResumeEngine",
                     canonicalKey);

@@ -1,19 +1,19 @@
 package com.acuver.autwit.internal.stepDef;
 
-import com.acuver.autwit.core.domain.EventContext;
+import com.acuver.autwit.core.domain.EventContextEntities;
 import java.util.Map;
 
 public interface ReusableStepDefs {
 
     /**
      * Check if the expected event has arrived.
-     * - If present in DB → return EventContext
+     * - If present in DB → return EventContextEntities
      * - If not present → create placeholder + skip scenario
      */
-    EventContext verifyEvent(String eventType);
+    EventContextEntities verifyEvent(String eventType);
 
     /**
-     * Validate event payload or DB scenarioStateTracker AFTER verifyEvent().
+     * Validate event payload or DB service AFTER verifyEvent().
      * - Ensures event exists
      * - Performs validation logic
      * - If missing → create placeholder + skip

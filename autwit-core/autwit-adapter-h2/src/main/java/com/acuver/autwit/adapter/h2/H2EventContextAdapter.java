@@ -1,6 +1,6 @@
 package com.acuver.autwit.adapter.h2;
 
-import com.acuver.autwit.core.domain.EventContext;
+import com.acuver.autwit.core.domain.EventContextEntities;
 import com.acuver.autwit.core.ports.EventContextPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -20,7 +20,7 @@ public class H2EventContextAdapter implements EventContextPort {
     // SAVE
     // =====================================================================
     @Override
-    public void save(EventContext ctx) {
+    public void save(EventContextEntities ctx) {
         repo.save(toEntity(ctx));
     }
 
@@ -28,7 +28,7 @@ public class H2EventContextAdapter implements EventContextPort {
     // FIND LATEST EVENT BY ORDER + TYPE
     // =====================================================================
     @Override
-    public Optional<EventContext> findLatest(String orderId, String eventType) {
+    public Optional<EventContextEntities> findLatest(String orderId, String eventType) {
         return repo.findTopByOrderIdAndEventTypeOrderByEventTimestampDesc(orderId, eventType)
                 .map(this::toDomain);
     }
@@ -37,7 +37,7 @@ public class H2EventContextAdapter implements EventContextPort {
     // FIND BY CANONICAL KEY
     // =====================================================================
     @Override
-    public Optional<EventContext> findByCanonicalKey(String key) {
+    public Optional<EventContextEntities> findByCanonicalKey(String key) {
         return repo.findByCanonicalKey(key).map(this::toDomain);
     }
 
@@ -45,7 +45,7 @@ public class H2EventContextAdapter implements EventContextPort {
     // MARK PAUSED
     // =====================================================================
     @Override
-    public void markPaused(EventContext ctx) {
+    public void markPaused(EventContextEntities ctx) {
 
         repo.findByCanonicalKey(ctx.getCanonicalKey()).ifPresentOrElse(existing -> {
 
@@ -108,7 +108,7 @@ public class H2EventContextAdapter implements EventContextPort {
     // FIND ALL EVENTS FOR ORDER
     // =====================================================================
     @Override
-    public List<EventContext> findByOrderId(String orderId) {
+    public List<EventContextEntities> findByOrderId(String orderId) {
         return repo.findByOrderId(orderId)
                 .stream()
                 .map(this::toDomain)
@@ -119,7 +119,7 @@ public class H2EventContextAdapter implements EventContextPort {
     // FIND ALL PAUSED EVENTS
     // =====================================================================
     @Override
-    public List<EventContext> findPaused() {
+    public List<EventContextEntities> findPaused() {
         return repo.findByPausedTrue()
                 .stream()
                 .map(this::toDomain)
@@ -129,7 +129,7 @@ public class H2EventContextAdapter implements EventContextPort {
     // =====================================================================
     // MAPPING: DOMAIN → ENTITY
     // =====================================================================
-    private H2EventContextEntity toEntity(EventContext ctx) {
+    private H2EventContextEntity toEntity(EventContextEntities ctx) {
         return H2EventContextEntity.builder()
                 .canonicalKey(ctx.getCanonicalKey())
                 .orderId(ctx.getOrderId())
@@ -151,8 +151,8 @@ public class H2EventContextAdapter implements EventContextPort {
     // =====================================================================
     // MAPPING: ENTITY → DOMAIN
     // =====================================================================
-    private EventContext toDomain(H2EventContextEntity e) {
-        return EventContext.builder()
+    private EventContextEntities toDomain(H2EventContextEntity e) {
+        return EventContextEntities.builder()
                 .canonicalKey(e.getCanonicalKey())
                 .orderId(e.getOrderId())
                 .eventType(e.getEventType())

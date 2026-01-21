@@ -6,8 +6,8 @@ import java.util.Map;
 /**
  * Runtime (ThreadLocal) scenario context.
  * 
- * This is execution-time, thread-scoped scenarioStateTracker.
- * It is NOT persisted scenarioStateTracker (see ScenarioStateContext in core.domain).
+ * This is execution-time, thread-scoped service.
+ * It is NOT persisted service (see ScenarioStateContextEntities in core.domain).
  */
 public final class ScenarioContext {
 

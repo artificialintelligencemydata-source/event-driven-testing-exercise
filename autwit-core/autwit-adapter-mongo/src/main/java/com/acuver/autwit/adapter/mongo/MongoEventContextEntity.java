@@ -8,8 +8,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * MongoDB storage entity for EventContext.
- * Mirrors the core-domain EventContext fields.
+ * MongoDB storage entity for EventContextEntities.
+ * Mirrors the core-domain EventContextEntities fields.
  */
 @Data
 @Builder(toBuilder = true)

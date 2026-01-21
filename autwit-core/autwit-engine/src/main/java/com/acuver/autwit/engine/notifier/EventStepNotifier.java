@@ -1,6 +1,6 @@
 package com.acuver.autwit.engine.notifier;
 
-import com.acuver.autwit.core.domain.EventContext;
+import com.acuver.autwit.core.domain.EventContextEntities;
 import com.acuver.autwit.core.ports.EventContextPort;
 import com.acuver.autwit.core.ports.runtime.RuntimeContextPort;
 import com.acuver.autwit.core.ports.EventMatcherPort;
@@ -52,7 +52,7 @@ public class EventStepNotifier implements EventMatcherPort {
      * Registry of waiting futures, keyed by canonical key.
      * Multiple futures can wait for the same key.
      */
-    private final ConcurrentMap<String, List<CompletableFuture<EventContext>>> waiters =
+    private final ConcurrentMap<String, List<CompletableFuture<EventContextEntities>>> waiters =
             new ConcurrentHashMap<>();
 
     /**
@@ -111,10 +111,10 @@ public class EventStepNotifier implements EventMatcherPort {
      *
      * @param orderId The order ID to match
      * @param eventType The event type to match
-     * @return CompletableFuture that completes with EventContext when found
+     * @return CompletableFuture that completes with EventContextEntities when found
      */
     @Override
-    public CompletableFuture<EventContext> match(String orderId, String eventType) {
+    public CompletableFuture<EventContextEntities> match(String orderId, String eventType) {
         // ═══════════════════════════════════════════════════════════════
         // V2 CANONICAL KEY GENERATION
         // ═══════════════════════════════════════════════════════════════
@@ -142,7 +142,7 @@ public class EventStepNotifier implements EventMatcherPort {
 
         // Fast probe: Check if event already exists in DB
         try {
-            Optional<EventContext> found = storage.findByCanonicalKey(key);
+            Optional<EventContextEntities> found = storage.findByCanonicalKey(key);
             if (found.isPresent()) {
                 log.debug("EventStepNotifier: Immediate DB match for key={}", key);
                 return CompletableFuture.completedFuture(found.get());
@@ -151,7 +151,7 @@ public class EventStepNotifier implements EventMatcherPort {
             // Also try V1 key for backward compatibility during migration
             if (scenarioName != null) {
                 String v1Key = CanonicalKeyGenerator.forOrder(orderId, eventType);
-                Optional<EventContext> v1Found = storage.findByCanonicalKey(v1Key);
+                Optional<EventContextEntities> v1Found = storage.findByCanonicalKey(v1Key);
                 if (v1Found.isPresent()) {
                     log.info("EventStepNotifier: Found event using V1 key (migration compatibility) - v1Key={}", v1Key);
                     return CompletableFuture.completedFuture(v1Found.get());
@@ -162,7 +162,7 @@ public class EventStepNotifier implements EventMatcherPort {
         }
 
         // No immediate match - register waiter for future completion
-        CompletableFuture<EventContext> future = new CompletableFuture<>();
+        CompletableFuture<EventContextEntities> future = new CompletableFuture<>();
 
         waiters.compute(key, (k, list) -> {
             if (list == null) {
@@ -200,7 +200,7 @@ public class EventStepNotifier implements EventMatcherPort {
      * @param ctx The event context that arrived
      */
     @Override
-    public void eventArrived(EventContext ctx) {
+    public void eventArrived(EventContextEntities ctx) {
         if (ctx == null) {
             log.warn("EventStepNotifier: eventArrived() called with null context");
             return;
@@ -232,8 +232,8 @@ public class EventStepNotifier implements EventMatcherPort {
     /**
      * Complete all waiters for a given key.
      */
-    private void completeWaiters(String key, EventContext ctx) {
-        List<CompletableFuture<EventContext>> waitingFutures = waiters.remove(key);
+    private void completeWaiters(String key, EventContextEntities ctx) {
+        List<CompletableFuture<EventContextEntities>> waitingFutures = waiters.remove(key);
 
         if (waitingFutures == null || waitingFutures.isEmpty()) {
             log.trace("EventStepNotifier: No waiters found for key={}", key);
@@ -242,7 +242,7 @@ public class EventStepNotifier implements EventMatcherPort {
 
         log.info("EventStepNotifier: Completing {} waiter(s) for key={}", waitingFutures.size(), key);
 
-        for (CompletableFuture<EventContext> future : waitingFutures) {
+        for (CompletableFuture<EventContextEntities> future : waitingFutures) {
             try {
                 future.complete(ctx);
             } catch (Exception e) {
@@ -254,7 +254,7 @@ public class EventStepNotifier implements EventMatcherPort {
     /**
      * Remove a specific waiter from the registry.
      */
-    private void removeWaiter(String key, CompletableFuture<EventContext> future) {
+    private void removeWaiter(String key, CompletableFuture<EventContextEntities> future) {
         waiters.computeIfPresent(key, (k, list) -> {
             list.remove(future);
             return list.isEmpty() ? null : list;

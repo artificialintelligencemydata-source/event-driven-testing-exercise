@@ -1,6 +1,6 @@
 //package com.bjs.tests.stepDefinitions;
 //
-//import com.acuver.autwit.core.domain.EventContext;
+//import com.acuver.autwit.core.domain.EventContextEntities;
 //import com.acuver.autwit.core.ports.EventContextPort;
 //import com.acuver.autwit.core.ports.EventMatcherPort;
 //import com.acuver.autwit.core.ports.ScenarioStatePort;
@@ -115,7 +115,7 @@
 //
 //        String orderId = ScenarioContext.get("orderId");
 //
-//        EventContext ctx = eventStepNotifier.match(orderId, eventType)
+//        EventContextEntities ctx = eventStepNotifier.match(orderId, eventType)
 //                .get(10, TimeUnit.SECONDS);
 //
 //        Allure.addAttachment("Event Data", ctx.getKafkaPayload());
@@ -134,7 +134,7 @@
 //
 //        String orderId = ScenarioContext.get("orderId");
 //
-//        Optional<EventContext> evt = eventContextPort.findLatest(orderId, "CREATE_ORDER_REQUEST");
+//        Optional<EventContextEntities> evt = eventContextPort.findLatest(orderId, "CREATE_ORDER_REQUEST");
 //        if (evt.isEmpty()) throw new SkipException("Event not found yet");
 //
 //        SoftAssertUtils.getSoftAssert().assertEquals(orderId, evt.get().getOrderId());
@@ -153,7 +153,7 @@
 //
 //        String orderId = ScenarioContext.get("orderId");
 //
-//        EventContext ctx = eventStepNotifier.match(orderId, eventType)
+//        EventContextEntities ctx = eventStepNotifier.match(orderId, eventType)
 //                .get(seconds, TimeUnit.SECONDS);
 //
 //        Allure.addAttachment("Event Data", ctx.getKafkaPayload());
@@ -172,7 +172,7 @@
 //
 //        String orderId = ScenarioContext.get("orderId");
 //
-//        Optional<EventContext> evt = eventContextPort.findLatest(orderId, "ORDER_CREATED");
+//        Optional<EventContextEntities> evt = eventContextPort.findLatest(orderId, "ORDER_CREATED");
 //        if (evt.isEmpty()) throw new SkipException("ORDER_CREATED not found");
 //
 //        tracker.markStep(scenarioKey, stepName, "success", Map.of("orderId", orderId));
@@ -189,7 +189,7 @@
 //
 //        String orderId = ScenarioContext.get("orderId");
 //
-//        EventContext ctx = eventStepNotifier.match(orderId, eventType)
+//        EventContextEntities ctx = eventStepNotifier.match(orderId, eventType)
 //                .get(15, TimeUnit.SECONDS);
 //
 //        Allure.addAttachment("Payment Event", ctx.getKafkaPayload());
@@ -208,7 +208,7 @@
 //
 //        String orderId = ScenarioContext.get("orderId");
 //
-//        Optional<EventContext> evt = eventContextPort.findLatest(orderId, "ORDER_AUTHORIZED");
+//        Optional<EventContextEntities> evt = eventContextPort.findLatest(orderId, "ORDER_AUTHORIZED");
 //        if (evt.isEmpty()) throw new SkipException("Not arrived yet");
 //
 //        tracker.markStep(scenarioKey, stepName, "success", Map.of("orderId", orderId));
@@ -225,7 +225,7 @@
 //
 //        String orderId = ScenarioContext.get("orderId");
 //
-//        EventContext ctx = eventStepNotifier.match(orderId, eventType)
+//        EventContextEntities ctx = eventStepNotifier.match(orderId, eventType)
 //                .get(20, TimeUnit.SECONDS);
 //
 //        Allure.addAttachment("Shipment Event", ctx.getKafkaPayload());
@@ -244,7 +244,7 @@
 //
 //        String orderId = ScenarioContext.get("orderId");
 //
-//        Optional<EventContext> evt = eventContextPort.findLatest(orderId, "SHIPMENT_CREATED");
+//        Optional<EventContextEntities> evt = eventContextPort.findLatest(orderId, "SHIPMENT_CREATED");
 //        if (evt.isEmpty()) throw new SkipException("Not arrived yet");
 //
 //        tracker.markStep(scenarioKey, stepName, "success", Map.of("orderId", orderId));
@@ -261,7 +261,7 @@
 //
 //        String orderId = ScenarioContext.get("orderId");
 //
-//        EventContext ctx = eventStepNotifier.match(orderId, eventType)
+//        EventContextEntities ctx = eventStepNotifier.match(orderId, eventType)
 //                .get(20, TimeUnit.SECONDS);
 //
 //        Allure.addAttachment("Pickup Event", ctx.getKafkaPayload());
@@ -280,7 +280,7 @@
 //
 //        String orderId = ScenarioContext.get("orderId");
 //
-//        Optional<EventContext> evt = eventContextPort.findLatest(orderId, "SHIPMENT_PICKED");
+//        Optional<EventContextEntities> evt = eventContextPort.findLatest(orderId, "SHIPMENT_PICKED");
 //        if (evt.isEmpty()) throw new SkipException("Event not arrived");
 //
 //        tracker.markStep(scenarioKey, stepName, "success", Map.of("orderId", orderId));
@@ -297,7 +297,7 @@
 //
 //        String orderId = ScenarioContext.get("orderId");
 //
-//        EventContext ctx = eventStepNotifier.match(orderId, eventType)
+//        EventContextEntities ctx = eventStepNotifier.match(orderId, eventType)
 //                .get(20, TimeUnit.SECONDS);
 //
 //        tracker.markStep(scenarioKey, stepName, "success", Map.of("orderId", orderId));
@@ -314,7 +314,7 @@
 //
 //        String orderId = ScenarioContext.get("orderId");
 //
-//        Optional<EventContext> evt = eventContextPort.findLatest(orderId, "ORDER_CHARGED");
+//        Optional<EventContextEntities> evt = eventContextPort.findLatest(orderId, "ORDER_CHARGED");
 //        if (evt.isEmpty()) throw new SkipException("Not yet");
 //
 //        tracker.markStep(scenarioKey, stepName, "success", Map.of("orderId", orderId));
@@ -325,9 +325,9 @@
 //    public void verifyCorrelation() {
 //
 //        String orderId = ScenarioContext.get("orderId");
-//        List<EventContext> events = eventContextPort.findByOrderId(orderId);
+//        List<EventContextEntities> events = eventContextPort.findByOrderId(orderId);
 //
-//        for (EventContext e : events) {
+//        for (EventContextEntities e : events) {
 //            SoftAssertUtils.getSoftAssert().assertEquals(orderId, e.getOrderId());
 //        }
 //    }

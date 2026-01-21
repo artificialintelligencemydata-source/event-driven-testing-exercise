@@ -1,6 +1,6 @@
 package com.acuver.autwit.internal.stepDef;
 
-import com.acuver.autwit.core.domain.EventContext;
+import com.acuver.autwit.core.domain.EventContextEntities;
 import com.acuver.autwit.core.ports.EventContextPort;
 import com.acuver.autwit.core.ports.EventMatcherPort;
 import com.acuver.autwit.core.ports.ScenarioStatePort;
@@ -54,7 +54,7 @@ public class ReusableStepDefsImpl implements ReusableStepDefs {
 
         String canonical = CanonicalKeyGenerator.forOrder(orderId, eventType);
 
-        EventContext placeholder = EventContext.builder()
+        EventContextEntities placeholder = EventContextEntities.builder()
                 .canonicalKey(canonical)
                 .orderId(orderId)
                 .eventType(eventType)
@@ -75,7 +75,7 @@ public class ReusableStepDefsImpl implements ReusableStepDefs {
     // ============================================================
 
     @Override
-    public EventContext verifyEvent(String eventType) {
+    public EventContextEntities verifyEvent(String eventType) {
 
         String orderId = ScenarioContext.get("orderId");
         String scenarioKey = ScenarioContext.get("uniqueScenarioKey");
@@ -87,7 +87,7 @@ public class ReusableStepDefsImpl implements ReusableStepDefs {
         }
 
         // 2️⃣ DB lookup
-        Optional<EventContext> fromDb = eventStore.findLatest(orderId, eventType);
+        Optional<EventContextEntities> fromDb = eventStore.findLatest(orderId, eventType);
 
         if (fromDb.isPresent()) {
 
@@ -118,7 +118,7 @@ public class ReusableStepDefsImpl implements ReusableStepDefs {
         if (skipIfAlreadyPassed(stepName)) return;
 
         // 2️⃣ Must exist in DB, else skip
-        EventContext evt = eventStore.findLatest(orderId, eventType)
+        EventContextEntities evt = eventStore.findLatest(orderId, eventType)
                 .orElseThrow(() -> new SkipException(
                         "Event " + eventType + " missing for order " + orderId
                 ));

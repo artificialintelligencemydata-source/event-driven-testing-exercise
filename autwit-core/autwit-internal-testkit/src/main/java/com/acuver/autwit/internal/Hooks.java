@@ -1,6 +1,6 @@
 package com.acuver.autwit.internal;
 
-import com.acuver.autwit.core.domain.ScenarioStateContext;
+import com.acuver.autwit.core.domain.ScenarioStateContextEntities;
 import com.acuver.autwit.core.ports.ScenarioContextPort;
 import com.acuver.autwit.core.ports.ScenarioStatePort;
 import com.acuver.autwit.core.ports.runtime.RuntimeContextPort;
@@ -15,7 +15,6 @@ import com.acuver.autwit.internal.reporting.AllureLifecycleManager;
 import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
-import io.cucumber.java.BeforeStep;
 import io.cucumber.java.Scenario;
 import io.qameta.allure.model.Status;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +23,6 @@ import org.apache.logging.log4j.Logger;
 import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
 
-import java.io.IOException;
-import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -434,7 +431,7 @@ public class Hooks {
     /**
      * Restore scenario context from persisted state.
      */
-    private void restoreScenarioContext(ScenarioStateContext savedContext) {
+    private void restoreScenarioContext(ScenarioStateContextEntities savedContext) {
         Map<String, String> stepStatus = savedContext.getStepStatus();
         Map<String, Map<String, String>> allStepData = savedContext.getStepData();
 

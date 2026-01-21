@@ -1,5 +1,5 @@
 package com.acuver.autwit.adapter.mongo.scenario;
-import com.acuver.autwit.core.domain.ScenarioStateContext;
+import com.acuver.autwit.core.domain.ScenarioStateContextEntities;
 import com.acuver.autwit.core.ports.ScenarioContextPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -14,13 +14,13 @@ public class MongoScenarioContextAdapter implements ScenarioContextPort {
     private final MongoScenarioContextRepository repo;
 
     @Override
-    public Optional<ScenarioStateContext> findByScenarioName(String name) {
+    public Optional<ScenarioStateContextEntities> findByScenarioName(String name) {
         return repo.findById(name)
                 .map(this::toDomain);
     }
 
     @Override
-    public ScenarioStateContext save(ScenarioStateContext state) {
+    public ScenarioStateContextEntities save(ScenarioStateContextEntities state) {
         return toDomain(repo.save(toEntity(state)));
     }
 
@@ -34,7 +34,7 @@ public class MongoScenarioContextAdapter implements ScenarioContextPort {
         repo.deleteAll();
     }
 
-    private MongoScenarioContextEntity toEntity(ScenarioStateContext ctx) {
+    private MongoScenarioContextEntity toEntity(ScenarioStateContextEntities ctx) {
         return new MongoScenarioContextEntity(
                 ctx.get_id(),
                 ctx.getScenarioKey(),
@@ -48,8 +48,8 @@ public class MongoScenarioContextAdapter implements ScenarioContextPort {
         );
     }
 
-    private ScenarioStateContext toDomain(MongoScenarioContextEntity e) {
-        return new ScenarioStateContext(
+    private ScenarioStateContextEntities toDomain(MongoScenarioContextEntity e) {
+        return new ScenarioStateContextEntities(
                 e.get_id(),
                 e.getScenarioKey(),
                 e.getExampleId(),

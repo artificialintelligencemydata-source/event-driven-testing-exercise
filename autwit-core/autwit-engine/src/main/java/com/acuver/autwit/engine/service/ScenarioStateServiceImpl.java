@@ -11,12 +11,12 @@ import java.util.Map;
 import java.util.Optional;
 
 @Component
-public class ScenarioStateService implements ScenarioStatePort {
+public class ScenarioStateServiceImpl implements ScenarioStatePort {
 
     private final ScenarioContextPort scenarioContextPort;
     private final RuntimeContextPort runtimeContextPort;
 
-    public ScenarioStateService(ScenarioContextPort port, RuntimeContextPort runtimeContextPort) {
+    public ScenarioStateServiceImpl(ScenarioContextPort port, RuntimeContextPort runtimeContextPort) {
         this.scenarioContextPort = port;
         this.runtimeContextPort = runtimeContextPort;
     }
