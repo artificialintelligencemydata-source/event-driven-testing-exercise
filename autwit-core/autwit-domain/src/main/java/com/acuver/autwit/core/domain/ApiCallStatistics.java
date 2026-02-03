@@ -4,23 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.util.Map;
+
 /**
- * Domain entity representing API call statistics.
+ * ApiCallStatistics - Value object for API call analytics.
  *
- * <h2>LOCATION</h2>
- * Module: autwit-domain
- * Package: com.acuver.autwit.core.domain
- *
- * <h2>PURPOSE</h2>
- * Aggregated statistics about API calls made during test execution.
- * Part of the core domain model.
- *
- * <h2>RELATIONSHIP WITH OTHER DOMAINS</h2>
- * <ul>
- *   <li>{@link ApiContextEntities} - Individual API call records</li>
- *   <li>{@link ApiCallStatistics} - Aggregated statistics (this class)</li>
- * </ul>
+ * <h2>NOT AN ENTITY</h2>
+ * This is a computed value object, not persisted to database.
+ * Created by ApiContextServiceImpl from stored ApiContextEntities.
  *
  * @author AUTWIT Framework
  * @since 2.0.0
@@ -30,97 +22,85 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ApiCallStatistics {
+
     /**
-     * Total number of API calls recorded
+     * Total number of API calls.
      */
     private long totalCalls;
 
     /**
-     * Number of regular API calls (isService=false)
+     * Number of regular API calls (isService=false).
      */
     private long apiCalls;
 
     /**
-     * Number of service/flow calls (isService=true)
+     * Number of service/flow calls (isService=true).
      */
     private long serviceCalls;
 
     /**
-     * Count of calls grouped by HTTP method
-     * Example: {"POST": 45, "GET": 23, "DELETE": 5}
+     * Breakdown by HTTP method.
+     * Key: Method name (GET, POST, etc.)
+     * Value: Count
      */
     private Map<String, Long> callsByHttpMethod;
 
     /**
-     * Count of calls grouped by data representation format
-     * Example: {"XML": 65, "JSON": 8}
+     * Breakdown by data format.
+     * Key: Format (XML, JSON)
+     * Value: Count
      */
     private Map<String, Long> callsByDataRepresentation;
 
     /**
-     * Name of the most frequently called API
+     * Most frequently called API.
      */
     private String mostUsedApi;
 
     /**
-     * Name of the most frequently called service
+     * Most frequently called service.
      */
     private String mostUsedService;
 
     /**
-     * Calculate percentage of service calls
-     *
-     * @return Percentage (0-100)
+     * Calculate service call percentage.
      */
     public double getServiceCallPercentage() {
-        if (totalCalls == 0) {
-            return 0.0;
-        }
+        if (totalCalls == 0) return 0.0;
         return (serviceCalls * 100.0) / totalCalls;
     }
 
     /**
-     * Calculate percentage of API calls
-     *
-     * @return Percentage (0-100)
+     * Calculate API call percentage.
      */
     public double getApiCallPercentage() {
-        if (totalCalls == 0) {
-            return 0.0;
-        }
+        if (totalCalls == 0) return 0.0;
         return (apiCalls * 100.0) / totalCalls;
     }
 
-    /**
-     * Pretty print statistics for reporting
-     *
-     * @return Formatted statistics string
-     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("========== API Call Statistics ==========\n");
-        sb.append(String.format("Total Calls:        %d\n", totalCalls));
-        sb.append(String.format("API Calls:          %d (%.1f%%)\n", apiCalls, getApiCallPercentage()));
-        sb.append(String.format("Service Calls:      %d (%.1f%%)\n", serviceCalls, getServiceCallPercentage()));
-        sb.append(String.format("Most Used API:      %s\n", mostUsedApi));
-        sb.append(String.format("Most Used Service:  %s\n", mostUsedService));
+        sb.append("\n========== API Call Statistics ==========\n");
+        sb.append(String.format("Total Calls:        %d%n", totalCalls));
+        sb.append(String.format("API Calls:          %d (%.1f%%)%n", apiCalls, getApiCallPercentage()));
+        sb.append(String.format("Service Calls:      %d (%.1f%%)%n", serviceCalls, getServiceCallPercentage()));
+        sb.append(String.format("Most Used API:      %s%n", mostUsedApi));
+        sb.append(String.format("Most Used Service:  %s%n", mostUsedService));
 
         if (callsByHttpMethod != null && !callsByHttpMethod.isEmpty()) {
             sb.append("\nCalls by HTTP Method:\n");
-            callsByHttpMethod.entrySet().stream()
-                    .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
-                    .forEach(e -> sb.append(String.format("  %s: %d\n", e.getKey(), e.getValue())));
+            callsByHttpMethod.forEach((method, count) ->
+                    sb.append(String.format("  %s: %d%n", method, count)));
         }
 
         if (callsByDataRepresentation != null && !callsByDataRepresentation.isEmpty()) {
             sb.append("\nCalls by Data Format:\n");
-            callsByDataRepresentation.entrySet().stream()
-                    .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
-                    .forEach(e -> sb.append(String.format("  %s: %d\n", e.getKey(), e.getValue())));
+            callsByDataRepresentation.forEach((format, count) ->
+                    sb.append(String.format("  %s: %d%n", format, count)));
         }
 
-        sb.append("==========================================");
+        sb.append("==========================================\n");
         return sb.toString();
     }
 }

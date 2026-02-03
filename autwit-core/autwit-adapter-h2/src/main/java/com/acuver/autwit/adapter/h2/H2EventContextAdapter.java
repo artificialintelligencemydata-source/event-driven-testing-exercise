@@ -74,7 +74,7 @@ public class H2EventContextAdapter implements EventContextPort {
                     .firstPausedAt(System.currentTimeMillis())
                     .lastRetryAt(System.currentTimeMillis())
                     .status(ctx.getStatus())
-                    .timestamp(System.currentTimeMillis())
+                    .createdAt(System.currentTimeMillis())
                     .build();
 
             repo.save(saved);
@@ -144,7 +144,7 @@ public class H2EventContextAdapter implements EventContextPort {
                 .lastRetryAt(ctx.getLastRetryAt())
 
                 .status(ctx.getStatus())
-                .timestamp(ctx.getTimestamp())
+                .createdAt(ctx.getCreatedAt())
                 .build();
     }
 
@@ -166,7 +166,7 @@ public class H2EventContextAdapter implements EventContextPort {
                 .lastRetryAt(e.getLastRetryAt())
 
                 .status(e.getStatus())
-                .timestamp(e.getTimestamp())
+                .createdAt(e.getCreatedAt())
                 .build();
     }
 }

@@ -45,7 +45,6 @@ import java.util.concurrent.*;
  */
 @Component
 public class EventStepNotifier implements EventMatcherPort {
-
     private static final Logger log = LogManager.getLogger(EventStepNotifier.class);
 
     /**

@@ -118,7 +118,7 @@ public class EventContextMapper {
 
                     // Metadata
                     .status("RECEIVED")
-                    .timestamp(System.currentTimeMillis())
+                    .createdAt(System.currentTimeMillis())
                     .build();
 
             log.debug("EventContextMapper: Successfully mapped Kafka payload to EventContextEntities - key={}",

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 @ConditionalOnProperty(name = "autwit.adapter.kafka.enabled", havingValue = "true")
 public class KafkaEventConsumer {
     private static final Logger LOG = LogManager.getLogger(KafkaEventConsumer.class);
-
     private final EventContextMapper mapper;
     private final EventContextPort storage;
 

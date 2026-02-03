@@ -14,6 +14,11 @@ public class MongoScenarioContextAdapter implements ScenarioContextPort {
     private final MongoScenarioContextRepository repo;
 
     @Override
+    public Optional<ScenarioStateContextEntities> findByScenarioKey(String scenarioKey) {
+        return repo.findByScenarioKey(scenarioKey)
+                .map(this::toDomain);
+    }
+    @Override
     public Optional<ScenarioStateContextEntities> findByScenarioName(String name) {
         return repo.findById(name)
                 .map(this::toDomain);
@@ -22,6 +27,11 @@ public class MongoScenarioContextAdapter implements ScenarioContextPort {
     @Override
     public ScenarioStateContextEntities save(ScenarioStateContextEntities state) {
         return toDomain(repo.save(toEntity(state)));
+    }
+
+    @Override
+    public void deleteByScenarioKey(String scenarioKey) {
+        repo.deleteByScenarioKey(scenarioKey);
     }
 
     @Override

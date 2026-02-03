@@ -1,5 +1,6 @@
-package com.acuver.autwit.client.sdk;
+package com.acuver.autwit.client.sdk.contextAccessor;
 
+import com.acuver.autwit.client.sdk.*;
 import com.acuver.autwit.core.ports.runtime.RuntimeContextPort;
 import lombok.RequiredArgsConstructor;
 
@@ -17,12 +18,14 @@ import lombok.RequiredArgsConstructor;
  * @author AUTWIT Framework
  * @since 2.0.0
  */
+
 @RequiredArgsConstructor
 class ContextAccessorImpl implements Autwit.ContextAccessor {
 
     private final RuntimeContextPort contextAccess;
-    // Lazy-initialized components
+
     private BaseActionsImpl baseActions;
+    private BaseActionsNewImpl baseActionsNew;
     private SterlingApiImpl sterlingApi;
     private XmlUtilsImpl xmlUtils;
     private ConfigReaderImpl configReader;
@@ -46,18 +49,10 @@ class ContextAccessorImpl implements Autwit.ContextAccessor {
     @Override
     public void setOrderId(String orderId) {
         contextAccess.set("orderId", orderId);
-        // Set in MDC for logging correlation
-        try {
-            Class<?> mdcClass = Class.forName("com.acuver.autwit.internal.context.ScenarioMDC");
-            java.lang.reflect.Method method = mdcClass.getMethod("setOrderId", String.class);
-            method.invoke(null, orderId);
-        } catch (Exception e) {
-            // MDC not available - ignore silently
-        }
     }
 
     @Override
-    public Autwit.ContextAccessor.BaseActions baseActions() {
+    public BaseActions baseActions() {
         if (baseActions == null) {
             baseActions = new BaseActionsImpl();
         }
@@ -66,11 +61,14 @@ class ContextAccessorImpl implements Autwit.ContextAccessor {
 
     @Override
     public BaseActionsNew baseActionsNew() {
-        return null;
+        if (baseActionsNew == null) {
+            baseActionsNew = new BaseActionsNewImpl();
+        }
+        return baseActionsNew;
     }
 
     @Override
-    public Autwit.ContextAccessor.SterlingApi sterling() {
+    public SterlingApi sterling() {
         if (sterlingApi == null) {
             sterlingApi = new SterlingApiImpl();
         }
@@ -78,7 +76,7 @@ class ContextAccessorImpl implements Autwit.ContextAccessor {
     }
 
     @Override
-    public Autwit.ContextAccessor.XmlUtils xml() {
+    public XmlUtils xml() {
         if (xmlUtils == null) {
             xmlUtils = new XmlUtilsImpl();
         }
@@ -86,7 +84,7 @@ class ContextAccessorImpl implements Autwit.ContextAccessor {
     }
 
     @Override
-    public Autwit.ContextAccessor.ConfigReader config() {
+    public ConfigReader config() {
         if (configReader == null) {
             configReader = new ConfigReaderImpl();
         }
@@ -94,7 +92,8 @@ class ContextAccessorImpl implements Autwit.ContextAccessor {
     }
 
     @Override
-    public Autwit.ContextAccessor.SoftAssertions assertions() {
+    public SoftAssertions assertions() {
         return new SoftAssertionsImpl();
     }
+
 }

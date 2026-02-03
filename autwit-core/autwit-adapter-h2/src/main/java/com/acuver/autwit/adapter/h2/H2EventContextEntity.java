@@ -32,5 +32,5 @@ public class H2EventContextEntity {
     private long lastRetryAt;
 
     private String status;
-    private long timestamp;
+    private long createdAt;
 }

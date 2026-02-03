@@ -1,27 +1,21 @@
 package com.acuver.autwit.client.sdk;
 
+import com.acuver.autwit.core.domain.ApiCallStatistics;
+import com.acuver.autwit.core.domain.ApiContextEntities;
 import io.restassured.response.Response;
 import org.testng.asserts.SoftAssert;
 import org.w3c.dom.Document;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * AUTWIT Client SDK - Main Facade Interface.
  *
- * <h2>STRUCTURE</h2>
- * <pre>
- * autwit.context()
- *     ├── .baseActions()      → BaseActions (legacy - generic API calls, XML utils)
- *     ├── .baseActionsNew()   → BaseActionsNew (new - simplified with DB storage)
- *     ├── .sterling()         → SterlingApiCalls (Sterling OMS specific)
- *     ├── .xml()              → XmlUpdater utilities
- *     ├── .config()           → ConfigFileReader
- *     └── .assertions()       → SoftAssertUtils
- * </pre>
- *
  * @author AUTWIT Framework
- * @since 2.0.0
+ * @version 2.0.0
+ * @since 1.0.0
  */
 public interface Autwit {
 
@@ -49,314 +43,183 @@ public interface Autwit {
     }
 
     // ==========================================================================
-    // CONTEXT ACCESSOR
+    // CONTEXT ACCESSOR (MAIN ENTRY)
     // ==========================================================================
 
     interface ContextAccessor {
 
         void setCurrentStep(String stepName);
-
         <T> void set(String key, T value);
         <T> T get(String key);
         void setOrderId(String orderId);
 
         BaseActions baseActions();
-        BaseActionsNew baseActionsNew();  // ✅ NEW
+        BaseActionsNew baseActionsNew();
         SterlingApi sterling();
         XmlUtils xml();
         ConfigReader config();
         SoftAssertions assertions();
 
         // ======================================================================
-        // BASE ACTIONS - Generic API Calls & Utilities (LEGACY)
+        // BASE ACTIONS (LEGACY)
         // ======================================================================
 
         interface BaseActions {
-
-            // ==================================================================
-            // FLEXIBLE API CALL METHODS
-            // ==================================================================
-
-            /**
-             * Make a Sterling API call with all parameters.
-             *
-             * @param apiName         API name (e.g., "createOrder")
-             * @param httpMethod      HTTP method ("GET", "POST", "DELETE")
-             * @param inputXml        Input XML string
-             * @param outputTemplate  Output template XML (can be null/empty)
-             * @return Response object
-             */
             Response makeAPICall(String apiName, String httpMethod, String inputXml, String outputTemplate) throws Exception;
 
-            /**
-             * Make a Sterling API call without output template.
-             *
-             * @param apiName    API name
-             * @param httpMethod HTTP method
-             * @param inputXml   Input XML string
-             * @return Response object
-             */
             default Response makeAPICall(String apiName, String httpMethod, String inputXml) throws Exception {
                 return makeAPICall(apiName, httpMethod, inputXml, "");
             }
 
-            /**
-             * Make a POST API call (most common).
-             *
-             * @param apiName  API name
-             * @param inputXml Input XML string
-             * @return Response object
-             */
             default Response post(String apiName, String inputXml) throws Exception {
                 return makeAPICall(apiName, "POST", inputXml, "");
             }
 
-            /**
-             * Make a POST API call with output template.
-             *
-             * @param apiName        API name
-             * @param inputXml       Input XML string
-             * @param outputTemplate Output template XML
-             * @return Response object
-             */
             default Response post(String apiName, String inputXml, String outputTemplate) throws Exception {
                 return makeAPICall(apiName, "POST", inputXml, outputTemplate);
             }
 
-            /**
-             * Make a GET API call.
-             *
-             * @param apiName  API name
-             * @param inputXml Input XML string
-             * @return Response object
-             */
             default Response get(String apiName, String inputXml) throws Exception {
                 return makeAPICall(apiName, "GET", inputXml, "");
             }
 
-            /**
-             * Make a GET API call with output template.
-             *
-             * @param apiName        API name
-             * @param inputXml       Input XML string
-             * @param outputTemplate Output template XML
-             * @return Response object
-             */
-            default Response get(String apiName, String inputXml, String outputTemplate) throws Exception {
-                return makeAPICall(apiName, "GET", inputXml, outputTemplate);
-            }
-
-            /**
-             * Make a DELETE API call.
-             *
-             * @param apiName  API name
-             * @param inputXml Input XML string
-             * @return Response object
-             */
             default Response delete(String apiName, String inputXml) throws Exception {
                 return makeAPICall(apiName, "DELETE", inputXml, "");
             }
 
-            /**
-             * Make a service/flow call (IsFlow=Y).
-             *
-             * @param serviceName Service name
-             * @param httpMethod  HTTP method
-             * @param inputXml    Input XML string
-             * @return Response object
-             */
             Response makeServiceCall(String serviceName, String httpMethod, String inputXml) throws Exception;
 
-            // ==================================================================
-            // FILE OPERATIONS
-            // ==================================================================
-
-            /**
-             * Read file and return as string.
-             */
             String generateStrFromRes(String filePath);
-
-            /**
-             * Save XML string to file.
-             */
             void saveResponseAsXML(String filePath, String xmlStr);
 
-            // ==================================================================
-            // XML OPERATIONS
-            // ==================================================================
-
-            /**
-             * Read XML value using XPath.
-             */
             String xmlXpathReader(String filePath, String xpath);
-
-            /**
-             * Get root element name from XML string.
-             */
             String getXmlRootName(String xmlStr);
-
-            /**
-             * Edit single node attribute in XML file.
-             */
             void editXmlSingleNode(String nodeName, String nodeValue, String filePath);
-
-            /**
-             * Get Document from XML string.
-             */
             Document getDocumentFromXmlString(String xmlStr);
         }
 
         // ======================================================================
-        // BASE ACTIONS NEW - Simplified with Database Storage
+        // BASE ACTIONS NEW (v2.0)
         // ======================================================================
 
-        /**
-         * BaseActionsNew - Simplified API call helper with automatic database storage.
-         *
-         * <h2>KEY DIFFERENCES FROM BaseActions</h2>
-         * <ul>
-         *   <li>Automatic database storage via ApiContextService</li>
-         *   <li>Simplified interface - only essential methods</li>
-         *   <li>No file storage complexity</li>
-         *   <li>Better for new development</li>
-         * </ul>
-         *
-         * <h2>USAGE</h2>
-         * <pre>
-         * // API Call
-         * Response response = autwit.context().baseActionsNew()
-         *     .makeAPICall("getOrderDetails", "POST", inputXml, templateXml);
-         *
-         * // Service Call
-         * Response response = autwit.context().baseActionsNew()
-         *     .makeServiceCall("CreateOrder", "POST", inputXml);
-         *
-         * // Simplified POST
-         * Response response = autwit.context().baseActionsNew()
-         *     .post("getOrderDetails", inputXml);
-         * </pre>
-         */
         interface BaseActionsNew {
 
-            // ==================================================================
-            // API CALL METHODS
-            // ==================================================================
+            Response makeAPICall(String apiName, String httpMethod,
+                                 String inputXml, String outputTemplate) throws Exception;
 
-            /**
-             * Make a Sterling API call with all parameters.
-             *
-             * @param apiName         API name (e.g., "createOrder")
-             * @param httpMethod      HTTP method ("GET", "POST", "DELETE", "PUT", "PATCH")
-             * @param inputXml        Input XML string
-             * @param outputTemplate  Output template XML (can be null/empty)
-             * @return Response object
-             */
-            Response makeAPICall(String apiName, String httpMethod, String inputXml, String outputTemplate) throws Exception;
-
-            /**
-             * Make a Sterling API call without output template.
-             *
-             * @param apiName    API name
-             * @param httpMethod HTTP method
-             * @param inputXml   Input XML string
-             * @return Response object
-             */
             default Response makeAPICall(String apiName, String httpMethod, String inputXml) throws Exception {
                 return makeAPICall(apiName, httpMethod, inputXml, "");
             }
 
-            /**
-             * Make a service/flow call (IsFlow=Y).
-             *
-             * @param serviceName Service name
-             * @param httpMethod  HTTP method
-             * @param inputXml    Input XML string
-             * @return Response object
-             */
+            Response makeAPICallWithTemplate(String apiName, Map<String, String> parameters) throws Exception;
+
             Response makeServiceCall(String serviceName, String httpMethod, String inputXml) throws Exception;
 
-            /**
-             * Make a POST API call (most common).
-             *
-             * @param apiName  API name
-             * @param inputXml Input XML string
-             * @return Response object
-             */
             default Response post(String apiName, String inputXml) throws Exception {
                 return makeAPICall(apiName, "POST", inputXml, "");
             }
 
-            /**
-             * Make a POST API call with output template.
-             *
-             * @param apiName        API name
-             * @param inputXml       Input XML string
-             * @param outputTemplate Output template XML
-             * @return Response object
-             */
-            default Response post(String apiName, String inputXml, String outputTemplate) throws Exception {
-                return makeAPICall(apiName, "POST", inputXml, outputTemplate);
-            }
-
-            /**
-             * Make a GET API call.
-             *
-             * @param apiName  API name
-             * @param inputXml Input XML string
-             * @return Response object
-             */
             default Response get(String apiName, String inputXml) throws Exception {
                 return makeAPICall(apiName, "GET", inputXml, "");
             }
 
-            /**
-             * Make a DELETE API call.
-             *
-             * @param apiName  API name
-             * @param inputXml Input XML string
-             * @return Response object
-             */
             default Response delete(String apiName, String inputXml) throws Exception {
                 return makeAPICall(apiName, "DELETE", inputXml, "");
             }
 
-            // ==================================================================
-            // XML UTILITY METHODS (Essential ones only)
-            // ==================================================================
+            // Step-level retrieval
+            String getLastResponseFromCurrentStep(String apiName);
+            String getResponseFromStep(String stepName, String apiName);
+            List<ApiContextEntities> getAllCallsFromCurrentStep();
+            String extractFromStep(String stepName, String apiName, String path);
 
-            /**
-             * Read file and return as string.
-             */
+            // Order correlation
+            Optional<String> getResponseByOrderNo(String orderNo);
+            List<ApiContextEntities> getOrderLifecycle(String orderNo);
+
+            // Legacy
+            @Deprecated String getLastResponse(String apiName);
+            @Deprecated String getResponseByCallIndex(String apiName, int callIndex);
+            @Deprecated List<String> getAllResponses(String apiName);
+
+            String getLastRequest(String apiName);
+            String extractFromLastResponse(String apiName, String path);
+            String extractFromResponse(String apiName, int callIndex, String path);
+
             String generateStrFromRes(String filePath);
-
-            /**
-             * Save XML string to file.
-             */
             void saveResponseAsXML(String filePath, String xmlStr);
-
-            /**
-             * Read XML value using XPath.
-             */
             String xmlXpathReader(String filePath, String xpath);
-
-            /**
-             * Get root element name from XML string.
-             */
             String getXmlRootName(String xmlStr);
-
-            /**
-             * Edit single node attribute in XML file.
-             */
             void editXmlSingleNode(String nodeName, String nodeValue, String filePath);
-
-            /**
-             * Get Document from XML string.
-             */
             Document getDocumentFromXmlString(String xmlStr);
         }
 
         // ======================================================================
-        // STERLING API - Sterling OMS Specific
+        // API CONTEXT (v2.0)
+        // ======================================================================
+
+        interface ApiContext {
+            Optional<String> getLastResponseFromStep(String stepKey, String apiName);
+            List<String> getAllResponsesFromStep(String stepKey);
+            Optional<String> getResponseFromPreviousStep(String scenarioKey, String stepName, String apiName);
+            boolean hasCalledApi(String stepKey, String apiName);
+            long getCallCount(String stepKey);
+
+            Optional<String> getResponseByOrderNo(String orderNo);
+            List<String> getAllResponsesForOrder(String orderNo);
+            Optional<String> getOrderNoFromLastCall(String stepKey, String apiName);
+            List<ApiContextEntities> trackOrderLifecycle(String orderNo);
+
+            Optional<String> getLastResponseFromScenario(String scenarioKey, String apiName);
+            List<String> getAllResponsesFromScenario(String scenarioKey);
+
+            ApiContextEntities save(ApiContextEntities context);
+            Optional<ApiContextEntities> getContext(String stepKey, String apiName);
+            List<ApiContextEntities> getAllContexts(String stepKey);
+        }
+
+        // ======================================================================
+        // API TEMPLATE (v2.0)
+        // ======================================================================
+
+        interface ApiTemplate {
+            ApiTemplate createTemplate(String apiName, String httpMethod,
+                                       String endpointTemplate, String requestTemplate,
+                                       String dataRepresentation);
+
+            ApiTemplate createServiceTemplate(String serviceName, String httpMethod,
+                                              String endpointTemplate, String requestTemplate,
+                                              String dataRepresentation);
+
+            Optional<ApiTemplate> getTemplate(String apiName);
+            boolean templateExists(String apiName);
+            ApiTemplate updateTemplate(ApiTemplate template);
+            void deleteTemplate(String apiName);
+
+            List<ApiTemplate> getAllTemplates();
+            List<ApiTemplate> getApiTemplates();
+            List<ApiTemplate> getServiceTemplates();
+            List<ApiTemplate> getTemplatesByHttpMethod(String httpMethod);
+
+            Optional<String> buildRequest(String apiName, Map<String, String> parameters);
+            Optional<String> buildRequest(String apiName, String paramName, String paramValue);
+            Optional<String> buildRequest(String apiName,
+                                          String p1, String v1,
+                                          String p2, String v2);
+
+            long getTemplateCount();
+            long getApiTemplateCount();
+            long getServiceTemplateCount();
+
+            boolean validateTemplate(String apiName, Map<String, String> parameters);
+            List<String> getMissingParameters(String apiName, Map<String, String> parameters);
+
+            List<ApiTemplate> createTemplates(List<ApiTemplate> templates);
+            void deleteAllTemplates();
+        }
+
+        // ======================================================================
+        // STERLING API
         // ======================================================================
 
         interface SterlingApi {
@@ -404,7 +267,7 @@ public interface Autwit {
         }
 
         // ======================================================================
-        // XML UTILITIES
+        // XML UTILS
         // ======================================================================
 
         interface XmlUtils {
@@ -417,23 +280,32 @@ public interface Autwit {
         }
 
         // ======================================================================
-        // CONFIGURATION
+        // CONFIG READER
         // ======================================================================
 
         interface ConfigReader {
+            // URL Configuration
             String getBaseUrl();
             String getEndPointUrl();
+
+            // Path Configuration
             String getInputXmlPath();
             String getResponseXmlPath();
             String getApiTemplatesXmlPath();
-            String getUserId();
-            String getPassword();
-            String getProgId();
             String getValidationExcelsPath();
             String getTransferOrderInputXmls();
             String getPurchaseOrderXmls();
+
+            // Authentication
+            String getUserId();
+            String getPassword();
+            String getProgId();
+
+            // Timing
             int getDaysForReqDeliveryDate();
             long getImplicitlyWait();
+
+            // JIRA Integration
             String getJiraURL();
             String getJiraUserName();
             String getJiraAPIToken();
@@ -452,10 +324,11 @@ public interface Autwit {
     }
 
     // ==========================================================================
-    // FACADE METHODS
+    // ROOT FACADE
     // ==========================================================================
 
     EventExpectation expectEvent(String orderId, String eventType);
+    void pauseUntilEvent(String orderId, String eventType);
     ScenarioStepStatus step();
     ContextAccessor context();
 }

@@ -47,7 +47,6 @@ import java.util.Optional;
 public class H2EventPoller {
 
     private static final Logger log = LogManager.getLogger(H2EventPoller.class);
-
     private final EventContextPort storage;
     private final ResumeEngine resumeEngine;
 

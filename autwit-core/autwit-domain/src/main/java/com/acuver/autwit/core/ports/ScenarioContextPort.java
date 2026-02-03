@@ -7,7 +7,11 @@ import java.util.Optional;
 public interface ScenarioContextPort {
     // Existing methods
     Optional<ScenarioStateContextEntities> findByScenarioName(String name);
+    Optional<ScenarioStateContextEntities> findByScenarioKey(String scenarioKey);
     ScenarioStateContextEntities save(ScenarioStateContextEntities state);
+
+    void deleteByScenarioKey(String scenarioKey);
+
     void delete(String scenarioName);
     void deleteAll();
 

@@ -51,6 +51,10 @@ public class PostgresEventContextEntity {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "timestamp")
-    private long timestamp;
+    @Column(name = "created_at")
+    private Long createdAt;
+
+//    @Column(name = "timestamp")
+//    private long timestamp;
+
 }

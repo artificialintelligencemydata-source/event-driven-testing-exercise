@@ -77,6 +77,7 @@ public class EventDrivenOrderLifecycleStepDefsFacedBased {
         String orderId = autwit.context().get("orderId");
         //autwit.expectEvent(orderId, eventType).assertSatisfied();
         autwit.step().markStepSuccess();
+
         //autwit.setEventPlaceHolder(orderID,eventType);
         //autwit.step().markStepSkipped(orderId);
     }
@@ -96,20 +97,22 @@ public class EventDrivenOrderLifecycleStepDefsFacedBased {
     // ==============================================================================
     @And("I verify {string} event is published within {int} seconds")
     public void verifyEventWithin(String eventType, int seconds) {
-        autwit.context();
+//        autwit.context();
 //        autwit.step();
 //        autwit.expectEvent();
 //        autwit.context().setCurrentStep("I verify " + eventType + " event is published within " + seconds + " seconds");
 //        String orderId = autwit.context().get("orderId");
 //        autwit.expectEvent(orderId, eventType).assertSatisfied();
-//        autwit.context().assertions().assertAll();
+//        autwit.context().assertions().assertAll();// accerting thisng
 //        autwit.context().assertions().getSoftAssert().assertEquals();
-//        autwit.context().baseActions().makeAPICall();
-//        autwit.context().sterling().createOrder();
+//        autwit.context().baseActions().makeAPICall(); // Assure API call out way
+//        autwit.context().baseActionsNew().makeAPICall()// new way of making API call;
+//        autwit.context().sterling().createOrder();// Sterling API call
 //        autwit.step().markStepSuccess();
 //        autwit.step().markStepSuccess();
 //        autwit.step().markStepSkipped(orderId);
 //        autwit.context().xml().editXmlFile();
+//        autwit.context().baseActionsNew().makeAPICall("","","","")
     }
 
     // ==============================================================================

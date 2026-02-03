@@ -10,7 +10,7 @@ import java.util.Arrays;
 public abstract class BaseAutwitCucumberRunner
         extends AbstractTestNGCucumberTests {
     @Override
-    @DataProvider(name = "scenarios", parallel = false)
+    @DataProvider(name = "scenarios", parallel = true)
     public Object[][] scenarios() {
         return super.scenarios();
     }

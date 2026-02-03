@@ -337,14 +337,14 @@ public class TestNGListenerNew implements ITestListener, ISuiteListener {
         try {
             Scenario scenario = currentScenario.get();
 
-            // Fallback: try to get from Hooks (from OLD)
+            // Fallback: try to get from HooksOld (from OLD)
             if (scenario == null) {
                 try {
-                    Class<?> hooksClass = Class.forName("com.acuver.autwit.internal.hooks.Hooks");
+                    Class<?> hooksClass = Class.forName("com.acuver.autwit.internal.hooks.HooksOld");
                     java.lang.reflect.Method method = hooksClass.getMethod("AfterTest");
                     scenario = (Scenario) method.invoke(null);
                 } catch (Exception e) {
-                    log.debug("Could not get scenario from Hooks: {}", e.getMessage());
+                    log.debug("Could not get scenario from HooksOld: {}", e.getMessage());
                 }
             }
 

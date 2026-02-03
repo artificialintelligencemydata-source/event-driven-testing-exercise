@@ -23,49 +23,82 @@ public class H2ScenarioContextAdapter implements ScenarioContextPort {
     }
 
     @Override
+    public Optional<ScenarioStateContextEntities> findByScenarioKey(String scenarioKey) {
+        return repo.findByScenarioKey(scenarioKey)
+                .map(this::toDomain);
+    }
+
+//    @Override
+//    public ScenarioStateContextEntities save(ScenarioStateContextEntities ctx) {
+//        log.debug("Saving ScenarioStateContextEntities: scenarioName={}, exampleId={}, _id={}",
+//                ctx.getScenarioName(), ctx.getExampleId(), ctx.get_id());
+//
+//        H2ScenarioContextEntity entityToSave;
+//
+//        // Check if this is an UPDATE (existing record) or CREATE (new record)
+//        if (ctx.get_id() != null) {
+//            // Has an ID - check if it exists in DB
+//            Optional<H2ScenarioContextEntity> existingById = repo.findById(ctx.get_id());
+//            if (existingById.isPresent()) {
+//                // UPDATE existing entity
+//                entityToSave = existingById.get();
+//                updateEntity(entityToSave, ctx);
+//                log.debug("Updating existing entity by ID: {}", ctx.get_id());
+//            } else {
+//                // ID provided but doesn't exist - treat as new (ID will be regenerated)
+//                entityToSave = toNewEntity(ctx);
+//                log.debug("ID provided but not found, creating new entity");
+//            }
+//        } else {
+//            // No ID - check by business key (scenarioName + exampleId)
+//            Optional<H2ScenarioContextEntity> existingByBusinessKey =
+//                    findByBusinessKey(ctx.getScenarioName(), ctx.getExampleId());
+//
+//            if (existingByBusinessKey.isPresent()) {
+//                // UPDATE existing entity found by business key
+//                entityToSave = existingByBusinessKey.get();
+//                updateEntity(entityToSave, ctx);
+//                log.debug("Updating existing entity by business key: {}_{}",
+//                        ctx.getScenarioName(), ctx.getExampleId());
+//            } else {
+//                // CREATE new entity - ID will be auto-generated
+//                entityToSave = toNewEntity(ctx);
+//                log.debug("Creating new entity for: {}_{}",
+//                        ctx.getScenarioName(), ctx.getExampleId());
+//            }
+//        }
+//
+//        H2ScenarioContextEntity saved = repo.save(entityToSave);
+//        log.debug("Entity saved with ID: {}", saved.getId());
+//
+//        return toDomain(saved);
+//    }
+
+
+    @Override
     public ScenarioStateContextEntities save(ScenarioStateContextEntities ctx) {
-        log.debug("Saving ScenarioStateContextEntities: scenarioName={}, exampleId={}, _id={}",
-                ctx.getScenarioName(), ctx.getExampleId(), ctx.get_id());
+        log.debug("Saving ScenarioStateContextEntities: scenarioKey={}, scenarioName={}, exampleId={}",
+                ctx.getScenarioKey(), ctx.getScenarioName(), ctx.getExampleId());
 
-        H2ScenarioContextEntity entityToSave;
+        H2ScenarioContextEntity entity;
 
-        // Check if this is an UPDATE (existing record) or CREATE (new record)
-        if (ctx.get_id() != null) {
-            // Has an ID - check if it exists in DB
-            Optional<H2ScenarioContextEntity> existingById = repo.findById(ctx.get_id());
-            if (existingById.isPresent()) {
-                // UPDATE existing entity
-                entityToSave = existingById.get();
-                updateEntity(entityToSave, ctx);
-                log.debug("Updating existing entity by ID: {}", ctx.get_id());
-            } else {
-                // ID provided but doesn't exist - treat as new (ID will be regenerated)
-                entityToSave = toNewEntity(ctx);
-                log.debug("ID provided but not found, creating new entity");
-            }
+        Optional<H2ScenarioContextEntity> existing =
+                repo.findByScenarioKey(ctx.getScenarioKey());
+
+        if (existing.isPresent()) {
+            entity = existing.get();
+            updateEntity(entity, ctx);
         } else {
-            // No ID - check by business key (scenarioName + exampleId)
-            Optional<H2ScenarioContextEntity> existingByBusinessKey =
-                    findByBusinessKey(ctx.getScenarioName(), ctx.getExampleId());
-
-            if (existingByBusinessKey.isPresent()) {
-                // UPDATE existing entity found by business key
-                entityToSave = existingByBusinessKey.get();
-                updateEntity(entityToSave, ctx);
-                log.debug("Updating existing entity by business key: {}_{}",
-                        ctx.getScenarioName(), ctx.getExampleId());
-            } else {
-                // CREATE new entity - ID will be auto-generated
-                entityToSave = toNewEntity(ctx);
-                log.debug("Creating new entity for: {}_{}",
-                        ctx.getScenarioName(), ctx.getExampleId());
-            }
+            entity = toNewEntity(ctx);
         }
 
-        H2ScenarioContextEntity saved = repo.save(entityToSave);
-        log.debug("Entity saved with ID: {}", saved.getId());
-
+        H2ScenarioContextEntity saved = repo.save(entity);
         return toDomain(saved);
+    }
+
+    @Override
+    public void deleteByScenarioKey(String scenarioKey) {
+        repo.deleteByScenarioKey(scenarioKey);
     }
 
     @Override

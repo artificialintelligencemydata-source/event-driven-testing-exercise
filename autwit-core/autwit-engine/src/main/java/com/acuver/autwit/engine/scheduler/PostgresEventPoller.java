@@ -47,7 +47,6 @@ import java.util.Optional;
 public class PostgresEventPoller {
 
     private static final Logger log = LogManager.getLogger(PostgresEventPoller.class);
-
     private final EventContextPort storage;
     private final ResumeEngine resumeEngine;
 

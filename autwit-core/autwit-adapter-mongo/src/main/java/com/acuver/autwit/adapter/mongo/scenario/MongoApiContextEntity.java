@@ -34,10 +34,21 @@ class MongoApiContextEntity {
     @Id
     private String id;
 
-    @Indexed(unique = true)
-    private String apiName;
+    @Indexed
+    private String scenarioKey;
+
+    private String stepKey;
+    private String stepName;
+    private Integer stepExecutionIndex = 0;
+    private String testCaseId;
+
+    private String exampleId;
 
     @Indexed
+    private String apiName;
+
+    private Integer callIndex;
+
     private String httpMethod;
 
     private String apiTemplate;
@@ -55,10 +66,12 @@ class MongoApiContextEntity {
     @Indexed
     private String serviceName;
 
+    private String orderNo;
+
+    private String orderHeaderKey;
+
     @Indexed
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
-
-    private Map<String, Object> additionalMetadata;
 }

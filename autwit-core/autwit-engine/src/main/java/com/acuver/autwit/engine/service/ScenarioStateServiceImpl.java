@@ -27,11 +27,21 @@ public class ScenarioStateServiceImpl implements ScenarioStatePort {
                          String status,
                          Map<String, String> stepData) {
 
+
+
+        // 1️⃣ Scenario identity MUST come from runtime context
+        String scenarioKey = runtimeContextPort.get("scenarioKey");
+        System.out.println("scenarioKey = "+scenarioKey);
+
+        if (scenarioKey == null || scenarioKey.isBlank()) {
+            throw new IllegalStateException("scenarioKey missing in RuntimeContext");
+        }
+
         ScenarioStateContextEntities state = null;
 
         // 1️⃣ Load existing scenario state (if any)
         Optional<ScenarioStateContextEntities> optional =
-                scenarioContextPort.findByScenarioName(scenario);
+                scenarioContextPort.findByScenarioKey(scenarioKey);
 
         if (optional.isPresent()) {
             state = optional.get();
@@ -40,18 +50,17 @@ public class ScenarioStateServiceImpl implements ScenarioStatePort {
         // 2️⃣ Create scenario state if missing (OLD behavior parity)
         if (state == null) {
             state = new ScenarioStateContextEntities();
+            state.setScenarioKey(scenarioKey);
             state.setScenarioName(scenario);
             state.setStepStatus(new HashMap<>());
             state.setStepData(new HashMap<>());
             state.setTestCaseId(runtimeContextPort.get("testCaseId"));
             state.setExampleId(runtimeContextPort.get("exampleKey"));
-            state.setScenarioKey(runtimeContextPort.get("scenarioKey"));
-
         }
 
         // ✅ Ensure scenarioKey is never missing (critical safety)
         if (state.getScenarioKey() == null || state.getScenarioKey().isBlank()) {
-            state.setScenarioKey(runtimeContextPort.get("scenarioKey"));
+            state.setScenarioKey(scenarioKey);
         }
 
         // ✅ Ensure scenarioName exists too

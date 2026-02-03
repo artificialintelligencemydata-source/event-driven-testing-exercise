@@ -22,12 +22,15 @@ import io.qameta.allure.model.Status;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.ThreadContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
 
+import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.Map;
 import java.util.UUID;
+import java.util.HashMap;
 
 /**
  * AUTWIT Cucumber HooksOld - Lifecycle management for scenarios.
@@ -78,9 +81,8 @@ import java.util.UUID;
  * @since 2.0.0
  */
 @RequiredArgsConstructor
-public class HooksOld {
-
-    private static final Logger log = LogManager.getLogger(HooksOld.class);
+public class Hooks {
+    private static final Logger log = LogManager.getLogger(Hooks.class);
 
     // ==========================================================================
     // DEPENDENCIES (NEW - injected)
@@ -96,7 +98,8 @@ public class HooksOld {
 
     /** Thread-local scenario reference (from OLD) */
     private static final ThreadLocal<Scenario> scenarioThreadLocal = new ThreadLocal<>();
-
+    private static final ThreadLocal<Map<String, Integer>> stepExecutionCounters =
+            ThreadLocal.withInitial(HashMap::new);
     // ==========================================================================
     // BEFORE HOOKS
     // ==========================================================================
@@ -122,6 +125,9 @@ public class HooksOld {
         String scenarioName = sanitize(scenario.getName());
         String scenarioId = sanitize(scenario.getId());
 
+        log.info("✓ sanitize scenario variables:");
+        log.info("   ├─ sanitize scenarioName  : {}", scenarioName);
+        log.info("   └─ sanitize scenarioId     : {}", scenarioId);
         // 1️⃣ Extract scenario metadata
         // Generate deterministic keys
         /*int hash = Math.abs((scenarioName + scenarioId).hashCode() % 9999);
@@ -216,9 +222,42 @@ public class HooksOld {
         log.info("Scenario {} Thread {} cleared the assert!",
                 scenario.getName(), Thread.currentThread().threadId());
     }
+    // ==========================================================================
+    // BEFORE METHOD (TestNG) - Step Tracking
+    // ==========================================================================
+
+    @BeforeMethod(alwaysRun = true)
+    public void setupStepContext(Method method) {
+        String scenarioKey = runtimeContext.get("scenarioKey");
+
+        if (scenarioKey == null) {
+            return;
+        }
+
+        // Extract step name from method
+        String stepName = extractStepNameFromMethod(method);
+
+        // Get step execution index (for reruns)
+        int stepExecutionIndex = getStepExecutionIndex(stepName);
+
+        // Generate stepKey (max ~30 chars)
+        String stepKey = generateShortStepKey(scenarioKey, stepName, stepExecutionIndex);
+
+        // Store in RuntimeContext
+        runtimeContext.set("stepKey", stepKey);
+        runtimeContext.set("stepName", stepName);
+        runtimeContext.set("stepExecutionIndex", stepExecutionIndex);
+
+        // Set in logging contexts
+        ScenarioContext.set("stepName", stepName);
+        log.debug("▶️  Step: {} | stepKey: {}", stepName, stepKey);
+
+        // Increment counter for next execution
+        incrementStepCounter(stepName);
+    }
 
     // ==========================================================================
-    // BEFORE/AFTER STEP (NEW - for StepContextPlugin integration)
+    // AFTER STEP
     // ==========================================================================
 
     /**
@@ -328,7 +367,7 @@ public class HooksOld {
             // 5️⃣ Clear ThreadLocal
             scenarioThreadLocal.remove();
             log.info("✓ scenarioThreadLocal cleared");
-            log.info("✅ Scenario context cleanup completed successfully");
+            log.info("✓ scenario context cleanup completed successfully");
 
         } catch (Exception e) {
             // Cleanup should NEVER fail the test
@@ -583,6 +622,7 @@ public class HooksOld {
         try {
             String[] parts = scenarioId.split("/");
             String featureFile = parts[parts.length - 1].split(":")[0];
+            System.out.println("extractTestCaseId - featureFile "+featureFile);
             return featureFile.replace(".feature", "");
         } catch (Exception e) {
             log.warn("Failed to extract test case ID from: {}", scenarioId);
@@ -615,5 +655,87 @@ public class HooksOld {
         }
 
         return "default";
+    }
+
+    /**
+     *
+     * Format: {scenarioKey}_s{stepHash4}_{execIdx}
+     * Example: S_a3f4b2c1_T5_550123_sAB12_0
+     * Length: ~35-40 characters (vs 150+ in old format)
+     */
+    private String generateShortStepKey(String scenarioKey, String stepName, int stepExecutionIndex) {
+        // Generate 4-char hash from step name
+        String stepHash4 = generateHash4(stepName);
+
+        return String.format("%s_s%s_%d", scenarioKey, stepHash4, stepExecutionIndex);
+    }
+
+    /**
+     * Generate 8-character hash from input string.
+     * Uses MD5 hash truncated to 8 hex chars.
+     */
+    private String generateHash8(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] hash = md.digest(input.getBytes(StandardCharsets.UTF_8));
+
+            // Convert first 4 bytes to hex (8 chars)
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 4; i++) {
+                sb.append(String.format("%02x", hash[i]));
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            // Fallback to UUID if MD5 fails
+            return UUID.randomUUID().toString().substring(0, 8);
+        }
+    }
+
+    /**
+     * Generate 4-character hash from input string.
+     * Uses MD5 hash truncated to 4 hex chars.
+     */
+    private String generateHash4(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] hash = md.digest(input.getBytes(StandardCharsets.UTF_8));
+
+            // Convert first 2 bytes to hex (4 chars)
+            return String.format("%02x%02x", hash[0], hash[1]);
+        } catch (Exception e) {
+            // Fallback to UUID if MD5 fails
+            return UUID.randomUUID().toString().substring(0, 4);
+        }
+    }
+
+    // ==========================================================================
+    // HELPER METHODS
+    // ==========================================================================
+
+    /**
+     * Extract human-readable step name from method name.
+     */
+    private String extractStepNameFromMethod(Method method) {
+        String methodName = method.getName();
+
+        String stepName = methodName
+                .replaceAll("([A-Z])", " $1")
+                .trim()
+                .toLowerCase();
+
+        if (!stepName.isEmpty()) {
+            stepName = Character.toUpperCase(stepName.charAt(0)) + stepName.substring(1);
+        }
+
+        return stepName;
+    }
+
+    private void incrementStepCounter(String stepName) {
+        Map<String, Integer> counters = stepExecutionCounters.get();
+        counters.put(stepName, counters.getOrDefault(stepName, 0) + 1);
+    }
+
+    private int getStepExecutionIndex(String stepName) {
+        return stepExecutionCounters.get().getOrDefault(stepName, 0);
     }
 }

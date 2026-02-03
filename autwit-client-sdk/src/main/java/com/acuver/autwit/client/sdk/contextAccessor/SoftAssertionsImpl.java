@@ -1,6 +1,7 @@
-package com.acuver.autwit.client.sdk;
+package com.acuver.autwit.client.sdk.contextAccessor;
 
 
+import com.acuver.autwit.client.sdk.Autwit;
 import org.testng.asserts.SoftAssert;
 
 /**

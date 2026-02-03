@@ -62,7 +62,7 @@ public class ReusableStepDefsImpl implements ReusableStepDefs {
                 .resumeReady(false)
                 .retryCount(0)
                 .firstPausedAt(System.currentTimeMillis())
-                .timestamp(System.currentTimeMillis())
+                .createdAt(System.currentTimeMillis())
                 .build();
 
         eventStore.markPaused(placeholder);

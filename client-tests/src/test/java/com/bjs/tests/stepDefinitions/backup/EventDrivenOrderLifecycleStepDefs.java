@@ -36,7 +36,7 @@
 //    // ==============================================================================
 //    private boolean skipIfAlreadyPassed(String stepName, String eventType) {
 //
-//        // NOTE: Hooks sets "scenarioKey" — use the same key here.
+//        // NOTE: HooksOld sets "scenarioKey" — use the same key here.
 //        String scenarioKey = ScenarioContext.get("scenarioKey");
 //
 //        if (scenarioKey == null) {

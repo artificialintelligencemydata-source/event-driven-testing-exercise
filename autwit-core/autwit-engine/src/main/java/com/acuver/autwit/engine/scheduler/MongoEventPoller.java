@@ -47,7 +47,6 @@ import java.util.Optional;
 public class MongoEventPoller {
 
     private static final Logger log = LogManager.getLogger(MongoEventPoller.class);
-
     private final EventContextPort storage;
     private final ResumeEngine resumeEngine;
 

@@ -32,4 +32,8 @@ public interface H2ScenarioContextRepository extends JpaRepository<H2ScenarioCon
      * Delete by scenario name
      */
     void deleteByScenarioName(String scenarioName);
+
+    Optional<H2ScenarioContextEntity> findByScenarioKey(String scenarioKey);
+
+    void deleteByScenarioKey(String scenarioKey);
 }

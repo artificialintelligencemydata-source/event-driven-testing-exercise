@@ -21,5 +21,5 @@ public class EventContextEntities {
     private long firstPausedAt;
     private long lastRetryAt;
     private String status;
-    private long timestamp;
+    private long createdAt;
 }

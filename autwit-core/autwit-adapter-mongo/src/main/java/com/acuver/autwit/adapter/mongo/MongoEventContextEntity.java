@@ -34,5 +34,5 @@ public class MongoEventContextEntity {
     private long lastRetryAt;
 
     private String status;
-    private long timestamp;
+    private long createdAt;
 }

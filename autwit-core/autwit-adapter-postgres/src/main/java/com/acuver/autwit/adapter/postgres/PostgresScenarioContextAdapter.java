@@ -17,6 +17,11 @@ public class PostgresScenarioContextAdapter implements ScenarioContextPort {
     private final PostgresScenarioContextRepository repo;
 
     @Override
+    public Optional<ScenarioStateContextEntities> findByScenarioKey(String scenarioKey) {
+        return repo.findByScenarioKey(scenarioKey)
+                .map(this::toDomain);
+    }
+    @Override
     public Optional<ScenarioStateContextEntities> findByScenarioName(String scenarioName) {
         return repo.findByScenarioName(scenarioName).map(this::toDomain);
     }
@@ -24,6 +29,11 @@ public class PostgresScenarioContextAdapter implements ScenarioContextPort {
     @Override
     public ScenarioStateContextEntities save(ScenarioStateContextEntities state) {
         return toDomain(repo.save(toEntity(state)));
+    }
+
+    @Override
+    public void deleteByScenarioKey(String scenarioKey) {
+        repo.deleteByScenarioKey(scenarioKey);
     }
 
     @Override
@@ -38,30 +48,30 @@ public class PostgresScenarioContextAdapter implements ScenarioContextPort {
 
     // ---------- Mapping ----------
     private PostgresScenarioContextEntity toEntity(ScenarioStateContextEntities ctx) {
-        return new PostgresScenarioContextEntity(
-                ctx.get_id(),
-                ctx.getScenarioKey(),
-                ctx.getExampleId(),
-                ctx.getTestCaseId(),
-                ctx.getScenarioName(),
-                ctx.getStepStatus(),
-                ctx.getStepData(),
-                ctx.getLastUpdated(),
-                ctx.getScenarioStatus()
-        );
+        return PostgresScenarioContextEntity.builder()
+                .id(ctx.get_id())
+                .scenarioKey(ctx.getScenarioKey())
+                .exampleId(ctx.getExampleId())
+                .testCaseId(ctx.getTestCaseId())
+                .scenarioName(ctx.getScenarioName())
+                .stepStatus(ctx.getStepStatus())
+                .stepData(ctx.getStepData())
+                .lastUpdated(ctx.getLastUpdated())
+                .scenarioStatus(ctx.getScenarioStatus())
+                .build();
     }
 
     private ScenarioStateContextEntities toDomain(PostgresScenarioContextEntity e) {
-        return new ScenarioStateContextEntities(
-                e.getId(),
-                e.getScenarioKey(),
-                e.getExampleId(),
-                e.getTestCaseId(),
-                e.getScenarioName(),
-                e.getStepStatus(),
-                e.getStepData(),
-                e.getLastUpdated(),
-                e.getScenarioStatus()
-        );
+        return ScenarioStateContextEntities.builder()
+                ._id(e.getId())
+                .scenarioKey(e.getScenarioKey())
+                .exampleId(e.getExampleId())
+                .testCaseId(e.getTestCaseId())
+                .scenarioName(e.getScenarioName())
+                .stepStatus(e.getStepStatus())
+                .stepData(e.getStepData())
+                .lastUpdated(e.getLastUpdated())
+                .scenarioStatus(e.getScenarioStatus())
+                .build();
     }
 }

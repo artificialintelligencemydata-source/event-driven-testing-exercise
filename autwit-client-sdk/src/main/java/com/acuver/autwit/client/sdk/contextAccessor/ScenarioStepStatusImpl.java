@@ -1,5 +1,6 @@
-package com.acuver.autwit.client.sdk;
+package com.acuver.autwit.client.sdk.contextAccessor;
 
+import com.acuver.autwit.client.sdk.Autwit;
 import com.acuver.autwit.core.ports.ScenarioStatePort;
 import com.acuver.autwit.core.ports.runtime.RuntimeContextPort;
 import java.util.Collections;

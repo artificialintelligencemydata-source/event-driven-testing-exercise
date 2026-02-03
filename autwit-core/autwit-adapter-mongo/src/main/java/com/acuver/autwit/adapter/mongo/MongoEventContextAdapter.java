@@ -116,7 +116,7 @@ public class MongoEventContextAdapter implements EventContextPort {
                 .firstPausedAt(ctx.getFirstPausedAt())
                 .lastRetryAt(ctx.getLastRetryAt())
                 .status(ctx.getStatus())
-                .timestamp(ctx.getTimestamp())
+                .createdAt(ctx.getCreatedAt())
                 .build();
     }
 
@@ -133,7 +133,7 @@ public class MongoEventContextAdapter implements EventContextPort {
                 .firstPausedAt(e.getFirstPausedAt())
                 .lastRetryAt(e.getLastRetryAt())
                 .status(e.getStatus())
-                .timestamp(e.getTimestamp())
+                .createdAt(e.getCreatedAt())
                 .build();
     }
 }
