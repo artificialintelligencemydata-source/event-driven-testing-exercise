@@ -7,9 +7,11 @@ import com.acuver.autwit.core.ports.runtime.RuntimeContextPort;
 import com.acuver.autwit.internal.api.SterlingApiCalls;
 import com.acuver.autwit.internal.asserts.SoftAssertUtils;
 import com.acuver.autwit.internal.config.FileReaderManager;
+import com.acuver.autwit.internal.context.RuntimeContextAdapter;
 import com.acuver.autwit.internal.context.ScenarioContext;
 import com.acuver.autwit.internal.context.ScenarioMDC;
 import com.acuver.autwit.internal.context.TestThreadContext;
+import com.acuver.autwit.internal.helper.BaseActionsNew;
 import com.acuver.autwit.internal.listeners.TestNGListenerNew;
 import com.acuver.autwit.internal.reporting.AllureLifecycleManager;
 import io.cucumber.java.After;
@@ -20,13 +22,15 @@ import io.qameta.allure.model.Status;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.ThreadContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
 
 import java.util.Map;
+import java.util.UUID;
 
 /**
- * AUTWIT Cucumber Hooks - Lifecycle management for scenarios.
+ * AUTWIT Cucumber HooksOld - Lifecycle management for scenarios.
  *
  * <h2>COMPARISON: OLD vs NEW</h2>
  * <pre>
@@ -74,9 +78,9 @@ import java.util.Map;
  * @since 2.0.0
  */
 @RequiredArgsConstructor
-public class Hooks {
+public class HooksOld {
 
-    private static final Logger log = LogManager.getLogger(Hooks.class);
+    private static final Logger log = LogManager.getLogger(HooksOld.class);
 
     // ==========================================================================
     // DEPENDENCIES (NEW - injected)
@@ -104,10 +108,8 @@ public class Hooks {
     public void startAllureTestCase(Scenario scenario) {
         String scenarioName = sanitize(scenario.getName());
         String scenarioId = sanitize(scenario.getId());
-
         // Start Allure lifecycle FIRST
         allureLifecycle.startTestCase(scenarioName, scenarioId);
-
         log.trace("Allure test case started for: {}", scenarioName);
     }
 
@@ -120,11 +122,31 @@ public class Hooks {
         String scenarioName = sanitize(scenario.getName());
         String scenarioId = sanitize(scenario.getId());
 
+        // 1️⃣ Extract scenario metadata
         // Generate deterministic keys
-        int hash = Math.abs((scenarioName + scenarioId).hashCode() % 9999);
+        /*int hash = Math.abs((scenarioName + scenarioId).hashCode() % 9999);
         String exampleKey = "ex" + hash;
         String testCaseId = "TC" + hash;
-        String scenarioKey = scenarioName + "_" + exampleKey;
+        String scenarioKey = scenarioName + "_" + exampleKey;*/
+        String testCaseId = extractTestCaseId(scenarioId);
+        String exampleKey = extractExampleId(scenario);
+
+        // 2️⃣ Generate execution-unique scenarioKey (CRITICAL FIX)
+        // ✅ Generate scenarioKey ONCE per scenario
+        String scenarioKey = generateExecutionUniqueScenarioKey(scenarioName, exampleKey);
+
+        // 3️⃣ Store in RuntimeContextPort (AUTWIT framework)
+        runtimeContext.set("scenarioName", scenarioName);
+        runtimeContext.set("scenarioKey", scenarioKey);
+        runtimeContext.set("testCaseId", testCaseId);
+        runtimeContext.set("exampleKey", exampleKey);
+
+        // 4️⃣ Store in MDC (SLF4J - for distributed logging/tracing)
+        // Set MDC for Log4j2 routing appender (NEW)
+        ScenarioMDC.setScenario(scenarioKey);
+        ScenarioMDC.setScenarioName(scenarioName);
+        ScenarioMDC.setScenarioId(scenarioId);
+        ScenarioMDC.setThreadId(String.valueOf(Thread.currentThread().threadId()));
 
         // Save in ThreadLocal ScenarioContext (NEW)
         ScenarioContext.set("scenarioName", scenarioName);
@@ -133,16 +155,14 @@ public class Hooks {
         ScenarioContext.set("testCaseId", testCaseId);
         ScenarioContext.set("scenarioKey", scenarioKey);
 
-        // Set MDC for Log4j2 routing appender (NEW)
-        ScenarioMDC.setScenario(scenarioKey);
-        ScenarioMDC.setScenarioName(scenarioName);
-        ScenarioMDC.setScenarioId(scenarioId);
-        ScenarioMDC.setThreadId(String.valueOf(Thread.currentThread().threadId()));
-
-        runtimeContext.set("scenarioName", scenarioName); // IMPORTANT: use scenarioKey not raw scenarioName
-        runtimeContext.set("scenarioKey", scenarioKey);
-
         log.info("▶ Starting Scenario: {} | Example={} | Key={}", scenarioName, exampleKey, scenarioKey);
+        // 7️⃣ Log initialized context
+        log.info("📋 Scenario Context Initialized:");
+        log.info("   ├─ scenarioKey  : {}", scenarioKey);
+        log.info("   ├─ testCaseId   : {}", testCaseId);
+        log.info("   ├─ exampleKey   : {}", exampleKey);
+        log.info("   ├─ scenarioName : {}", scenarioName);
+        log.info("   └─ threadId     : {}", Thread.currentThread().getId());
 
         // Safe attachment - now Allure lifecycle is active
         allureLifecycle.attachText("Scenario Initialized", scenarioKey);
@@ -274,24 +294,46 @@ public class Hooks {
     public void cleanupScenarioContext(Scenario scenario) {
         String scenarioName = ScenarioContext.get("scenarioName");
         String scenarioKey = ScenarioContext.get("scenarioKey");
-
         String status = scenario.isFailed() ? "FAILED" :
                 (scenario.getStatus() == io.cucumber.java.Status.SKIPPED ? "SKIPPED" : "PASSED");
-
         log.info("⏹ Finished Scenario: {} | Status={} | Key={}",
                 scenarioName, status, scenarioKey);
-
         // Attach final scenario summary
         String summary = String.format(
                 "Scenario: %s%nKey: %s%nStatus: %s",
                 scenarioName, scenarioKey, status
         );
         allureLifecycle.attachText("Scenario Summary", summary);
-
         // Clear contexts
-        runtimeContext.clear();
-        ScenarioContext.clear();
-        ScenarioMDC.clear();
+        log.info("🧹 Cleaning up scenario context...");
+        try {
+            // 1️⃣ Clear RuntimeContextPort
+            if (runtimeContext instanceof RuntimeContextAdapter) {
+                ((RuntimeContextAdapter) runtimeContext).clear();
+                log.info("✓ RuntimeContext cleared");
+            }
+
+            // 2️⃣ Clear BaseActionsNew call index tracker
+            BaseActionsNew.clearCallIndexTracker();
+            log.info("✓ Call index tracker cleared");
+
+            // 3️⃣ Clear MDC (SLF4J)
+            ScenarioMDC.clear();
+            log.info("✓ ScenarioMDC cleared");
+
+            // 4️⃣ Clear ThreadContext (Log4j)
+            TestThreadContext.clearAll();
+            log.info("✓ TestThreadContext cleared");
+
+            // 5️⃣ Clear ThreadLocal
+            scenarioThreadLocal.remove();
+            log.info("✓ scenarioThreadLocal cleared");
+            log.info("✅ Scenario context cleanup completed successfully");
+
+        } catch (Exception e) {
+            // Cleanup should NEVER fail the test
+            log.error("⚠️ Error during context cleanup (non-fatal): {}", e.getMessage(), e);
+        }
     }
 
     /**
@@ -489,5 +531,89 @@ public class Hooks {
         }
 
         log.debug("Restored {} context variables", stepData.size());
+    }
+
+    // ==========================================================================
+    // HELPER METHODS
+    // ==========================================================================
+    /**
+     * Generate execution-unique scenario key (CRITICAL FIX).
+     *
+     * <h3>FORMAT</h3>
+     * <pre>{scenarioName}_{exampleId}_T{threadId}_{uuid8}_{timestamp}</pre>
+     *
+     * <h3>UNIQUENESS GUARANTEES</h3>
+     * <ul>
+     *   <li>Different scenarios → Different names</li>
+     *   <li>Same scenario, different examples → Different exampleId</li>
+     *   <li>Parallel threads → Different threadId</li>
+     *   <li>Sequential runs → Different uuid + timestamp</li>
+     *   <li>Reruns/retries → Different uuid + timestamp</li>
+     * </ul>
+     *
+     * @param scenarioName Scenario name
+     * @param exampleId    Example identifier
+     * @return Unique scenario key
+     */
+    private String generateExecutionUniqueScenarioKey(String scenarioName, String exampleId) {
+        String sanitizedName = scenarioName.replaceAll("[^a-zA-Z0-9_]", "_");
+        String uuid8 = UUID.randomUUID().toString().substring(0, 8);
+        long timestamp = System.currentTimeMillis();
+        long threadId = Thread.currentThread().getId();
+
+        return String.format("%s_%s_T%d_%s_%d",
+                sanitizedName,
+                exampleId != null ? exampleId : "default",
+                threadId,
+                uuid8,
+                timestamp
+        );
+    }
+
+    /**
+     * Extract test case ID from scenario ID.
+     *
+     * @param scenarioId Cucumber scenario ID
+     * @return Feature file name or "unknown"
+     */
+    private String extractTestCaseId(String scenarioId) {
+        if (scenarioId == null || scenarioId.isBlank()) {
+            return "unknown";
+        }
+        try {
+            String[] parts = scenarioId.split("/");
+            String featureFile = parts[parts.length - 1].split(":")[0];
+            return featureFile.replace(".feature", "");
+        } catch (Exception e) {
+            log.warn("Failed to extract test case ID from: {}", scenarioId);
+            return "unknown";
+        }
+    }
+
+    /**
+     * Extract example ID for data-driven tests.
+     *
+     * @param scenario Cucumber Scenario object
+     * @return Example identifier or "default"
+     */
+    private String extractExampleId(Scenario scenario) {
+        if (scenario.getUri() == null) {
+            return "default";
+        }
+
+        String uri = scenario.getUri().toString();
+
+        if (uri.contains(":")) {
+            try {
+                String[] parts = uri.split(":");
+                String lineNumber = parts[parts.length - 1];
+                return "example_line_" + lineNumber;
+            } catch (Exception e) {
+                log.warn("Failed to extract line number from URI: {}", uri);
+                return "default";
+            }
+        }
+
+        return "default";
     }
 }

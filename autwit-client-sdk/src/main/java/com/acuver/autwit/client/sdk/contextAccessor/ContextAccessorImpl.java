@@ -21,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 class ContextAccessorImpl implements Autwit.ContextAccessor {
 
     private final RuntimeContextPort contextAccess;
-
     // Lazy-initialized components
     private BaseActionsImpl baseActions;
     private SterlingApiImpl sterlingApi;
@@ -63,6 +62,11 @@ class ContextAccessorImpl implements Autwit.ContextAccessor {
             baseActions = new BaseActionsImpl();
         }
         return baseActions;
+    }
+
+    @Override
+    public BaseActionsNew baseActionsNew() {
+        return null;
     }
 
     @Override

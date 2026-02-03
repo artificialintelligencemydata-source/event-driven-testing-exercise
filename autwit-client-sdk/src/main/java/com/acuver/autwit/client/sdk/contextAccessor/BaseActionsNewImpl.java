@@ -1,34 +1,47 @@
 package com.acuver.autwit.client.sdk;
+
 import io.restassured.response.Response;
 import org.w3c.dom.Document;
+
+import java.util.List;
 
 /**
  * BaseActionsNew Facade Implementation.
  *
  * <h2>DELEGATES TO</h2>
- * com.acuver.autwit.testkit.helper.BaseActionsNew
+ * com.acuver.autwit.internal.helper.BaseActionsNew
  *
  * <h2>PURPOSE</h2>
- * Provides simplified API call interface with automatic database storage.
+ * Provides simplified API call interface with automatic database storage
+ * and response retrieval capabilities.
+ *
+ * <h2>NEW IN v2.0</h2>
+ * <ul>
+ *   <li>✅ Automatic scenario isolation</li>
+ *   <li>✅ Response retrieval from database</li>
+ *   <li>✅ XPath/JSONPath extraction</li>
+ *   <li>✅ Multiple call tracking</li>
+ * </ul>
  *
  * @author AUTWIT Framework
- * @since 2.0.0
+ * @version 2.0.0
+ * @since 1.0.0
  */
 class BaseActionsNewImpl implements Autwit.ContextAccessor.BaseActionsNew {
 
     private Class<?> baseActionsNewClass;
 
     /**
-     * Get BaseActionsNew class.
-     * Located at: com.acuver.autwit.testkit.helper.BaseActionsNew
+     * Get BaseActionsNew class via reflection.
+     * Located at: com.acuver.autwit.internal.helper.BaseActionsNew
      */
     private Class<?> getBaseActionsNewClass() {
         if (baseActionsNewClass == null) {
             try {
-                baseActionsNewClass = Class.forName("com.acuver.autwit.testkit.helper.BaseActionsNew");
+                baseActionsNewClass = Class.forName("com.acuver.autwit.internal.helper.BaseActionsNew");
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(
-                        "BaseActionsNew not found at com.acuver.autwit.testkit.helper.BaseActionsNew. " +
+                        "BaseActionsNew not found at com.acuver.autwit.internal.helper.BaseActionsNew. " +
                                 "Ensure the class is in autwit-testkit module.", e);
             }
         }
@@ -36,7 +49,7 @@ class BaseActionsNewImpl implements Autwit.ContextAccessor.BaseActionsNew {
     }
 
     // ==========================================================================
-    // API CALL METHODS
+    // API CALL METHODS (MAKING CALLS)
     // ==========================================================================
 
     @Override
@@ -60,6 +73,80 @@ class BaseActionsNewImpl implements Autwit.ContextAccessor.BaseActionsNew {
             return (Response) method.invoke(null, serviceName, httpMethod, inputXml);
         } catch (Exception e) {
             throw new RuntimeException("Failed to make service call: " + serviceName, e);
+        }
+    }
+
+    // ==========================================================================
+    // RESPONSE RETRIEVAL METHODS (NEW IN v2.0)
+    // ==========================================================================
+
+    @Override
+    public String getLastResponse(String apiName) {
+        try {
+            Class<?> clazz = getBaseActionsNewClass();
+            java.lang.reflect.Method method = clazz.getMethod("getLastResponse", String.class);
+            return (String) method.invoke(null, apiName);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get last response for: " + apiName, e);
+        }
+    }
+
+    @Override
+    public String getResponseByCallIndex(String apiName, int callIndex) {
+        try {
+            Class<?> clazz = getBaseActionsNewClass();
+            java.lang.reflect.Method method = clazz.getMethod(
+                    "getResponseByCallIndex", String.class, int.class);
+            return (String) method.invoke(null, apiName, callIndex);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get response for: " + apiName + " at index: " + callIndex, e);
+        }
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<String> getAllResponses(String apiName) {
+        try {
+            Class<?> clazz = getBaseActionsNewClass();
+            java.lang.reflect.Method method = clazz.getMethod("getAllResponses", String.class);
+            return (List<String>) method.invoke(null, apiName);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get all responses for: " + apiName, e);
+        }
+    }
+
+    @Override
+    public String getLastRequest(String apiName) {
+        try {
+            Class<?> clazz = getBaseActionsNewClass();
+            java.lang.reflect.Method method = clazz.getMethod("getLastRequest", String.class);
+            return (String) method.invoke(null, apiName);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get last request for: " + apiName, e);
+        }
+    }
+
+    @Override
+    public String extractFromLastResponse(String apiName, String path) {
+        try {
+            Class<?> clazz = getBaseActionsNewClass();
+            java.lang.reflect.Method method = clazz.getMethod(
+                    "extractFromLastResponse", String.class, String.class);
+            return (String) method.invoke(null, apiName, path);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to extract from last response: " + apiName, e);
+        }
+    }
+
+    @Override
+    public String extractFromResponse(String apiName, int callIndex, String path) {
+        try {
+            Class<?> clazz = getBaseActionsNewClass();
+            java.lang.reflect.Method method = clazz.getMethod(
+                    "extractFromResponse", String.class, int.class, String.class);
+            return (String) method.invoke(null, apiName, callIndex, path);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to extract from response: " + apiName + " at index: " + callIndex, e);
         }
     }
 
